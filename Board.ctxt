@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.params=dimension\ fairPotFreq\ randomPotFreq\ holdFreq\ pHoldFreq
+comment0.target=Board(int,\ double,\ double,\ double,\ double)
+comment1.params=index
+comment1.target=Space\ get(int)
+comment1.text=public\ void\ addSpecialSpaces(double\ fairPotFreq,\ double\ randomPotFreq,\ double\ holdFreq,\ double\ pHoldFreq)\ {\n\ \ \ \ \ \ \ \ //Gaussian\ distribution\n\ \ \ \ \ \ \ \ //for\ each\ space\ add\ a\ space\ of\ type\ defined\ by\ Gaussian\ number.\ What\ numbers\ correspond\ to\ which\ types\ is\ determined\ by\ freqencies\n\ \ \ \ \ \ \ \ board.add(new\ FairTPot(15,\ 5));\n\ \ \ \ \ \ \ \ \n}
+comment2.params=
+comment2.target=java.lang.String\ toString()
+numComments=3

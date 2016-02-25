@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=amount\ maxTimes
+comment0.target=FairTPot(int,\ int)
+comment1.params=
+comment1.target=boolean\ canGive()
+comment2.params=
+comment2.target=int\ givePieces()
+numComments=3

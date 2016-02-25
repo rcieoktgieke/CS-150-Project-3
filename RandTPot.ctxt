@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=pieces
+comment0.target=RandTPot(int)
+comment1.params=
+comment1.target=boolean\ canGive()
+comment2.params=
+comment2.target=int\ givePieces()
+numComments=3

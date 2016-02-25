@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Player()
+comment1.params=spaces
+comment1.target=boolean\ advance(int)
+comment2.params=pieces
+comment2.target=void\ addPieces(int)
+comment3.params=
+comment3.target=int\ getIndex()
+numComments=4
