@@ -1,51 +1,80 @@
+import java.util.*;
+import java.lang.Math.*;
+import java.io.File;
 /**
  * The board stores spaces and provides access to them to main.
  * 
  * @Eric Weber
- * @2/25/16
+ * @3/16/16
  */
-import java.util.*;
-import java.lang.Math.*;
 public class Board {
     
+    /** The list of spaces representing the board */
     private ArrayList<Space> board;
-    private int dimension;
+    /** The value of the x dimension of the board. */
+    private int x;
+    /** The value of the y dimension of the board. */
+    private int y;
+    /** The value of the z dimension of the board. */
+    private int z;
+    /** The number of spaces on the board */
     private int numberOfSpaces;
-    public Board(int dimension, double fairPotFreq, double randomPotFreq, double holdFreq, double pHoldFreq) {
-        this.dimension = dimension;
-        numberOfSpaces = (int) Math.pow(dimension, 2);
-        board = new ArrayList<Space>(numberOfSpaces);
-        Random rand = new Random();
-        for (int i = 0; i < (numberOfSpaces); i ++) {
-            double spaceRand = rand.nextDouble();
-            if (spaceRand <= fairPotFreq) {
-                board.add(new FairTPot(15, 5));
-            }
-            else if (spaceRand <= (fairPotFreq + randomPotFreq)) {
-                board.add(new Space());
-            }
-            else {
-                board.add(new Space());
+    /**
+     * Constructor.
+     * 
+     * Initialize the board and set each space based on a Gaussian random number.
+     * @param fileName the name of the config file for the various frequencies and initial details of the spaces.
+     */
+    public Board(String fileName) {
+        File configFile = new File(fileName);
+        try {
+            Scanner configScan = new Scanner(configFile);
+            this.x = x; //TODO get from file
+            this.y = y;
+            this.z = z;
+            numberOfSpaces = x*y*z;
+            board = new ArrayList<Space>(numberOfSpaces);
+            board.add(new BlankSpace());
+            SpaceGenerator spaceGen = new SpaceGenerator(configScan);
+            /**Iterate through the board, creating a new space of a type defined by a Gaussian random number at each index.*/
+            for (int i = 1; i < (numberOfSpaces); i ++) {
+                board.add(spaceGen.gaussianSpace());
             }
         }
+        catch (Exception e) {
+            System.out.println("Config file scan has failed.");
+            System.out.println(e.getLocalizedMessage());
+        }
     }
-    /*public void addSpecialSpaces(double fairPotFreq, double randomPotFreq, double holdFreq, double pHoldFreq) {
-        //Gaussian distribution
-        //for each space add a space of type defined by Gaussian number. What numbers correspond to which types is determined by freqencies
-        board.add(new FairTPot(15, 5));
-        
-    }*/
+    /**
+     * Get the number of spaces on the board.
+     * 
+     * @return the number of spaces on the board.
+     */
+    public int numberOfSpaces() {
+        return x*y*z;
+    }
+    /**
+     * Get the space at the given index.
+     * 
+     * @param index the index of the desired space.
+     * @return the space at the given index.
+    */
     public Space get(int index) {
         return board.get(index);
     }
-    public String toString() {
-        String returnStr = "";
-        for (int i = 0; i < dimension; i ++) {
-            for (int j = 0; j < dimension; j ++) {
-                returnStr += board.get(i*10 + j) + "\t";
+    /**
+     * Print the status of each space on the board.
+     */
+    public void printBoard() {
+        for (int zIndex = 0; zIndex < z; zIndex ++) {
+            for (int yIndex = 0; yIndex < y; yIndex ++) {
+                for (int xIndex = 0; xIndex < x; xIndex ++) {
+                    System.out.printf("%-25s", zIndex*(x*y)+yIndex*x+xIndex + ": " + board.get(zIndex*(x*y)+yIndex*x+xIndex).getStatus());
+                }
+                System.out.println();
             }
-            returnStr += "\n";
+            System.out.println();
         }
-        return returnStr;
     }
 }

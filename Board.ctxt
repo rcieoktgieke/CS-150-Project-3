@@ -1,9 +1,14 @@
 #BlueJ class context
-comment0.params=dimension\ fairPotFreq\ randomPotFreq\ holdFreq\ pHoldFreq
-comment0.target=Board(int,\ double,\ double,\ double,\ double)
-comment1.params=index
-comment1.target=Space\ get(int)
-comment1.text=public\ void\ addSpecialSpaces(double\ fairPotFreq,\ double\ randomPotFreq,\ double\ holdFreq,\ double\ pHoldFreq)\ {\n\ \ \ \ \ \ \ \ //Gaussian\ distribution\n\ \ \ \ \ \ \ \ //for\ each\ space\ add\ a\ space\ of\ type\ defined\ by\ Gaussian\ number.\ What\ numbers\ correspond\ to\ which\ types\ is\ determined\ by\ freqencies\n\ \ \ \ \ \ \ \ board.add(new\ FairTPot(15,\ 5));\n\ \ \ \ \ \ \ \ \n}
-comment2.params=
-comment2.target=java.lang.String\ toString()
-numComments=3
+comment0.params=fileName
+comment0.target=Board(java.lang.String)
+comment0.text=\n\ Constructor.\n\ \n\ Initialize\ the\ board\ and\ set\ each\ space\ based\ on\ a\ Gaussian\ random\ number.\n\ @param\ fileName\ the\ name\ of\ the\ config\ file\ for\ the\ various\ frequencies\ and\ initial\ details\ of\ the\ spaces.\n
+comment1.params=
+comment1.target=int\ numberOfSpaces()
+comment1.text=\n\ Get\ the\ number\ of\ spaces\ on\ the\ board.\n\ \n\ @return\ the\ number\ of\ spaces\ on\ the\ board.\n
+comment2.params=index
+comment2.target=Space\ get(int)
+comment2.text=\n\ Get\ the\ space\ at\ the\ given\ index.\n\ \n\ @param\ index\ the\ index\ of\ the\ desired\ space.\n\ @return\ the\ space\ at\ the\ given\ index.\n
+comment3.params=
+comment3.target=void\ printBoard()
+comment3.text=\n\ Print\ the\ status\ of\ each\ space\ on\ the\ board.\n
+numComments=4

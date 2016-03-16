@@ -1,8 +1,15 @@
 #BlueJ class context
 comment0.params=
 comment0.target=BlankSpace()
+comment0.text=\n\ Constructor.\n
 comment1.params=p\ d
 comment1.target=void\ land(Player,\ Die)
-comment2.params=p\ d
-comment2.target=void\ takeTurn(Player,\ Die)
-numComments=3
+comment2.params=
+comment2.target=boolean\ canMove()
+comment2.text=\n\ @return\ if\ moving\ the\ player\ would\ go\ beyond\ the\ bounds\ of\ the\ board.\n
+comment3.params=
+comment3.target=java.lang.String\ getStatus()
+comment4.params=p\ d\ boardEnd
+comment4.target=boolean\ takeTurn(Player,\ Die,\ int)
+comment4.text=\n\ Take\ player's\ turn.\n\ \n\ Roll\ the\ die.\ Print\ the\ player\ and\ the\ roll.\ If\ the\ roll\ is\ within\ the\ bounds\ of\ the\ board,\ advance\ the\ player.\n
+numComments=5

@@ -1,8 +1,16 @@
 #BlueJ class context
 comment0.params=amount\ maxTimes
 comment0.target=FairTPot(int,\ int)
-comment1.params=
-comment1.target=boolean\ canGive()
+comment0.text=\n\ Constructor.\n\ \n\ @param\ amount\ number\ of\ pieces\ to\ be\ given\ to\ each\ player.\n\ @param\ maxTimes\ number\ of\ times\ the\ pot\ may\ give\ pieces\n
+comment1.params=p\ d
+comment1.target=void\ land(Player,\ Die)
+comment1.text=\n\ Print\ the\ player\ and\ the\ status\ of\ the\ pot.\ If\ the\ pot\ has\ been\ landed\ on\ fewer\ times\ than\ its\ max,\ give\ pieces\ to\ the\ player.\n
 comment2.params=
-comment2.target=int\ givePieces()
-numComments=3
+comment2.target=boolean\ canMove()
+comment2.text=\n\ @return\ if\ moving\ the\ player\ would\ go\ beyond\ the\ bounds\ of\ the\ board.\n
+comment3.params=
+comment3.target=java.lang.String\ getStatus()
+comment4.params=p\ d\ boardEnd
+comment4.target=boolean\ takeTurn(Player,\ Die,\ int)
+comment4.text=\n\ Take\ player's\ turn.\n\ \n\ Roll\ the\ die.\ Print\ the\ player\ and\ the\ roll.\ If\ the\ roll\ is\ within\ the\ bounds\ of\ the\ board,\ advance\ the\ player.\n
+numComments=5

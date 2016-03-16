@@ -1,0 +1,5 @@
+HoldQ 10 1 1
+Hold 10 1 1
+treasurePotA 10 5 50
+PriorityHold 10 1 1
+treasurePotB 10 60
