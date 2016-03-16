@@ -1,6 +1,6 @@
 import java.util.*;
 /**
- * SpaceGenerator uses a Gaussian random number to choose one of the five types of spaces.
+ * SpaceGenerator uses a Gaussian random number to choose one of the six types of spaces.
  * 
  * @Eric Weber
  * @3/16/16
@@ -90,7 +90,25 @@ public class SpaceGenerator {
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             Scanner lineScanner = new Scanner(line);
-            if (line.substring(0, 12).equals("treasurePotA")) {
+            if (line.substring(0, 5).equals("HoldQ")) {
+                lineScanner.next();
+                lineScanner.nextInt();//holdQFreq = lineScanner.nextInt();
+                minHoldQFactor = lineScanner.nextInt();
+                maxHoldQFactor = lineScanner.nextInt();
+            }
+            else if (line.substring(0, 4).equals("Hold")) {
+                lineScanner.next();
+                lineScanner.nextInt();//holdFreq = lineScanner.nextInt();
+                minHoldFactor = lineScanner.nextInt();
+                maxHoldFactor = lineScanner.nextInt();
+            }
+            else if (line.substring(0, 6).equals("JStack")) {
+                /*lineScanner.next();
+                lineScanner.nextInt();//holdFreq = lineScanner.nextInt();
+                minHoldFactor = lineScanner.nextInt();
+                maxHoldFactor = lineScanner.nextInt();*/
+            }
+            else if (line.substring(0, 12).equals("treasurePotA")) {
                 lineScanner.next();
                 lineScanner.nextInt();//fairPotFreq = lineScanner.nextInt();
                 fairPotPieces = lineScanner.nextInt();
@@ -106,18 +124,6 @@ public class SpaceGenerator {
                 lineScanner.nextInt();//pHoldFreq = lineScanner.nextInt();
                 minPHoldFactor = lineScanner.nextInt();
                 maxPHoldFactor = lineScanner.nextInt();
-            }
-            else if (line.substring(0, 5).equals("HoldQ")) {
-                lineScanner.next();
-                lineScanner.nextInt();//holdQFreq = lineScanner.nextInt();
-                minHoldQFactor = lineScanner.nextInt();
-                maxHoldQFactor = lineScanner.nextInt();
-            }
-            else if (line.substring(0, 4).equals("Hold")) {
-                lineScanner.next();
-                lineScanner.nextInt();//holdFreq = lineScanner.nextInt();
-                minHoldFactor = lineScanner.nextInt();
-                maxHoldFactor = lineScanner.nextInt();
             }
         }
     }

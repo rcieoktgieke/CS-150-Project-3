@@ -24,26 +24,21 @@ public class Board {
      * 
      * Initialize the board and set each space based on a Gaussian random number.
      * @param fileName the name of the config file for the various frequencies and initial details of the spaces.
+     * @param x the value of the x dimension of the board.
+     * @param y the value of the y dimension of the board.
+     * @param z the value of the z dimension of the board.
      */
-    public Board(String fileName) {
-        File configFile = new File(fileName);
-        try {
-            Scanner configScan = new Scanner(configFile);
-            this.x = x; //TODO get from file
-            this.y = y;
-            this.z = z;
-            numberOfSpaces = x*y*z;
-            board = new ArrayList<Space>(numberOfSpaces);
-            board.add(new BlankSpace());
-            SpaceGenerator spaceGen = new SpaceGenerator(configScan);
-            /**Iterate through the board, creating a new space of a type defined by a Gaussian random number at each index.*/
-            for (int i = 1; i < (numberOfSpaces); i ++) {
-                board.add(spaceGen.gaussianSpace());
-            }
-        }
-        catch (Exception e) {
-            System.out.println("Config file scan has failed.");
-            System.out.println(e.getLocalizedMessage());
+    public Board(int x, int y, int z, Scanner scan) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        numberOfSpaces = x*y*z;
+        board = new ArrayList<Space>(numberOfSpaces);
+        board.add(new BlankSpace());
+        SpaceGenerator spaceGen = new SpaceGenerator(scan);
+        /**Iterate through the board, creating a new space of a type defined by a Gaussian random number at each index.*/
+        for (int i = 1; i < (numberOfSpaces); i ++) {
+            board.add(spaceGen.gaussianSpace());
         }
     }
     /**
