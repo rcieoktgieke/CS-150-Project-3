@@ -1,12 +1,8 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all he/she needs to know. The comments should usually include at least:
-------------------------------------------------------------------------
+PROJECT TITLE: Chutes and Ladders and Pots
+PURPOSE OF PROJECT: To model a game of Chutes and Ladders and Pots using various data structures and algorithms.
+VERSION or DATE: 3/7/16
+HOW TO START THIS PROJECT: Run main.main(String[] args) with an array of arguments as specified below.
+AUTHORS: Eric Weber
+USER INSTRUCTIONS: The String array passed to main should consist of the following: [0]: x and y dimensions of the board. [1]: max value of the die. [2]: number of players. [3]: name of config file.
 
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
-HOW TO START THIS PROJECT:
-AUTHORS:
-USER INSTRUCTIONS:
+Main will prompt the user for input, which must be one of the following commands: An input of p will print a map of the board, i.e. location of every token, aid, obstacle and treasure pot and its status. An input of c will move the game forward one turn. An input of i will continue the game until it ends. An input of r will print status of each player/token; the position on the board and the number of treasure pieces in their possession. Any other input will end the game.
