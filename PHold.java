@@ -1,18 +1,18 @@
 import java.util.*;
 /**
- * When a player lands on a priority hold, they are assigned the priority equal to the number rolled to land on it. They may only leave the space when no players with a lower number priority are on the priority hold with them. When a player is on a priority hold and does not have the lowest number priority, they end their turn without rolling. When they are on a priority hold and do have the lowest number priority, they roll, and advance the number of spaces rolled times a number specified for that priority hold when the board is created, which will be between two numbers set in configuration.
+ * When a token lands on a priority hold, they are assigned the priority equal to the number rolled to land on it. They may only leave the space when no tokens with a lower number priority are on the priority hold with them. When a token is on a priority hold and does not have the lowest number priority, they end their turn without rolling. When they are on a priority hold and do have the lowest number priority, they roll, and advance the number of spaces rolled times a number specified for that priority hold when the board is created, which will be between two numbers set in configuration.
  * 
  * @Eric Weber
- * @3/5/16
+ * @3/16/16
  */
-public class PHold implements Space, Comparator<Player> {
+public class PHold implements Space, Comparator<Token> {
     
     /** The number by which to multiply rolls leaving the hold.*/
     private int multiplier;
-    /** The ability of the player last passed to takeTurn to move. */
+    /** The ability of the token last passed to takeTurn to move. */
     private boolean canMove;
-    /** The queue of players currently in the hold */
-    private PriorityQueue<Player> players;
+    /** The queue of tokens currently in the hold */
+    private PriorityQueue<Token> tokens;
     /**
      * Constructor.
      * 
@@ -20,50 +20,50 @@ public class PHold implements Space, Comparator<Player> {
      */
     public PHold(int multiplier) {
         this.multiplier = multiplier;
-        players = new PriorityQueue<Player>(1, this);
+        tokens = new PriorityQueue<Token>(1, this);
     }
     /**
-     * Print the player and the status of the hold. Set the roll stored by the player. Add the player to queue of players currently in the hold.
+     * Print the token and the status of the hold. Set the roll stored by the token. Add the token to queue of tokens currently in the hold.
      */
-    public void land(Player p, Die d) {
+    public void land(Token p, Die d) {
         p.setRoll(d.prevRoll());
-        players.add(p);
+        tokens.add(p);
         System.out.print(p + " has landed on " + getStatus());
     }
     /**
-     * @return if the player is at the front of the queue and if moving the player would go beyond the bounds of the board.
+     * @return if the token is at the front of the queue and if moving the token would go beyond the bounds of the board.
      */
     public boolean canMove() {
         return canMove;
     }
     
     public String getStatus() {
-        return "P.Hold:" + multiplier + "|" + players.size();
+        return "P.Hold:" + multiplier + "|" + tokens.size();
     }
     
     /**
-     * Take player's turn.
+     * Take token's turn.
      * 
-     * Print the player. If the player is first in the queue, roll the die. Print the roll. If the roll is within the bounds of the board, advance the player.
+     * Print the token. If the token is first in the queue, roll the die. Print the roll. If the roll is within the bounds of the board, advance the token.
      */
-    public boolean takeTurn(Player p, Die d, int boardEnd) {
+    public boolean takeTurn(Token p, Die d, int boardEnd) {
         boolean atFront = true;
-        int maxRoll = players.peek().getRoll();
-        Iterator<Player> playerIter = players.iterator();
-        while (atFront && playerIter.hasNext()) {
-            Player cPlayer = playerIter.next();
-            if (cPlayer == p && cPlayer.getRoll() <= maxRoll) {
+        int maxRoll = tokens.peek().getRoll();
+        Iterator<Token> tokenIter = tokens.iterator();
+        while (atFront && tokenIter.hasNext()) {
+            Token cToken = tokenIter.next();
+            if (cToken == p && cToken.getRoll() <= maxRoll) {
                 /** Normal space behavior.*/
                 int roll = d.roll();
                 System.out.print(p + " is at the front of the queue and has rolled " + roll + ". ");
                 if ((roll * multiplier) + p.getIndex() < boardEnd && (roll * multiplier) + p.getIndex() >= 0) {
-                    playerIter.remove();
+                    tokenIter.remove();
                     canMove = true;
                     p.advance(roll * multiplier);
                     return false;
                 }
                 else if ((roll * multiplier) + p.getIndex() == boardEnd) {
-                    playerIter.remove();
+                    tokenIter.remove();
                     p.advance(roll * multiplier);
                     return true;
                 }
@@ -72,7 +72,7 @@ public class PHold implements Space, Comparator<Player> {
                     return false;
                 }
             }
-            else if (cPlayer.getRoll() > maxRoll) {
+            else if (cToken.getRoll() > maxRoll) {
                 atFront = false;
                 System.out.print(p + " is not at the front of the queue. ");
                 canMove = false;
@@ -83,14 +83,14 @@ public class PHold implements Space, Comparator<Player> {
     }
     
     /**
-     * Compare to Player objects for their priority in the queue.
+     * Compare to Token objects for their priority in the queue.
      * 
-     * Player 1 is greater than player 2 if player 1's entry roll is greater or equal to player 2's. Player 1 is less than player 2 if player 1's entry roll is less than player 2's.
-     * @param p1 player 1.
-     * @param p2 player 2.
-     * @return 1 if player 1 is greater; -1 if player 1 is less.
+     * Token 1 is greater than token 2 if token 1's entry roll is greater or equal to token 2's. Token 1 is less than token 2 if token 1's entry roll is less than token 2's.
+     * @param p1 token 1.
+     * @param p2 token 2.
+     * @return 1 if token 1 is greater; -1 if token 1 is less.
      */
-    public int compare(Player p1, Player p2) {
+    public int compare(Token p1, Token p2) {
         if (p1.getRoll() >= p2.getRoll()) {
             return 1;
         }

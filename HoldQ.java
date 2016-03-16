@@ -1,18 +1,18 @@
 import java.util.*;
 /**
- * When a player lands on a hold queue, they are added to the end of a queue of players that landed there previously. They may only leave the space when no players are in the queue ahead of them, and when they roll the number they rolled to land on the hold queue. When a player is on a hold queue and are not in the front of the queue, they end their turn without rolling. When they are on a hold queue and are in the front of the queue, they roll, and if their roll is other than the one they entered with, the player’s turn ends without moving their token. When the player rolls the required number, they advance the number of spaces rolled times a number specified for that hold space when the board is created, which will be between two numbers set in configuration.
+ * When a tokens lands on a hold queue, they are added to the end of a queue of tokens that landed there previously. They may only leave the space when no tokens are in the queue ahead of them, and when they roll the number they rolled to land on the hold queue. When a token is on a hold queue and are not in the front of the queue, they end their turn without rolling. When they are on a hold queue and are in the front of the queue, they roll, and if their roll is other than the one they entered with, the token’s turn ends without moving. When the token rolls the required number, they advance the number of spaces rolled times a number specified for that hold space when the board is created, which will be between two numbers set in configuration.
  * 
  * @Eric Weber
- * @3/5/16
+ * @3/16/16
  */
 public class HoldQ implements Space {
     
     /** The number by which to multiply rolls leaving the hold.*/
     int multiplier;
-    /** The ability of the player last passed to takeTurn to move. */
+    /** The ability of the token last passed to takeTurn to move. */
     boolean canMove;
-    /** The queue of players currently in the hold */
-    LinkedList<Player> players;
+    /** The queue of tokens currently in the hold */
+    LinkedList<Token> tokens;
     /**
      * Constructor.
      * 
@@ -20,18 +20,18 @@ public class HoldQ implements Space {
      */
     public HoldQ(int multiplier) {
         this.multiplier = multiplier;
-        players = new LinkedList<Player>();
+        tokens = new LinkedList<Token>();
     }
     /**
-     * Print the player and the status of the hold queue. Set the roll stored by the player. Add the player to queue of players currently in the hold queue.
+     * Print the token and the status of the hold queue. Set the roll stored by the token. Add the token to queue of tokens currently in the hold queue.
      */
-    public void land(Player p, Die d) {
-        p.setRoll(d.prevRoll());
-        players.addLast(p);
-        System.out.print(p + " has landed on " + getStatus() + ". ");
+    public void land(Token t, Die d) {
+        t.setRoll(d.prevRoll());
+        tokens.addLast(t);
+        System.out.print(t + " has landed on " + getStatus() + ". ");
     }
     /**
-     * @return if the player has been released from the hold and if moving the player would go beyond the bounds of the board.
+     * @return if the token has been released from the hold and if moving the token would go beyond the bounds of the board.
      */
     public boolean canMove() {
         return canMove;
@@ -39,9 +39,9 @@ public class HoldQ implements Space {
     
     public String getStatus() {
         String rollsStr = "";
-        Iterator<Player> playerIter = players.iterator();
-        while (playerIter.hasNext()) {    
-            rollsStr += ", " + playerIter.next().getRoll();
+        Iterator<Token> tokenIter = tokens.iterator();
+        while (tokenIter.hasNext()) {    
+            rollsStr += ", " + tokenIter.next().getRoll();
         }
         if (rollsStr.length() > 0) {
             return "HoldQ:" + multiplier + "|" + rollsStr.substring(2);
@@ -52,26 +52,26 @@ public class HoldQ implements Space {
     }
     
     /**
-     * Take player's turn.
+     * Take token's turn.
      * 
-     * Print the player. If the player is first in the queue, roll the die. Print the roll. If the roll is equal to the player's entry roll, and if the roll times the multiplier is within the bounds of the board, advance the player.
+     * Print the token. If the token is first in the queue, roll the die. Print the roll. If the roll is equal to the token's entry roll, and if the roll times the multiplier is within the bounds of the board, advance the token.
      */
-    public boolean takeTurn(Player p, Die d, int boardEnd) {
-        System.out.print(p);
-        if (players.peek() == p) {
+    public boolean takeTurn(Token t, Die d, int boardEnd) {
+        System.out.print(t);
+        if (tokens.peek() == t) {
             /** Hold behavior. */
             int roll = d.roll();
             System.out.print(" is at the front of the queue and rolled " + roll + ". ");
-            if (roll == p.getRoll()) {
-                if ((roll * multiplier) + p.getIndex() < boardEnd && (roll * multiplier) + p.getIndex() >= 0) {
-                    p.advance(roll * multiplier);
-                    players.poll();
+            if (roll == t.getRoll()) {
+                if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
+                    t.advance(roll * multiplier);
+                    tokens.poll();
                     canMove = true;
                     return false;
                 }
-                else if ((roll * multiplier) + p.getIndex() == boardEnd) {
-                    p.advance(roll * multiplier);
-                    players.poll();
+                else if ((roll * multiplier) + t.getIndex() == boardEnd) {
+                    t.advance(roll * multiplier);
+                    tokens.poll();
                     canMove = true;
                     return true;
                 }

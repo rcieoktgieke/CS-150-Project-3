@@ -6,12 +6,12 @@ import org.junit.Test;
  * The test class HoldTest.
  *
  * @Eric Weber
- * @3/4/16
+ * @3/16/16
  */
 public class HoldTest
 {
     private Hold hold;
-    private Player p;
+    private Token t;
     private Die d;
     private int boardEnd;
     /**
@@ -30,7 +30,7 @@ public class HoldTest
     public void setUp()
     {
         hold = new Hold(3);
-        p = new Player();
+        t = new Token();
         d = new Die(10);
         boardEnd = 15;
     }
@@ -49,18 +49,18 @@ public class HoldTest
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
-            p = new Player();
-            int playerIndex = p.getIndex();
+            t = new Token();
+            int tokenIndex = t.getIndex();
             int roll = d.prevRoll();
-            hold.land(p, d);
+            hold.land(t, d);
             while (d.prevRoll() != roll) {
                 assertFalse(hold.canMove());
-                hold.takeTurn(p, d, boardEnd);
+                hold.takeTurn(t, d, boardEnd);
             }
-            if (playerIndex + (d.prevRoll() * 3) > 0 && playerIndex + (d.prevRoll() * 3) < boardEnd) {
+            if (tokenIndex + (d.prevRoll() * 3) > 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
                 assertTrue(hold.canMove());
             }
-            else if (playerIndex + (d.prevRoll() * 3) == boardEnd) {
+            else if (tokenIndex + (d.prevRoll() * 3) == boardEnd) {
                 assertTrue(hold.canMove());
             }
             else {
@@ -74,7 +74,7 @@ public class HoldTest
     {
         String rolls = "";
         for (int i = 0; i < 300; i ++) {
-            hold.land(p, d);
+            hold.land(t, d);
             rolls += "" + d.prevRoll();
             assertEquals("Hold:3|" + rolls, hold.getStatus());
             rolls += ", ";
@@ -84,25 +84,25 @@ public class HoldTest
     public void testTakeTurn()
     {
         for (int i = 0; i < 100; i ++) {
-            p = new Player();
-            int playerIndex = p.getIndex();
+            t = new Token();
+            int tokenIndex = t.getIndex();
             int roll = d.prevRoll();
             boolean takeTurnOutput = false;
-            hold.land(p, d);
+            hold.land(t, d);
             while (d.prevRoll() != roll) {
                 assertFalse(hold.canMove());
-                takeTurnOutput = hold.takeTurn(p, d, boardEnd);
+                takeTurnOutput = hold.takeTurn(t, d, boardEnd);
             }
-            if (playerIndex + (d.prevRoll() * 3) > 0 && playerIndex + (d.prevRoll() * 3) < boardEnd) {
+            if (tokenIndex + (d.prevRoll() * 3) > 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
                 assertEquals(false, takeTurnOutput);
-                assertEquals(p.getIndex(), (playerIndex + d.prevRoll()));
+                assertEquals(t.getIndex(), (tokenIndex + d.prevRoll()));
             }
-            else if (playerIndex + (d.prevRoll() * 3) == boardEnd) {
+            else if (tokenIndex + (d.prevRoll() * 3) == boardEnd) {
                 assertEquals(true, takeTurnOutput);
-                assertEquals(p.getIndex(), boardEnd);
+                assertEquals(t.getIndex(), boardEnd);
             }
             else {
-                assertEquals(p.getIndex(), playerIndex);
+                assertEquals(t.getIndex(), tokenIndex);
             }
         }
     }

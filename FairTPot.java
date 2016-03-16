@@ -1,23 +1,23 @@
 /**
- * When a player lands on a fair treasure pot, it gives that player a number of pieces specified by the game’s configuration. However, each pot can only give pieces to a certain number of players (also specified in configuration). If a player lands on the pot after the maximum number of players is reached, the pot is treated as a blank space. .
+ * When a token lands on a fair treasure pot, it gives that token a number of pieces specified by the game’s configuration. However, each pot can only give pieces to a certain number of tokens (also specified in configuration). If a token lands on the pot after the maximum number of tokens is reached, the pot is treated as a blank space.
  * 
  * @Eric Weber
- * @3/3/16
+ * @3/16/16
  */
 public class FairTPot implements Space  {
     
-    /** The number of pieces to be given to each player*/
+    /** The number of pieces to be given to each token*/
     private int amount;
     /** The number of times the pot may give pieces */
     private int maxTimes;
     /** The number of times the pot has given pieces */
     private int times = 0;
-    /** The ability of the player last passed to takeTurn to move. */
+    /** The ability of the token last passed to takeTurn to move. */
     private boolean canMove =  true;
     /**
      * Constructor.
      * 
-     * @param amount number of pieces to be given to each player.
+     * @param amount number of pieces to be given to each token.
      * @param maxTimes number of times the pot may give pieces
      */
     public FairTPot(int amount, int maxTimes) {
@@ -26,17 +26,17 @@ public class FairTPot implements Space  {
     }
     
     /**
-     * Print the player and the status of the pot. If the pot has been landed on fewer times than its max, give pieces to the player.
+     * Print the token and the status of the pot. If the pot has been landed on fewer times than its max, give pieces to the token.
      */
-    public void land(Player p, Die d) {
-        System.out.print(p + " has landed on " + getStatus() + ". ");
+    public void land(Token t, Die d) {
+        System.out.print(t + " has landed on " + getStatus() + ". ");
         if (times < maxTimes) {
-            p.addPieces(amount);
+            t.addPieces(amount);
             times ++;
         }
     }
     /**
-     * @return if moving the player would go beyond the bounds of the board.
+     * @return if moving the token would go beyond the bounds of the board.
      */
     public boolean canMove() {
         return canMove;
@@ -47,20 +47,20 @@ public class FairTPot implements Space  {
     }
     
     /**
-     * Take player's turn.
+     * Take token's turn.
      * 
-     * Roll the die. Print the player and the roll. If the roll is within the bounds of the board, advance the player.
+     * Roll the die. Print the token and the roll. If the roll is within the bounds of the board, advance the token.
      */
-    public boolean takeTurn(Player p, Die d, int boardEnd) {
+    public boolean takeTurn(Token t, Die d, int boardEnd) {
         int roll = d.roll();
-        System.out.print(p + " has rolled " + roll + ". ");
-        if (roll + p.getIndex() < boardEnd) {
+        System.out.print(t + " has rolled " + roll + ". ");
+        if (roll + t.getIndex() < boardEnd) {
             canMove = true;
-            p.advance(roll);
+            t.advance(roll);
             return false;
         }
-        else if (roll + p.getIndex() == boardEnd) {
-            p.advance(roll);
+        else if (roll + t.getIndex() == boardEnd) {
+            t.advance(roll);
             return true;
         }
         else {

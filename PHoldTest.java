@@ -6,14 +6,14 @@ import org.junit.Test;
  * The test class PHoldTest.
  *
  * @Eric Weber
- * @3/5/16
+ * @3/16/16
  */
 public class PHoldTest
 {
     private PHold pHold;
-    private Player p1;
-    private Player p2;
-    private Player p3;
+    private Token t1;
+    private Token t2;
+    private Token t3;
     private Die d;
     private int boardEnd;
     /**
@@ -32,9 +32,9 @@ public class PHoldTest
     public void setUp()
     {
         pHold = new PHold(3);
-        p1 = new Player();
-        p2 = new Player();
-        p3 = new Player();
+        t1 = new Token();
+        t2 = new Token();
+        t3 = new Token();
         d = new Die(10);
         boardEnd = 10;
     }
@@ -52,35 +52,35 @@ public class PHoldTest
     @Test
     public void testCompare()
     {
-        p1.setRoll(10);
-        p2.setRoll(5);
-        assertEquals(1, pHold.compare(p1, p2));
-        p1.setRoll(10);
-        p2.setRoll(10);
-        assertEquals(1, pHold.compare(p1, p2));
-        p1.setRoll(5);
-        p2.setRoll(10);
-        assertEquals(-1, pHold.compare(p1, p2));
+        t1.setRoll(10);
+        t2.setRoll(5);
+        assertEquals(1, pHold.compare(t1, t2));
+        t1.setRoll(10);
+        t2.setRoll(10);
+        assertEquals(1, pHold.compare(t1, t2));
+        t1.setRoll(5);
+        t2.setRoll(10);
+        assertEquals(-1, pHold.compare(t1, t2));
     }
 
     @Test
     public void testTakeTurn()
     {
         for (int i = 0; i < 100; i ++) {
-            Player p = new Player();
-            int playerIndex = p.getIndex();
+            Token p = new Token();
+            int tokenIndex = p.getIndex();
             pHold.land(p, d);
             boolean takeTurnOutput = pHold.takeTurn(p, d, boardEnd);
-            if (playerIndex + (d.prevRoll() * 3) > 0 && playerIndex + (d.prevRoll() * 3) < boardEnd) {
+            if (tokenIndex + (d.prevRoll() * 3) > 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
                 assertEquals(false, takeTurnOutput);
-                assertEquals(p.getIndex(), (playerIndex + (d.prevRoll() * 3)));
+                assertEquals(p.getIndex(), (tokenIndex + (d.prevRoll() * 3)));
             }
-            else if (playerIndex + (d.prevRoll() * 3) == boardEnd) {
+            else if (tokenIndex + (d.prevRoll() * 3) == boardEnd) {
                 assertEquals(true, takeTurnOutput);
                 assertEquals(p.getIndex(), boardEnd);
             }
             else {
-                assertEquals(p.getIndex(), playerIndex);
+                assertEquals(p.getIndex(), tokenIndex);
             }
         }
     }

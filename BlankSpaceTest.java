@@ -6,12 +6,12 @@ import org.junit.Test;
  * The test class BlankSpaceTest.
  *
  * @Eric Weber
- * @3/4/16
+ * @3/16/16
  */
 public class BlankSpaceTest
 {
     private BlankSpace bSpace;
-    private Player p;
+    private Token t;
     private Die d;
     private int boardEnd;
     /**
@@ -30,7 +30,7 @@ public class BlankSpaceTest
     public void setUp()
     {
         bSpace = new BlankSpace();
-        p = new Player();
+        t = new Token();
         d = new Die(10);
         boardEnd = 15;
     }
@@ -54,13 +54,13 @@ public class BlankSpaceTest
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
-            p = new Player();
-            int playerIndex = p.getIndex();
-            bSpace.takeTurn(p, d, boardEnd);
-            if (playerIndex + d.prevRoll() > 0 && playerIndex + d.prevRoll() < boardEnd) {
+            t = new Token();
+            int tokenIndex = t.getIndex();
+            bSpace.takeTurn(t, d, boardEnd);
+            if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
                 assertTrue(bSpace.canMove());
             }
-            else if (playerIndex + d.prevRoll() == boardEnd) {
+            else if (tokenIndex + d.prevRoll() == boardEnd) {
                 assertTrue(bSpace.canMove());
             }
             else {
@@ -78,26 +78,26 @@ public class BlankSpaceTest
     @Test
     public void testLand()
     {
-        bSpace.land(p, d);
+        bSpace.land(t, d);
     }
 
     @Test
     public void testTakeTurn()
     {
         for (int i = 0; i < 100; i ++) {
-            p = new Player();
-            int playerIndex = p.getIndex();
-            boolean takeTurnOutput = bSpace.takeTurn(p, d, boardEnd);
-            if (playerIndex + d.prevRoll() > 0 && playerIndex + d.prevRoll() < boardEnd) {
+            t = new Token();
+            int tokenIndex = t.getIndex();
+            boolean takeTurnOutput = bSpace.takeTurn(t, d, boardEnd);
+            if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
                 assertEquals(false, takeTurnOutput);
-                assertEquals(p.getIndex(), (playerIndex + d.prevRoll()));
+                assertEquals(t.getIndex(), (tokenIndex + d.prevRoll()));
             }
-            else if (playerIndex + d.prevRoll() == boardEnd) {
+            else if (tokenIndex + d.prevRoll() == boardEnd) {
                 assertEquals(true, takeTurnOutput);
-                assertEquals(p.getIndex(), boardEnd);
+                assertEquals(t.getIndex(), boardEnd);
             }
             else {
-                assertEquals(p.getIndex(), playerIndex);
+                assertEquals(t.getIndex(), tokenIndex);
             }
         }
     }

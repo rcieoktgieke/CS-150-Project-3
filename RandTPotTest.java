@@ -6,12 +6,12 @@ import org.junit.Test;
  * The test class RandTPotTest.
  *
  * @Eric Weber
- * @3/4/16
+ * @3/16/16
  */
 public class RandTPotTest
 {
     private RandTPot rPot;
-    private Player p;
+    private Token t;
     private Die d;
     private int boardEnd;
     /**
@@ -30,7 +30,7 @@ public class RandTPotTest
     public void setUp()
     {
         rPot = new RandTPot(30);
-        p = new Player();
+        t = new Token();
         d = new Die(10);
         boardEnd = 15;
     }
@@ -54,13 +54,13 @@ public class RandTPotTest
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
-            p = new Player();
-            int playerIndex = p.getIndex();
-            rPot.takeTurn(p, d, boardEnd);
-            if (playerIndex + d.prevRoll() > 0 && playerIndex + d.prevRoll() < boardEnd) {
+            t = new Token();
+            int tokenIndex = t.getIndex();
+            rPot.takeTurn(t, d, boardEnd);
+            if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
                 assertTrue(rPot.canMove());
             }
-            else if (playerIndex + d.prevRoll() == boardEnd) {
+            else if (tokenIndex + d.prevRoll() == boardEnd) {
                 assertTrue(rPot.canMove());
             }
             else {
@@ -75,7 +75,7 @@ public class RandTPotTest
         int pieces = 30;
         assertEquals("R.Pot|" + pieces, rPot.getStatus());
         while (pieces > 0) {
-            rPot.land(p, d);
+            rPot.land(t, d);
             pieces -= d.prevRoll();
             if (pieces > 0) {
                 assertEquals("R.Pot|" + pieces, rPot.getStatus());
@@ -92,30 +92,30 @@ public class RandTPotTest
         rPot = new RandTPot(3000);
         int pieces = 0;
         while (pieces < 3000) {
-            rPot.land(p, d);
+            rPot.land(t, d);
             pieces += d.prevRoll();
-            assertEquals(pieces, p.getPieces());
+            assertEquals(pieces, t.getPieces());
         }
-        rPot.land(p, d);
-        assertEquals(pieces, p.getPieces());
+        rPot.land(t, d);
+        assertEquals(pieces, t.getPieces());
     }
     @Test
     public void testTakeTurn()
     {
         for (int i = 0; i < 100; i ++) {
-            p = new Player();
-            int playerIndex = p.getIndex();
-            boolean takeTurnOutput = rPot.takeTurn(p, d, boardEnd);
-            if (playerIndex + d.prevRoll() > 0 && playerIndex + d.prevRoll() < boardEnd) {
+            t = new Token();
+            int tokenIndex = t.getIndex();
+            boolean takeTurnOutput = rPot.takeTurn(t, d, boardEnd);
+            if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
                 assertEquals(false, takeTurnOutput);
-                assertEquals(p.getIndex(), (playerIndex + d.prevRoll()));
+                assertEquals(t.getIndex(), (tokenIndex + d.prevRoll()));
             }
-            else if (playerIndex + d.prevRoll() == boardEnd) {
+            else if (tokenIndex + d.prevRoll() == boardEnd) {
                 assertEquals(true, takeTurnOutput);
-                assertEquals(p.getIndex(), boardEnd);
+                assertEquals(t.getIndex(), boardEnd);
             }
             else {
-                assertEquals(p.getIndex(), playerIndex);
+                assertEquals(t.getIndex(), tokenIndex);
             }
         }
     }

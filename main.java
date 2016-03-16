@@ -16,7 +16,7 @@ public class main {
     public static void main(String[] args) {
         /** Initialize all components of the game.*/
         Die die = new Die(Integer.parseInt(args[1]));
-        LinkedList<Player> players = new LinkedList<Player>();
+        LinkedList<Token> tokens = new LinkedList<Token>();
         File configFile = new File(args[3]);
         try {
             Scanner configScan = new Scanner(configFile);
@@ -32,8 +32,8 @@ public class main {
             Board board = new Board(x, y, z, configScan);
             int numberOfSpaces = board.numberOfSpaces();
             for (int p = 0; p < Integer.parseInt(args[2]); p ++) {
-                Player player = new Player();
-                players.add(player);
+                Token token = new Token();
+                tokens.add(token);
             }
             /**Initialize user interface.*/
             boolean repeat = true;
@@ -53,23 +53,23 @@ public class main {
                         /**Take one turn*/
                         repeat = true;
                         System.out.println();
-                        if (takeTurn(players, board, die, numberOfSpaces - 1)) {
+                        if (takeTurn(tokens, board, die, numberOfSpaces - 1)) {
                             repeat = false;
                         }
                     }
                     else if (line.equals("i")) {
                         /**Take turns until the game ends*/
                         System.out.println();
-                        while (!(takeTurn(players, board, die, numberOfSpaces - 1))) {
+                        while (!(takeTurn(tokens, board, die, numberOfSpaces - 1))) {
                             System.out.println();
                         }
                         repeat = false;
                     }
                     else if (line.equals("r")) {
-                        /**Print player status*/
+                        /**Print token status*/
                         repeat = true;
                         System.out.println();
-                        printPlayers(players);
+                        printTokens(tokens);
                     }
                     else {
                         /**End game*/
@@ -89,30 +89,30 @@ public class main {
     /**
      * Take a turn.
      * 
-     * Iterate through the list of players in turn order. Take the turn of each player on their current space, and, if allowed, land them on their next space.
-     * @param players list of players in the game in turn order.
+     * Iterate through the list of tokens in turn order. Take the turn of each token on their current space, and, if allowed, land them on their next space.
+     * @param tokens list of tokens in the game in turn order.
      * @param board the board used for the game.
      * @param d die that is used for the game.
      * @param boardEnd the index of the final space on the board.
      * @return if the game has ended.
      */
-    public static boolean takeTurn(LinkedList<Player> players, Board board, Die die, int boardEnd) {
-        Player cPlayer;
-        Iterator<Player> turns = players.iterator();
+    public static boolean takeTurn(LinkedList<Token> tokens, Board board, Die die, int boardEnd) {
+        Token cToken;
+        Iterator<Token> turns = tokens.iterator();
         while (turns.hasNext()) {
-            cPlayer = turns.next();
-            int playerStartIndex = cPlayer.getIndex();
-            if (board.get(cPlayer.getIndex()).takeTurn(cPlayer, die, boardEnd)) {
-                /**If a player reaches the final space, print that the game is over and player info.*/
+            cToken = turns.next();
+            int tokenStartIndex = cToken.getIndex();
+            if (board.get(cToken.getIndex()).takeTurn(cToken, die, boardEnd)) {
+                /**If a token reaches the final space, print that the game is over and token info.*/
                 System.out.println("GAME OVER");
                 System.out.println();
-                printPlayers(players);
+                printTokens(tokens);
                 return true;
             }
             else {
-                if (board.get(playerStartIndex).canMove()) {
-                    /**If the player can move, call land on its new space.*/
-                    board.get(cPlayer.getIndex()).land(cPlayer, die);
+                if (board.get(tokenStartIndex).canMove()) {
+                    /**If the token can move, call land on its new space.*/
+                    board.get(cToken.getIndex()).land(cToken, die);
                 }
             }
             System.out.println();
@@ -129,16 +129,16 @@ public class main {
         board.printBoard();
     }
     /**
-     * Print each player, their index, and their pieces.
+     * Print each token, their index, and their pieces.
      * 
-     * @param players list of players in turn order.
+     * @param tokens list of tokens in turn order.
      */
-    public static void printPlayers(LinkedList<Player> players) {
-        Player cPlayer;
-        Iterator<Player> playerIter = players.iterator();
-        while (playerIter.hasNext()) {
-            cPlayer = playerIter.next();
-            System.out.println(cPlayer + ": " + cPlayer.getIndex() + " Pieces: " + cPlayer.getPieces());
+    public static void printTokens(LinkedList<Token> tokens) {
+        Token cToken;
+        Iterator<Token> tokenIter = tokens.iterator();
+        while (tokenIter.hasNext()) {
+            cToken = tokenIter.next();
+            System.out.println(cToken + ": " + cToken.getIndex() + " Pieces: " + cToken.getPieces());
         }
     }
 }

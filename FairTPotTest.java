@@ -6,12 +6,12 @@ import org.junit.Test;
  * The test class FairTPotTest.
  *
  * @Eric Weber
- * @3/4/16
+ * @3/16/16
  */
 public class FairTPotTest
 {
     private FairTPot fPot;
-    private Player p;
+    private Token t;
     private Die d;
     private int boardEnd;
     /**
@@ -30,7 +30,7 @@ public class FairTPotTest
     public void setUp()
     {
         fPot = new FairTPot(10, 300);
-        p = new Player();
+        t = new Token();
         d = new Die(10);
         boardEnd = 15;
     }
@@ -54,13 +54,13 @@ public class FairTPotTest
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
-            p = new Player();
-            int playerIndex = p.getIndex();
-            fPot.takeTurn(p, d, boardEnd);
-            if (playerIndex + d.prevRoll() > 0 && playerIndex + d.prevRoll() < boardEnd) {
+            t = new Token();
+            int tokenIndex = t.getIndex();
+            fPot.takeTurn(t, d, boardEnd);
+            if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
                 assertTrue(fPot.canMove());
             }
-            else if (playerIndex + d.prevRoll() == boardEnd) {
+            else if (tokenIndex + d.prevRoll() == boardEnd) {
                 assertTrue(fPot.canMove());
             }
             else {
@@ -74,10 +74,10 @@ public class FairTPotTest
     {
         for (int times = 0; times < 300; times ++) {
             assertEquals("F.Pot|" + times, fPot.getStatus());
-            fPot.land(p, d);
+            fPot.land(t, d);
         }
         assertEquals("F.Pot|300", fPot.getStatus());
-        fPot.land(p, d);
+        fPot.land(t, d);
         assertEquals("F.Pot|300", fPot.getStatus());
     }
     @Test
@@ -85,30 +85,30 @@ public class FairTPotTest
     {
         int pieces = 0;
         while (pieces < 3000) {
-            fPot.land(p, d);
+            fPot.land(t, d);
             pieces += 10;
-            assertEquals(pieces, p.getPieces());
+            assertEquals(pieces, t.getPieces());
         }
-        fPot.land(p, d);
-        assertEquals(pieces, p.getPieces());
+        fPot.land(t, d);
+        assertEquals(pieces, t.getPieces());
     }
     @Test
     public void testTakeTurn()
     {
         for (int i = 0; i < 100; i ++) {
-            p = new Player();
-            int playerIndex = p.getIndex();
-            boolean takeTurnOutput = fPot.takeTurn(p, d, boardEnd);
-            if (playerIndex + d.prevRoll() > 0 && playerIndex + d.prevRoll() < boardEnd) {
+            t = new Token();
+            int tokenIndex = t.getIndex();
+            boolean takeTurnOutput = fPot.takeTurn(t, d, boardEnd);
+            if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
                 assertEquals(false, takeTurnOutput);
-                assertEquals(p.getIndex(), (playerIndex + d.prevRoll()));
+                assertEquals(t.getIndex(), (tokenIndex + d.prevRoll()));
             }
-            else if (playerIndex + d.prevRoll() == boardEnd) {
+            else if (tokenIndex + d.prevRoll() == boardEnd) {
                 assertEquals(true, takeTurnOutput);
-                assertEquals(p.getIndex(), boardEnd);
+                assertEquals(t.getIndex(), boardEnd);
             }
             else {
-                assertEquals(p.getIndex(), playerIndex);
+                assertEquals(t.getIndex(), tokenIndex);
             }
         }
     }

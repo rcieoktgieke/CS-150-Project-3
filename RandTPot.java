@@ -1,14 +1,14 @@
 /**
- * When a player lands on a random treasure pot, the player rolls the die and receives a number of pieces equal to that roll. Each pot starts with a number of pieces specified by the configuration, and those pieces are decreased by the number given to each player. When the number of pieces reaches zero, no more pieces are given and the space is treated as blank.
+ * When a token lands on a random treasure pot, the token rolls the die and receives a number of pieces equal to that roll. Each pot starts with a number of pieces specified by the configuration, and those pieces are decreased by the number given to each token. When the number of pieces reaches zero, no more pieces are given and the space is treated as blank.
  * 
  * @Eric Weber
- * @3/4/16
+ * @3/16/16
  */
 public class RandTPot implements Space  {
     
     /** The number of pieces left in the pot */
     private int pieces;
-    /** The ability of the player last passed to takeTurn to move. */
+    /** The ability of the token last passed to takeTurn to move. */
     private boolean canMove = true;
     /**
      * Constructor.
@@ -20,16 +20,16 @@ public class RandTPot implements Space  {
     }
     
     /**
-     * Print the player and the status of the pot. If pieces are left in the pot, give pieces to the player.
+     * Print the token and the status of the pot. If pieces are left in the pot, give pieces to the token.
      */
-    public void land(Player p, Die d) {
-        System.out.print(p + " has landed on " + getStatus() + ". ");
+    public void land(Token t, Die d) {
+        System.out.print(t + " has landed on " + getStatus() + ". ");
         if (pieces > 0) {
-            p.addPieces(piecesToGive(d));
+            t.addPieces(piecesToGive(d));
         }
     }
     /**
-     * @return if moving the player would go beyond the bounds of the board.
+     * @return if moving the token would go beyond the bounds of the board.
      */
     public boolean canMove() {
         return canMove;
@@ -57,20 +57,20 @@ public class RandTPot implements Space  {
     }
     
     /**
-     * Take player's turn.
+     * Take token's turn.
      * 
-     * Roll the die. Print the player and the roll. If the roll is within the bounds of the board, advance the player.
+     * Roll the die. Print the token and the roll. If the roll is within the bounds of the board, advance the token.
      */
-    public boolean takeTurn(Player p, Die d, int boardEnd) {
+    public boolean takeTurn(Token t, Die d, int boardEnd) {
         int roll = d.roll();
-        System.out.print(p + " has rolled " + roll + ". ");
-        if (roll + p.getIndex() < boardEnd) {
+        System.out.print(t + " has rolled " + roll + ". ");
+        if (roll + t.getIndex() < boardEnd) {
             canMove = true;
-            p.advance(roll);
+            t.advance(roll);
             return false;
         }
-        else if (roll + p.getIndex() == boardEnd) {
-            p.advance(roll);
+        else if (roll + t.getIndex() == boardEnd) {
+            t.advance(roll);
             return true;
         }
         else {

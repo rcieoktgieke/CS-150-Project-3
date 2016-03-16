@@ -1,22 +1,22 @@
 /**
- * A blank space lets a player roll on their next turn and move forward.
+ * A blank space lets a token roll on their next turn and move forward.
  *  
  * @Eric Weber
  * @3/3/16
  */
 public class BlankSpace implements Space  {
     
-    /** The ability of the player last passed to takeTurn to move. */
+    /** The ability of the token last passed to takeTurn to move. */
     private boolean canMove = true;
     /**
      * Constructor.
      */
     public BlankSpace() {
     }
-    public void land(Player p, Die d) {
+    public void land(Token t, Die d) {
     }
     /**
-     * @return if moving the player would go beyond the bounds of the board.
+     * @return if moving the token would go beyond the bounds of the board.
      */
     public boolean canMove() {
         return canMove;
@@ -27,20 +27,20 @@ public class BlankSpace implements Space  {
     }
     
     /**
-     * Take player's turn.
+     * Take token's turn.
      * 
-     * Roll the die. Print the player and the roll. If the roll is within the bounds of the board, advance the player.
+     * Roll the die. Print the token and the roll. If the roll is within the bounds of the board, advance the token.
      */
-    public boolean takeTurn(Player p, Die d, int boardEnd) {
+    public boolean takeTurn(Token t, Die d, int boardEnd) {
         int roll = d.roll();
-        System.out.print(p + " has rolled " + roll + ". ");
-        if (roll + p.getIndex() < boardEnd) {
+        System.out.print(t + " has rolled " + roll + ". ");
+        if (roll + t.getIndex() < boardEnd) {
             canMove = true;
-            p.advance(roll);
+            t.advance(roll);
             return false;
         }
-        else if (roll + p.getIndex() == boardEnd) {
-            p.advance(roll);
+        else if (roll + t.getIndex() == boardEnd) {
+            t.advance(roll);
             return true;
         }
         else {
