@@ -8,33 +8,35 @@ import java.util.*;
 public class SpaceGenerator {
     private Random rand;
     /** The frequency with which fair treasure pots should appear on the board.*/
-    private double fairPotFreq = 1.28;
+    private double fairPotFreq;
     /** The number of pieces each fair pot should give to players.*/
     private int fairPotPieces;
     /** The number of times each fair pot can give pieces to players.*/
     private int fairPotTimes;
     /** The frequency with which random treasure pots should appear on the board.*/
-    private double randomPotFreq = .437;
+    private double randomPotFreq;
     /** The initial number of pieces each random treasure pot should have.*/
     private int randomPotPieces;
     /** The frequency with which holds should appear on the board.*/
-    private double holdFreq = .318; 
+    private double holdFreq; 
     /** The minimum factor by which players' rolls should be multiplied upon exiting a hold.*/
     private int minHoldFactor;
     /** The maximum factor by which players' rolls should be multiplied upon exiting a hold.*/
     private int maxHoldFactor;
     /** The frequency with which priority holds should appear on the board.*/
-    private double pHoldFreq = .273;
+    private double pHoldFreq;
     /** The minimum factor by which players' rolls should be multiplied upon exiting a priority hold.*/
     private int minPHoldFactor;
     /** The maximum factor by which players' rolls should be multiplied upon exiting a priority hold.*/
     private int maxPHoldFactor;
     /** The frequency with which hold queues should appear on the board.*/
-    private double holdQFreq = .252;
+    private double holdQFreq;
     /** The minimum factor by which players' rolls should be multiplied upon exiting a hold queue.*/
     private int minHoldQFactor;
     /** The maximum factor by which players' rolls should be multiplied upon exiting a hold queue.*/
     private int maxHoldQFactor;
+    /** The frequency with which JStacks should appear on the board.*/
+    private double jStackFreq;
     /**
      * Constructor.
      * 
@@ -50,15 +52,15 @@ public class SpaceGenerator {
      * 
      * @return a space of type BlankSpace, RandTPot, FairTPot, Hold, PHold, or HoldQ.
      */
-    public Space gaussianSpace() {
-        double spaceRand = rand.nextGaussian();
-        if (spaceRand < -1*fairPotFreq)  {
+    public Space randomSpace() {
+        double spaceRand = rand.nextInt(100);
+        if (spaceRand < fairPotFreq)  {
             return new FairTPot(fairPotPieces, fairPotTimes);
         }
-        else if (spaceRand < -1*fairPotFreq + randomPotFreq) {
+        else if (spaceRand < fairPotFreq + randomPotFreq) {
             return new RandTPot(randomPotPieces);
         }
-        else if (spaceRand < -1*fairPotFreq + randomPotFreq + holdFreq) {
+        else if (spaceRand < fairPotFreq + randomPotFreq + holdFreq) {
             if ((maxHoldFactor - minHoldFactor) > 0) {
                 return new Hold(rand.nextInt(maxHoldFactor - minHoldFactor) + minHoldFactor);
             }
@@ -66,7 +68,7 @@ public class SpaceGenerator {
                 return new Hold(minHoldFactor);
             }
         }
-        else if (spaceRand < -1*fairPotFreq + randomPotFreq + holdFreq + pHoldFreq) {
+        else if (spaceRand < fairPotFreq + randomPotFreq + holdFreq + pHoldFreq) {
             if ((maxPHoldFactor - minPHoldFactor) > 0) {
                 return new PHold(rand.nextInt(maxPHoldFactor - minPHoldFactor) + minPHoldFactor);
             }
@@ -74,7 +76,7 @@ public class SpaceGenerator {
                 return new PHold(minPHoldFactor);
             }
         }
-        else if (spaceRand < -1*fairPotFreq + randomPotFreq + holdFreq + pHoldFreq + holdQFreq) {
+        else if (spaceRand < fairPotFreq + randomPotFreq + holdFreq + pHoldFreq + holdQFreq) {
             if ((maxHoldQFactor - minHoldQFactor) > 0) {
                 return new HoldQ(rand.nextInt(maxHoldQFactor - minHoldQFactor) + minHoldQFactor);
             }
@@ -82,6 +84,14 @@ public class SpaceGenerator {
                 return new HoldQ(minHoldQFactor);
             }
         }
+        /*else if (spaceRand < fairPotFreq + randomPotFreq + holdFreq + pHoldFreq + holdQFreq) { make JStack
+            if ((maxHoldQFactor - minHoldQFactor) > 0) {
+                return new HoldQ(rand.nextInt(maxHoldQFactor - minHoldQFactor) + minHoldQFactor);
+            }
+            else {
+                return new HoldQ(minHoldQFactor);
+            }
+        }*/
         else {
             return new BlankSpace();
         }
@@ -92,36 +102,34 @@ public class SpaceGenerator {
             Scanner lineScanner = new Scanner(line);
             if (line.substring(0, 5).equals("HoldQ")) {
                 lineScanner.next();
-                lineScanner.nextInt();//holdQFreq = lineScanner.nextInt();
+                holdQFreq = lineScanner.nextInt();
                 minHoldQFactor = lineScanner.nextInt();
                 maxHoldQFactor = lineScanner.nextInt();
             }
             else if (line.substring(0, 4).equals("Hold")) {
                 lineScanner.next();
-                lineScanner.nextInt();//holdFreq = lineScanner.nextInt();
+                holdFreq = lineScanner.nextInt();
                 minHoldFactor = lineScanner.nextInt();
                 maxHoldFactor = lineScanner.nextInt();
             }
             else if (line.substring(0, 6).equals("JStack")) {
-                /*lineScanner.next();
-                lineScanner.nextInt();//holdFreq = lineScanner.nextInt();
-                minHoldFactor = lineScanner.nextInt();
-                maxHoldFactor = lineScanner.nextInt();*/
+                lineScanner.next();
+                jStackFreq = lineScanner.nextInt();
             }
             else if (line.substring(0, 12).equals("treasurePotA")) {
                 lineScanner.next();
-                lineScanner.nextInt();//fairPotFreq = lineScanner.nextInt();
+                fairPotFreq = lineScanner.nextInt();
                 fairPotPieces = lineScanner.nextInt();
                 fairPotTimes = lineScanner.nextInt();
             }
             else if (line.substring(0, 12).equals("treasurePotB")) {
                 lineScanner.next();
-                lineScanner.nextInt();//randomPotFreq = lineScanner.nextInt();
+                randomPotFreq = lineScanner.nextInt();
                 randomPotPieces = lineScanner.nextInt();
             }
             else if (line.substring(0, 12).equals("PriorityHold")) {
                 lineScanner.next();
-                lineScanner.nextInt();//pHoldFreq = lineScanner.nextInt();
+                pHoldFreq = lineScanner.nextInt();
                 minPHoldFactor = lineScanner.nextInt();
                 maxPHoldFactor = lineScanner.nextInt();
             }
