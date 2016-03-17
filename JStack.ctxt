@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=factor\ x\ y\ z
+comment0.target=JStack(int,\ int,\ int,\ int)
+comment0.text=\n\ Constructor.\n\ \n\ @param\ x\ the\ value\ of\ the\ x\ dimension\ of\ the\ board.\n\ @param\ y\ the\ value\ of\ the\ y\ dimension\ of\ the\ board.\n\ @param\ z\ the\ value\ of\ the\ z\ dimension\ of\ the\ board.\n
+comment1.params=t\ d
+comment1.target=void\ land(Token,\ Die)
+comment1.text=\n\ Print\ the\ token\ and\ the\ status\ of\ the\ JStack.\n
+comment2.params=
+comment2.target=boolean\ canMove()
+comment2.text=\n\ @return\ true\n
+comment3.params=
+comment3.target=java.lang.String\ getStatus()
+comment4.params=t\ d\ boardEnd
+comment4.target=boolean\ takeTurn(Token,\ Die,\ int)
+comment4.text=\n\ Take\ token's\ turn.\n\ \n\ Roll\ the\ die.\ Print\ the\ token\ and\ the\ roll.\ Advance\ the\ player\ to\ their\ current\ x\ and\ y\ coordinate\ up\ (or\ down)\ the\ z\ level\ that\ corresponds\ to\ their\ roll\ modulo\ the\ z\ dimension\ of\ the\ board.\n
+numComments=5

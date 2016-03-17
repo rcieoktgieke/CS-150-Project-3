@@ -50,9 +50,12 @@ public class SpaceGenerator {
     /**
      * Generates a space (of type BlankSpace, RandTPot, FairTPot, Hold, PHold, or HoldQ) based on a Gaussian random number.
      * 
+     * @param x the value of the x dimension of the board.
+     * @param y the value of the y dimension of the board.
+     * @param z the value of the z dimension of the board.
      * @return a space of type BlankSpace, RandTPot, FairTPot, Hold, PHold, or HoldQ.
      */
-    public Space randomSpace() {
+    public Space randomSpace(int x, int y, int z) {
         double spaceRand = rand.nextInt(100);
         if (spaceRand < fairPotFreq)  {
             return new FairTPot(fairPotPieces, fairPotTimes);

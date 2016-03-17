@@ -38,7 +38,7 @@ public class Board {
         SpaceGenerator spaceGen = new SpaceGenerator(scan);
         /**Iterate through the board, creating a new space of a type defined by a Gaussian random number at each index.*/
         for (int i = 1; i < (numberOfSpaces); i ++) {
-            board.add(spaceGen.randomSpace());
+            board.add(spaceGen.randomSpace(x, y, z));
         }
     }
     /**

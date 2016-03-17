@@ -44,17 +44,17 @@ public class SpaceGeneratorTest
     {
         try {
             SpaceGenerator spaceGen1 = new SpaceGenerator(new Scanner(new File("config.txt")));
-            while (!(spaceGen1.randomSpace() instanceof BlankSpace)) {
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof BlankSpace)) {
             }
-            while (!(spaceGen1.randomSpace() instanceof FairTPot)) {
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof FairTPot)) {
             }
-            while (!(spaceGen1.randomSpace() instanceof RandTPot)) {
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof RandTPot)) {
             }
-            while (!(spaceGen1.randomSpace() instanceof Hold)) {
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof Hold)) {
             }
-            while (!(spaceGen1.randomSpace() instanceof PHold)) {
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof PHold)) {
             }
-            while (!(spaceGen1.randomSpace() instanceof HoldQ)) {
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof HoldQ)) {
             }
         }
         catch (Exception e) {
@@ -66,17 +66,17 @@ public class SpaceGeneratorTest
     {
         try {
             SpaceGenerator spaceGen1 = new SpaceGenerator(new Scanner(new File("invalid.notatxt")));
-            while (!(spaceGen1.randomSpace() instanceof BlankSpace)) {
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof BlankSpace)) {
             }
-            while (!(spaceGen1.randomSpace() instanceof FairTPot)) {
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof FairTPot)) {
             }
-            while (!(spaceGen1.randomSpace() instanceof RandTPot)) {
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof RandTPot)) {
             }
-            while (!(spaceGen1.randomSpace() instanceof Hold)) {
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof Hold)) {
             }
-            while (!(spaceGen1.randomSpace() instanceof PHold)) {
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof PHold)) {
             }
-            while (!(spaceGen1.randomSpace() instanceof HoldQ)) {
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof HoldQ)) {
             }
         }
         catch (Exception e) {
