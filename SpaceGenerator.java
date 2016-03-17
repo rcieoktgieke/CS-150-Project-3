@@ -87,14 +87,14 @@ public class SpaceGenerator {
                 return new HoldQ(minHoldQFactor);
             }
         }
-        /*else if (spaceRand < fairPotFreq + randomPotFreq + holdFreq + pHoldFreq + holdQFreq) { make JStack
-            if ((maxHoldQFactor - minHoldQFactor) > 0) {
-                return new HoldQ(rand.nextInt(maxHoldQFactor - minHoldQFactor) + minHoldQFactor);
+        else if (spaceRand < fairPotFreq + randomPotFreq + holdFreq + pHoldFreq + holdQFreq + jStackFreq) {
+            if (rand.nextInt(1) == 1) {
+                return new JStack(1, x, y, z);
             }
             else {
-                return new HoldQ(minHoldQFactor);
+                return new JStack(-1, x, y, z);
             }
-        }*/
+        }
         else {
             return new BlankSpace();
         }

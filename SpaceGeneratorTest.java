@@ -56,6 +56,8 @@ public class SpaceGeneratorTest
             }
             while (!(spaceGen1.randomSpace(1, 1, 1) instanceof HoldQ)) {
             }
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof JStack)) {
+            }
         }
         catch (Exception e) {
         }
@@ -77,6 +79,8 @@ public class SpaceGeneratorTest
             while (!(spaceGen1.randomSpace(1, 1, 1) instanceof PHold)) {
             }
             while (!(spaceGen1.randomSpace(1, 1, 1) instanceof HoldQ)) {
+            }
+            while (!(spaceGen1.randomSpace(1, 1, 1) instanceof JStack)) {
             }
         }
         catch (Exception e) {
