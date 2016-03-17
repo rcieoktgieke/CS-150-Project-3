@@ -15,5 +15,5 @@ comment4.target=boolean\ takeTurn(Token,\ Die,\ int)
 comment4.text=\n\ Take\ token's\ turn.\n\ \n\ Print\ the\ token.\ If\ the\ token\ is\ first\ in\ the\ queue,\ roll\ the\ die.\ Print\ the\ roll.\ If\ the\ roll\ is\ within\ the\ bounds\ of\ the\ board,\ advance\ the\ token.\n
 comment5.params=roll1\ roll2
 comment5.target=int\ compare(java.lang.Integer,\ java.lang.Integer)
-comment5.text=\n\ Compare\ to\ Integer\ objects\ (rolls)\ for\ their\ priority\ in\ the\ queue.\n\ \n\ Token\ 1\ is\ greater\ than\ token\ 2\ if\ token\ 1's\ entry\ roll\ is\ greater\ than\ token\ 2's.\ Tokens\ are\ equal\ if\ their\ entry\ roll\ is\ equal.\ Token\ 1\ is\ less\ than\ token\ 2\ if\ token\ 1's\ entry\ roll\ is\ less\ than\ token\ 2's.\n\ @param\ p1\ token\ 1.\n\ @param\ p2\ token\ 2.\n\ @return\ 1\ if\ token\ 1\ is\ greater,\ 0\ if\ tokens\ are\ equal,\ -1\ if\ token\ 1\ is\ less.\n
+comment5.text=\n\ Compare\ two\ Integer\ objects\ (rolls)\ for\ their\ priority\ in\ the\ queue.\n\ \n\ Return\ 1\ if\ roll\ 1\ is\ higher\ than\ roll\ 2,\ 0\ if\ they\ are\ equal,\ and\ -1\ if\ roll\ 1\ is\ less\ than\ roll\ 2.\n\ @param\ roll1\ roll\ 1.\n\ @param\ roll2\ roll\ 2.\n\ @return\ 1\ if\ roll\ 1\ is\ higher\ than\ roll\ 2,\ 0\ if\ they\ are\ equal,\ and\ -1\ if\ roll\ 1\ is\ less\ than\ roll\ 2.\n
 numComments=6

@@ -123,12 +123,12 @@ public class PHold implements Space, Comparator<Integer> {
     }
     
     /**
-     * Compare to Integer objects (rolls) for their priority in the queue.
+     * Compare two Integer objects (rolls) for their priority in the queue.
      * 
-     * Token 1 is greater than token 2 if token 1's entry roll is greater than token 2's. Tokens are equal if their entry roll is equal. Token 1 is less than token 2 if token 1's entry roll is less than token 2's.
-     * @param p1 token 1.
-     * @param p2 token 2.
-     * @return 1 if token 1 is greater, 0 if tokens are equal, -1 if token 1 is less.
+     * Return 1 if roll 1 is higher than roll 2, 0 if they are equal, and -1 if roll 1 is less than roll 2.
+     * @param roll1 roll 1.
+     * @param roll2 roll 2.
+     * @return 1 if roll 1 is higher than roll 2, 0 if they are equal, and -1 if roll 1 is less than roll 2.
      */
     public int compare(Integer roll1, Integer roll2) {
         if (roll1 > roll2) {
