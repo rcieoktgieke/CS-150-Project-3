@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class PHoldTest.
  *
  * @Eric Weber
- * @3/16/16
+ * @3/17/16
  */
 public class PHoldTest
 {
@@ -54,13 +54,13 @@ public class PHoldTest
     {
         t1.setRoll(10);
         t2.setRoll(5);
-        assertEquals(1, pHold.compare(t1, t2));
+        assertEquals(1, pHold.compare(t1.getRoll(), t2.getRoll()));
         t1.setRoll(10);
         t2.setRoll(10);
-        assertEquals(1, pHold.compare(t1, t2));
+        assertEquals(0, pHold.compare(t1.getRoll(), t2.getRoll()));
         t1.setRoll(5);
         t2.setRoll(10);
-        assertEquals(-1, pHold.compare(t1, t2));
+        assertEquals(-1, pHold.compare(t1.getRoll(), t2.getRoll()));
     }
 
     @Test

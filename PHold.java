@@ -60,12 +60,18 @@ public class PHold implements Space, Comparator<Integer> {
             System.out.print(t + " is at the front of the queue and has rolled " + roll + ". ");
             if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
                 tokens.get(roll).remove(t); // is this right?
+                if (tokens.get(roll).isEmpty()) {
+                    tokens.remove(roll);
+                }
                 canMove = true;
                 t.advance(roll * multiplier);
                 return false;
             }
             else if ((roll * multiplier) + t.getIndex() == boardEnd) {
                 tokens.get(roll).remove(t); // and this
+                if (tokens.get(roll).isEmpty()) {
+                    tokens.remove(roll);
+                }
                 t.advance(roll * multiplier);
                 return true;
             }
