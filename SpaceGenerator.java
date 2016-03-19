@@ -3,7 +3,7 @@ import java.util.*;
  * SpaceGenerator uses a Gaussian random number to choose one of the six types of spaces.
  * 
  * @Eric Weber
- * @3/16/16
+ * @3/18/16
  */
 public class SpaceGenerator {
     private Random rand;
@@ -73,7 +73,11 @@ public class SpaceGenerator {
         }
         else if (spaceRand < fairPotFreq + randomPotFreq + holdFreq + pHoldFreq) {
             if ((maxPHoldFactor - minPHoldFactor) > 0) {
-                return new PHold(rand.nextInt(maxPHoldFactor - minPHoldFactor) + minPHoldFactor);
+                int factor = 0;
+                while (factor == -1*minPHoldFactor) {
+                    factor = rand.nextInt(maxPHoldFactor - minPHoldFactor);
+                }
+                return new PHold(factor + minPHoldFactor);
             }
             else {
                 return new PHold(minPHoldFactor);
