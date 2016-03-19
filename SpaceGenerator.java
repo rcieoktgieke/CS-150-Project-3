@@ -88,7 +88,7 @@ public class SpaceGenerator {
             }
         }
         else if (spaceRand < fairPotFreq + randomPotFreq + holdFreq + pHoldFreq + holdQFreq + jStackFreq) {
-            if (rand.nextInt(1) == 1) {
+            if (rand.nextInt(2) == 1) {
                 return new JStack(1, x, y, z);
             }
             else {

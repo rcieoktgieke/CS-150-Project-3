@@ -44,7 +44,7 @@ public class JStack implements Space  {
     }
     
     public String getStatus() {
-        return "JStack";
+        return "JStack:" + multiplier;
     }
     
     /**
@@ -56,7 +56,7 @@ public class JStack implements Space  {
         int roll = d.roll();
         System.out.print(t + " has rolled " + roll + ". ");
         int zIndex = t.getIndex() / (x*y);
-        t.advance((((roll*multiplier + zIndex) % z) - zIndex)*x*y);
+        t.advance(((z + ((roll*multiplier + zIndex) % z)) % z - zIndex)*x*y);
         if (t.getIndex() == boardEnd) {
             return true;
         }
