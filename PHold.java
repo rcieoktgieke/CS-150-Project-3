@@ -3,7 +3,7 @@ import java.util.*;
  * When a token lands on a priority hold, they are assigned the priority equal to the number rolled to land on it. They may only leave the space when no tokens with a lower number priority are on the priority hold with them. When a token is on a priority hold and does not have the lowest number priority, they end their turn without rolling. When they are on a priority hold and do have the lowest number priority, they roll, and advance the number of spaces rolled times a number specified for that priority hold when the board is created, which will be between two numbers set in configuration.
  * 
  * @Eric Weber
- * @3/18/16
+ * @3/25/16
  */
 public class PHold implements Space, Comparator<Integer> {
     
@@ -56,11 +56,11 @@ public class PHold implements Space, Comparator<Integer> {
     public boolean takeTurn(Token t, Die d, int boardEnd) {
         if (tokens.firstEntry().getValue().contains(t)) {
             /** Normal space behavior.*/
-            int roll = d.roll();
+            Integer roll = d.roll();
             System.out.print(t + " is at the front of the queue and has rolled " + roll + ". ");
             if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
-                tokens.get(roll).remove(t); // this crashes, maybe due to negative factor?
-                if (tokens.get(roll).isEmpty()) {
+                tokens.get(t.getRoll()).remove(t);
+                if (tokens.get(t.getRoll()).isEmpty()) {
                     tokens.remove(roll);
                 }
                 canMove = true;
@@ -68,8 +68,8 @@ public class PHold implements Space, Comparator<Integer> {
                 return false;
             }
             else if ((roll * multiplier) + t.getIndex() == boardEnd) {
-                tokens.get(roll).remove(t); // and this
-                if (tokens.get(roll).isEmpty()) {
+                tokens.get(t.getRoll()).remove(t);
+                if (tokens.get(t.getRoll()).isEmpty()) {
                     tokens.remove(roll);
                 }
                 t.advance(roll * multiplier);
@@ -85,41 +85,6 @@ public class PHold implements Space, Comparator<Integer> {
             canMove = false;
             return false;
         }
-        
-        /*
-        boolean atFront = true;
-        int maxRoll = tokens.peek().getRoll();
-        Iterator<Token> tokenIter = tokens.iterator();
-        while (atFront && tokenIter.hasNext()) {
-            Token cToken = tokenIter.next();
-            if (cToken == t && cToken.getRoll() <= maxRoll) {
-                /** Normal space behavior.*
-                int roll = d.roll();
-                System.out.print(t + " is at the front of the queue and has rolled " + roll + ". ");
-                if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
-                    tokenIter.remove();
-                    canMove = true;
-                    t.advance(roll * multiplier);
-                    return false;
-                }
-                else if ((roll * multiplier) + t.getIndex() == boardEnd) {
-                    tokenIter.remove();
-                    t.advance(roll * multiplier);
-                    return true;
-                }
-                else {
-                    canMove = false;
-                    return false;
-                }
-            }
-            else if (cToken.getRoll() > maxRoll) {
-                atFront = false;
-                System.out.print(t + " is not at the front of the queue. ");
-                canMove = false;
-                return false;
-            }
-        }
-        return false;*/
     }
     
     /**
