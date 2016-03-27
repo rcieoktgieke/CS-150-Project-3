@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=numTokens
+comment0.target=Player(int)
+comment1.params=roll
+comment1.target=Token\ whichToken(int)
+comment2.params=
+comment2.target=int\ getPieces()
+comment3.params=
+comment3.target=void\ printTokens()
+comment3.text=\n\ Print\ each\ token,\ their\ index,\ and\ their\ pieces.\n
+numComments=4
