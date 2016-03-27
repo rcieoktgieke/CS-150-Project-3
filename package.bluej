@@ -167,11 +167,19 @@ dependency59.type=UsesDependency
 dependency6.from=FairTPotTest
 dependency6.to=Die
 dependency6.type=UsesDependency
+<<<<<<< HEAD
 dependency60.from=main
 dependency60.to=Player
 dependency60.type=UsesDependency
 dependency61.from=main
 dependency61.to=Token
+=======
+dependency60.from=Player
+dependency60.to=Token
+dependency60.type=UsesDependency
+dependency61.from=main
+dependency61.to=Player
+>>>>>>> player
 dependency61.type=UsesDependency
 dependency7.from=main
 dependency7.to=Die
@@ -315,7 +323,10 @@ target18.editor.x=278
 target18.editor.y=91
 target18.height=50
 target18.name=Player
+<<<<<<< HEAD
 target18.naviview.expanded=false
+=======
+>>>>>>> player
 target18.showInterface=false
 target18.type=ClassTarget
 target18.typeParameters=
