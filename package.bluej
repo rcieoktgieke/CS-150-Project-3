@@ -161,12 +161,33 @@ dependency57.type=UsesDependency
 dependency58.from=SpaceGeneratorTest
 dependency58.to=JStack
 dependency58.type=UsesDependency
+<<<<<<< HEAD
 dependency59.from=main
+=======
+dependency59.from=Player
+>>>>>>> master
 dependency59.to=Token
 dependency59.type=UsesDependency
 dependency6.from=FairTPotTest
 dependency6.to=Die
 dependency6.type=UsesDependency
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+dependency60.from=main
+dependency60.to=Player
+dependency60.type=UsesDependency
+dependency61.from=main
+dependency61.to=Token
+=======
+dependency60.from=Player
+dependency60.to=Token
+dependency60.type=UsesDependency
+dependency61.from=main
+dependency61.to=Player
+>>>>>>> player
+dependency61.type=UsesDependency
+>>>>>>> master
 dependency7.from=main
 dependency7.to=Die
 dependency7.type=UsesDependency
@@ -310,7 +331,15 @@ target17.width=80
 target17.x=180
 target17.y=450
 target18.height=50
+<<<<<<< HEAD
 target18.name=DieTest
+=======
+target18.name=Player
+<<<<<<< HEAD
+target18.naviview.expanded=false
+=======
+>>>>>>> player
+>>>>>>> master
 target18.showInterface=false
 target18.type=UnitTestTargetJunit4
 target18.typeParameters=
