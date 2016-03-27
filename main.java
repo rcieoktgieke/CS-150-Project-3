@@ -4,7 +4,7 @@ import java.io.*;
  * Main runs a game of Chutes and Ladders and Pots
  * 
  * @Eric Weber
- * @3/18/16
+ * @3/26/16
  */
 public class main {
     /**
@@ -26,8 +26,7 @@ public class main {
             int z = configScan.nextInt();
             configScan.next();
             int winningPoints = configScan.nextInt();
-            double piecesPoints = configScan.nextDouble(); 
-            System.out.println(configScan.nextLine());
+            double piecesPoints = configScan.nextDouble();
             System.out.println(configScan.nextLine());
             Board board = new Board(x, y, z, configScan);
             int numberOfSpaces = board.numberOfSpaces();
