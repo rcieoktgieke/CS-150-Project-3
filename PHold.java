@@ -61,7 +61,7 @@ public class PHold implements Space, Comparator<Integer> {
             if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
                 tokens.get(t.getRoll()).remove(t);
                 if (tokens.get(t.getRoll()).isEmpty()) {
-                    tokens.remove(roll);
+                    tokens.remove(tokens.firstEntry().getKey());
                 }
                 canMove = true;
                 t.advance(roll * multiplier);
@@ -70,7 +70,7 @@ public class PHold implements Space, Comparator<Integer> {
             else if ((roll * multiplier) + t.getIndex() == boardEnd) {
                 tokens.get(t.getRoll()).remove(t);
                 if (tokens.get(t.getRoll()).isEmpty()) {
-                    tokens.remove(roll);
+                    tokens.remove(tokens.firstEntry().getKey());
                 }
                 t.advance(roll * multiplier);
                 return true;

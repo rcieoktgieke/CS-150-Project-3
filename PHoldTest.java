@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class PHoldTest.
  *
  * @Eric Weber
- * @3/17/16
+ * @3/29/16
  */
 public class PHoldTest
 {
@@ -36,7 +36,7 @@ public class PHoldTest
         t2 = new Token();
         t3 = new Token();
         d = new Die(10);
-        boardEnd = 10;
+        boardEnd = 30;
     }
 
     /**
@@ -66,21 +66,21 @@ public class PHoldTest
     @Test
     public void testTakeTurn()
     {
-        for (int i = 0; i < 100; i ++) {
-            Token p = new Token();
-            int tokenIndex = p.getIndex();
-            pHold.land(p, d);
-            boolean takeTurnOutput = pHold.takeTurn(p, d, boardEnd);
+        for (int i = 0; i < 500; i ++) {
+            Token t = new Token();
+            int tokenIndex = t.getIndex();
+            pHold.land(t, d);
+            boolean takeTurnOutput = pHold.takeTurn(t, d, boardEnd);
             if (tokenIndex + (d.prevRoll() * 3) > 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
                 assertEquals(false, takeTurnOutput);
-                assertEquals(p.getIndex(), (tokenIndex + (d.prevRoll() * 3)));
+                assertEquals(t.getIndex(), (tokenIndex + (d.prevRoll() * 3)));
             }
             else if (tokenIndex + (d.prevRoll() * 3) == boardEnd) {
                 assertEquals(true, takeTurnOutput);
-                assertEquals(p.getIndex(), boardEnd);
+                assertEquals(t.getIndex(), boardEnd);
             }
             else {
-                assertEquals(p.getIndex(), tokenIndex);
+                assertEquals(t.getIndex(), tokenIndex);
             }
         }
     }
