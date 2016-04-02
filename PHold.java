@@ -9,6 +9,10 @@ public class PHold implements Space, Comparator<Integer> {
     
     /** The number by which to multiply rolls leaving the hold.*/
     private int multiplier;
+    /** The die used by the game. */
+    private Die die;
+    /** Whether the latest turn on this space advanced a token. */
+    private boolean advanced = false;
     /** The queue of tokens currently in the hold */
     private TreeMap<Integer, ArrayList<Token>> tokens;
     /**
@@ -16,7 +20,8 @@ public class PHold implements Space, Comparator<Integer> {
      * 
      * @param multiplier number by which to multiply rolls leaving the hold.
      */
-    public PHold(int multiplier) {
+    public PHold(int multiplier, Die die) {
+        this.die = die;
         this.multiplier = multiplier;
         tokens = new TreeMap<Integer, ArrayList<Token>>(this);
     }
@@ -40,16 +45,14 @@ public class PHold implements Space, Comparator<Integer> {
      */
     public boolean canMove(Token t, int roll, int boardEnd) {
         if (tokens.firstEntry().getValue().contains(t)) {
-            if ((roll * multiplier) + t.getIndex() <= boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
-                return true;
-            }
-            else {
-                return false;
-            }
+            return true;
         }
         else {
             return false;
         }
+    }
+    public boolean advanced() {
+        return advanced;
     }
     
     public String getStatus() {
@@ -62,6 +65,7 @@ public class PHold implements Space, Comparator<Integer> {
      * Print the roll and the token. If it can move, advance the token.
      */
     public boolean takeTurn(Token t, int roll, int boardEnd) {
+        advanced = false;
         if (tokens.firstEntry().getValue().contains(t)) {
             System.out.print(t + " is at the front of the queue and has rolled " + roll + ". ");
         }
@@ -69,13 +73,21 @@ public class PHold implements Space, Comparator<Integer> {
             System.out.print(t + " is not at the front of the queue. ");
         }
         if (canMove(t, roll, boardEnd)) {
-            tokens.get(t.getRoll()).remove(t);
-            if (tokens.get(t.getRoll()).isEmpty()) {
-                tokens.remove(tokens.firstEntry().getKey());
-            }
-            t.advance(roll * multiplier);
-            if (t.getIndex() == boardEnd) {
-                return true;
+            roll = die.roll();
+            System.out.print(t + " has rolled " + roll + ". ");
+            if ((roll * multiplier) + t.getIndex() <= boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
+                tokens.get(t.getRoll()).remove(t);
+                if (tokens.get(t.getRoll()).isEmpty()) {
+                    tokens.remove(tokens.firstEntry().getKey());
+                }
+                t.advance(roll * multiplier);
+                advanced = true;
+                if (t.getIndex() == boardEnd) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
             else {
                 return false;

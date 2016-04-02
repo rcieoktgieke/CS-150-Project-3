@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.params=factor\ x\ y\ z
-comment0.target=JStack(int,\ int,\ int,\ int)
-comment0.text=\n\ Constructor.\n\ \n\ @param\ x\ the\ value\ of\ the\ x\ dimension\ of\ the\ board.\n\ @param\ y\ the\ value\ of\ the\ y\ dimension\ of\ the\ board.\n\ @param\ z\ the\ value\ of\ the\ z\ dimension\ of\ the\ board.\n
+comment0.params=factor\ x\ y\ z\ board
+comment0.target=JStack(int,\ int,\ int,\ int,\ Board)
+comment0.text=\n\ Constructor.\n\ \n\ @param\ x\ the\ value\ of\ the\ x\ dimension\ of\ the\ board.\n\ @param\ y\ the\ value\ of\ the\ y\ dimension\ of\ the\ board.\n\ @param\ z\ the\ value\ of\ the\ z\ dimension\ of\ the\ board.\n\ @param\ board\ the\ board\ used\ for\ the\ game.\n
 comment1.params=t\ d
 comment1.target=void\ land(Token,\ Die)
 comment1.text=\n\ Print\ the\ token\ and\ the\ status\ of\ the\ JStack.\n
@@ -9,8 +9,11 @@ comment2.params=t\ roll\ boardEnd
 comment2.target=boolean\ canMove(Token,\ int,\ int)
 comment2.text=\n\ @return\ true\n
 comment3.params=
-comment3.target=java.lang.String\ getStatus()
-comment4.params=t\ roll\ boardEnd
-comment4.target=boolean\ takeTurn(Token,\ int,\ int)
-comment4.text=\n\ Take\ token's\ turn.\n\ \n\ Print\ the\ token\ and\ the\ roll.\ Advance\ the\ player\ to\ their\ current\ x\ and\ y\ coordinate\ up\ (or\ down)\ the\ z\ level\ that\ corresponds\ to\ their\ roll\ modulo\ the\ z\ dimension\ of\ the\ board.\n
-numComments=5
+comment3.target=boolean\ advanced()
+comment3.text=\n\ @return\ false,\ so\ that\ main\ never\ calls\ land()\ on\ a\ space\ coming\ from\ a\ JStack.\n
+comment4.params=
+comment4.target=java.lang.String\ getStatus()
+comment5.params=t\ roll\ boardEnd
+comment5.target=boolean\ takeTurn(Token,\ int,\ int)
+comment5.text=\n\ Take\ token's\ turn.\n\ \n\ Print\ the\ token\ and\ the\ roll.\ Advance\ the\ player\ to\ their\ current\ x\ and\ y\ coordinate\ up\ (or\ down)\ the\ z\ level\ that\ corresponds\ to\ their\ roll\ modulo\ the\ z\ dimension\ of\ the\ board.\n
+numComments=6

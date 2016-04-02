@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=multiplier
-comment0.target=HoldQ(int)
+comment0.params=multiplier\ die
+comment0.target=HoldQ(int,\ Die)
 comment0.text=\n\ Constructor.\n\ \n\ @param\ multiplier\ number\ by\ which\ to\ multiply\ rolls\ leaving\ the\ hold\ queue.\n
 comment1.params=t\ d
 comment1.target=void\ land(Token,\ Die)
@@ -9,8 +9,10 @@ comment2.params=t\ roll\ boardEnd
 comment2.target=boolean\ canMove(Token,\ int,\ int)
 comment2.text=\n\ @return\ if\ the\ token\ is\ first\ in\ the\ queue,\ if\ the\ roll\ is\ equal\ to\ the\ token's\ entry\ roll,\ and\ if\ the\ roll\ times\ the\ multiplier\ is\ within\ the\ bounds\ of\ the\ board.\n
 comment3.params=
-comment3.target=java.lang.String\ getStatus()
-comment4.params=t\ roll\ boardEnd
-comment4.target=boolean\ takeTurn(Token,\ int,\ int)
-comment4.text=\n\ Take\ token's\ turn.\n\ \n\ Print\ the\ token\ and\ the\ roll.\ If\ the\ token\ can\ move,\ advance\ the\ token.\n
-numComments=5
+comment3.target=boolean\ advanced()
+comment4.params=
+comment4.target=java.lang.String\ getStatus()
+comment5.params=t\ roll\ boardEnd
+comment5.target=boolean\ takeTurn(Token,\ int,\ int)
+comment5.text=\n\ Take\ token's\ turn.\n\ \n\ Print\ the\ token\ and\ the\ roll.\ If\ the\ token\ can\ move,\ advance\ the\ token.\n
+numComments=6

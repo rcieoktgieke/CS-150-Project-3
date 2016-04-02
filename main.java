@@ -28,7 +28,7 @@ public class main {
             int winningPoints = configScan.nextInt();
             double piecesPoints = configScan.nextDouble();
             System.out.println(configScan.nextLine());
-            Board board = new Board(x, y, z, configScan);
+            Board board = new Board(x, y, z, configScan, die);
             int numberOfSpaces = board.numberOfSpaces();
             for (int p = 0; p < Integer.parseInt(args[1]); p ++) {
                 players.add(new Player(Integer.parseInt(args[2])));
@@ -110,7 +110,7 @@ public class main {
                 return true;
             }
             else {
-                if (canMove) {
+                if (canMove && board.get(tokenStartIndex).advanced()) {
                     /**If the token can move, call land on its new space.*/
                     board.get(cToken.getIndex()).land(cToken, die);
                 }

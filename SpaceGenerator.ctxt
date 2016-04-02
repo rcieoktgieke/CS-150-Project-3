@@ -1,10 +1,13 @@
 #BlueJ class context
-comment0.params=scan
-comment0.target=SpaceGenerator(java.util.Scanner)
-comment0.text=\n\ Constructor.\n\ \n\ Initialize\ random\ without\ seed.\n\ @param\ scan\ the\ Scanner\ object\ for\ the\ board's\ config\ file.\n
-comment1.params=x\ y\ z
-comment1.target=Space\ randomSpace(int,\ int,\ int)
-comment1.text=\n\ Generates\ a\ space\ (of\ type\ BlankSpace,\ RandTPot,\ FairTPot,\ Hold,\ PHold,\ or\ HoldQ)\ based\ on\ a\ Gaussian\ random\ number.\n\ \n\ @param\ x\ the\ value\ of\ the\ x\ dimension\ of\ the\ board.\n\ @param\ y\ the\ value\ of\ the\ y\ dimension\ of\ the\ board.\n\ @param\ z\ the\ value\ of\ the\ z\ dimension\ of\ the\ board.\n\ @return\ a\ space\ of\ type\ BlankSpace,\ RandTPot,\ FairTPot,\ Hold,\ PHold,\ or\ HoldQ.\n
-comment2.params=scan
-comment2.target=void\ readConfig(java.util.Scanner)
-numComments=3
+comment0.params=scan\ board
+comment0.target=SpaceGenerator(java.util.Scanner,\ Board)
+comment0.text=\n\ Constructor.\n\ \n\ Initialize\ random\ without\ seed.\n\ @param\ scan\ the\ Scanner\ object\ for\ the\ board's\ config\ file.\n\ @param\ board\ the\ board\ used\ for\ the\ game.\n
+comment1.params=x\ y\ z\ d
+comment1.target=Space\ randomSpace(int,\ int,\ int,\ Die)
+comment1.text=\n\ Generates\ a\ space\ (of\ type\ BlankSpace,\ RandTPot,\ FairTPot,\ Hold,\ PHold,\ HoldQ,\ or\ JStack)\ based\ on\ a\ random\ number.\n\ \n\ @param\ x\ the\ value\ of\ the\ x\ dimension\ of\ the\ board.\n\ @param\ y\ the\ value\ of\ the\ y\ dimension\ of\ the\ board.\n\ @param\ z\ the\ value\ of\ the\ z\ dimension\ of\ the\ board.\n\ @param\ d\ the\ die\ used\ for\ the\ game.\n\ @return\ a\ space\ of\ type\ BlankSpace,\ RandTPot,\ FairTPot,\ Hold,\ PHold,\ HoldQ,\ or\ JStack.\n
+comment2.params=x\ y\ z\ d
+comment2.target=Space\ noStackSpace(int,\ int,\ int,\ Die)
+comment2.text=\n\ Generates\ a\ non-JStack\ space\ (of\ type\ BlankSpace,\ RandTPot,\ FairTPot,\ Hold,\ PHold,\ or\ HoldQ)\ based\ on\ a\ random\ number.\n\ \n\ @param\ x\ the\ value\ of\ the\ x\ dimension\ of\ the\ board.\n\ @param\ y\ the\ value\ of\ the\ y\ dimension\ of\ the\ board.\n\ @param\ z\ the\ value\ of\ the\ z\ dimension\ of\ the\ board.\n\ @param\ d\ the\ die\ used\ for\ the\ game.\n\ @return\ a\ space\ of\ type\ BlankSpace,\ RandTPot,\ FairTPot,\ Hold,\ PHold,\ or\ HoldQ.\n
+comment3.params=scan
+comment3.target=void\ readConfig(java.util.Scanner)
+numComments=4

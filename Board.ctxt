@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.params=x\ y\ z\ scan
-comment0.target=Board(int,\ int,\ int,\ java.util.Scanner)
-comment0.text=\n\ Constructor.\n\ \n\ Initialize\ the\ board\ and\ set\ each\ space\ based\ on\ a\ Gaussian\ random\ number.\n\ @param\ fileName\ the\ name\ of\ the\ config\ file\ for\ the\ various\ frequencies\ and\ initial\ details\ of\ the\ spaces.\n\ @param\ x\ the\ value\ of\ the\ x\ dimension\ of\ the\ board.\n\ @param\ y\ the\ value\ of\ the\ y\ dimension\ of\ the\ board.\n\ @param\ z\ the\ value\ of\ the\ z\ dimension\ of\ the\ board.\n
+comment0.params=x\ y\ z\ scan\ d
+comment0.target=Board(int,\ int,\ int,\ java.util.Scanner,\ Die)
+comment0.text=\n\ Constructor.\n\ \n\ Initialize\ the\ board\ and\ set\ each\ space\ based\ on\ a\ Gaussian\ random\ number.\n\ @param\ x\ the\ value\ of\ the\ x\ dimension\ of\ the\ board.\n\ @param\ y\ the\ value\ of\ the\ y\ dimension\ of\ the\ board.\n\ @param\ z\ the\ value\ of\ the\ z\ dimension\ of\ the\ board.\n\ @param\ scan\ the\ Scanner\ object\ reading\ the\ file.\n\ @param\ d\ the\ die\ used\ for\ the\ game.\n
 comment1.params=
 comment1.target=int\ numberOfSpaces()
 comment1.text=\n\ Get\ the\ number\ of\ spaces\ on\ the\ board.\n\ \n\ @return\ the\ number\ of\ spaces\ on\ the\ board.\n

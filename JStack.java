@@ -17,14 +17,18 @@ public class JStack implements Space {
     private int y;
     /** The value of the z dimension of the board. */
     private int z;
+    /** The board used for the game. */
+    private Board board;
     /**
      * Constructor.
      * 
      * @param x the value of the x dimension of the board.
      * @param y the value of the y dimension of the board.
      * @param z the value of the z dimension of the board.
+     * @param board the board used for the game.
      */
-    public JStack(int factor, int x, int y, int z) {
+    public JStack(int factor, int x, int y, int z, Board board) {
+        this. board = board;
         multiplier = factor;
         this.x = x;
         this.y = y;
@@ -41,6 +45,12 @@ public class JStack implements Space {
      */
     public boolean canMove(Token t, int roll, int boardEnd) {
         return true;
+    }
+    /**
+     * @return false, so that main never calls land() on a space coming from a JStack.
+     */
+    public boolean advanced() {
+       return false;
     }
     
     public String getStatus() {

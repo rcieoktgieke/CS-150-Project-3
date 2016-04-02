@@ -44,6 +44,12 @@ public class FairTPot implements Space  {
             return false;
         }
     }
+    /**
+     * @return true
+     */
+    public boolean advanced() {
+       return true;
+    }
     
     public String getStatus() {
         return "F.Pot|" + times;

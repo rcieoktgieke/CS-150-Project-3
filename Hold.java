@@ -5,9 +5,13 @@ import java.util.*;
  * @Eric Weber
  * @4/2/16
  */
-public class Hold implements Space  {
+public class Hold implements Space {
     /** The number by which to multiply rolls leaving the hold. */
     private int multiplier;
+    /** The die used by the game. */
+    private Die die;
+    /** Whether the latest turn on this space advanced a token. */
+    private boolean advanced = false;
     /** The list of tokens currently in the hold */
     private LinkedList<Token> tokens;
     /**
@@ -15,7 +19,8 @@ public class Hold implements Space  {
      * 
      * @param multiplier number by which to multiply rolls leaving the hold.
      */
-    public Hold(int multiplier) {
+    public Hold(int multiplier, Die die) {
+        this.die = die;
         this.multiplier = multiplier;
         tokens = new LinkedList<Token>();
     }
@@ -32,16 +37,14 @@ public class Hold implements Space  {
      */
     public boolean canMove(Token t, int roll, int boardEnd) {
         if (roll == t.getRoll()) {
-            if ((roll * multiplier) + t.getIndex() <= boardEnd && (roll * multiplier) + t.getIndex() >= 0) {            
-                return true;
-            }
-            else {
-                return false;
-            }
+            return true;
         }
         else {
             return false;
         }
+    }
+    public boolean advanced() {
+        return advanced;
     }
     
     public String getStatus() {
@@ -65,13 +68,22 @@ public class Hold implements Space  {
      */
     public boolean takeTurn(Token t, int roll, int boardEnd) {
         System.out.print(t + " has rolled " + roll + ". ");
+        advanced = false;
         if (canMove(t, roll, boardEnd)) {
-            t.advance(roll * multiplier);
-            tokens.remove(t);
-            if (t.getIndex() == boardEnd) {
-                return true;
+            roll = die.roll();
+            System.out.print(t + " has rolled " + roll + ". ");
+            if ((roll * multiplier) + t.getIndex() <= boardEnd && (roll * multiplier) + t.getIndex() >= 0) {            
+                t.advance(roll * multiplier);
+                advanced = true;
+                tokens.remove(t);
+                if (t.getIndex() == boardEnd) {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            else {
+                return false;
+            }
         }
         else {
             System.out.print("No change. ");

@@ -24,6 +24,12 @@ public interface Space {
      */
     public boolean canMove(Token t, int roll, int boardEnd);
     /**
+     * Check if the last turn advanced a token.
+     * 
+     * @return if token advanced.
+     */
+    public boolean advanced();
+    /**
      * Return the type and vital information of the space.
      * 
      * @return the type and vital information of the space.

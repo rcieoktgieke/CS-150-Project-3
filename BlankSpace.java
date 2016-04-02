@@ -24,6 +24,12 @@ public class BlankSpace implements Space {
             return false;
         }
     }
+    /**
+     * @return true
+     */
+    public boolean advanced() {
+       return true;
+    }
     
     public String getStatus() {
         return "Blank";

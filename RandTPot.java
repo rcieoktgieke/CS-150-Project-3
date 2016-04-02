@@ -37,6 +37,12 @@ public class RandTPot implements Space  {
             return false;
         }
     }
+    /**
+     * @return true
+     */
+    public boolean advanced() {
+       return true;
+    }
     
     /**
      * Roll the die. If the value rolled is greater than the number of pieces left, return the number of pieces left. Otherwise, return the number rolled.
