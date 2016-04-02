@@ -85,7 +85,7 @@ public class HoldQ implements Space {
         if (canMove(t, roll, boardEnd)) {
             tokens.poll();
             t.advance(roll * multiplier);
-            if ((roll * multiplier) + t.getIndex() == boardEnd) {
+            if (t.getIndex() == boardEnd) {
                 return true;
             }
             return false;
@@ -94,31 +94,5 @@ public class HoldQ implements Space {
             System.out.print("No change. ");
             return false;
         }
-        /*
-            if (roll == t.getRoll()) {
-                if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
-                    t.advance(roll * multiplier);
-                    tokens.poll();
-                    canMove = true;
-                    return false;
-                }
-                else if ((roll * multiplier) + t.getIndex() == boardEnd) {
-                    t.advance(roll * multiplier);
-                    tokens.poll();
-                    canMove = true;
-                    return true;
-                }
-                else {
-                    canMove = false;
-                    System.out.print("Can't escape: movement out of bounds. ");
-                    return false;
-                }
-            }
-            else {
-                System.out.print("No change. ");
-                canMove = false;
-                return false;
-            }   
-        }*/
     }
 }

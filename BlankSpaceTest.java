@@ -31,7 +31,7 @@ public class BlankSpaceTest
     {
         bSpace = new BlankSpace();
         t = new Token();
-        d = new Die(10);
+        d = new Die(15);
         boardEnd = 15;
     }
 

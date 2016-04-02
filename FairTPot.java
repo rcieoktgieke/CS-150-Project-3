@@ -58,11 +58,12 @@ public class FairTPot implements Space  {
         System.out.print(t + " has rolled " + roll + ". ");
         if (canMove(t, roll, boardEnd)) {
             t.advance(roll);
-            return false;
-        }
-        else if (roll + t.getIndex() == boardEnd) {
-            t.advance(roll);
-            return true;
+            if (t.getIndex() == boardEnd) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
         else {
             return false;

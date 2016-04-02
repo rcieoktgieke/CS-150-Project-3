@@ -73,9 +73,8 @@ public class PHold implements Space, Comparator<Integer> {
             if (tokens.get(t.getRoll()).isEmpty()) {
                 tokens.remove(tokens.firstEntry().getKey());
             }
-            int prevIndex = t.getIndex();
             t.advance(roll * multiplier);
-            if ((roll * multiplier) + prevIndex == boardEnd) {
+            if (t.getIndex() == boardEnd) {
                 return true;
             }
             else {

@@ -67,8 +67,8 @@ public class Hold implements Space  {
         System.out.print(t + " has rolled " + roll + ". ");
         if (canMove(t, roll, boardEnd)) {
             t.advance(roll * multiplier);
-            //remove t from tokens?
-            if ((roll * multiplier) + t.getIndex() == boardEnd) {
+            tokens.remove(t);
+            if (t.getIndex() == boardEnd) {
                 return true;
             }
             return false;
