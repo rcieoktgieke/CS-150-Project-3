@@ -3,14 +3,16 @@ import java.util.*;
  * When a token lands on a priority hold, they are assigned the priority equal to the number rolled to land on it. They may only leave the space when no tokens with a lower number priority are on the priority hold with them. When a token is on a priority hold and does not have the lowest number priority, they end their turn without rolling. When they are on a priority hold and do have the lowest number priority, they roll, and advance the number of spaces rolled times a number specified for that priority hold when the board is created, which will be between two numbers set in configuration.
  * 
  * @Eric Weber
- * @3/25/16
+ * @4/2/16
  */
 public class PHold implements Space, Comparator<Integer> {
     
     /** The number by which to multiply rolls leaving the hold.*/
     private int multiplier;
-    /** The ability of the token last passed to takeTurn to move. */
-    private boolean canMove;
+    /** The die used by the game. */
+    private Die die;
+    /** Whether the latest turn on this space advanced a token. */
+    private boolean advanced = false;
     /** The queue of tokens currently in the hold */
     private TreeMap<Integer, ArrayList<Token>> tokens;
     /**
@@ -18,7 +20,8 @@ public class PHold implements Space, Comparator<Integer> {
      * 
      * @param multiplier number by which to multiply rolls leaving the hold.
      */
-    public PHold(int multiplier) {
+    public PHold(int multiplier, Die die) {
+        this.die = die;
         this.multiplier = multiplier;
         tokens = new TreeMap<Integer, ArrayList<Token>>(this);
     }
@@ -38,10 +41,18 @@ public class PHold implements Space, Comparator<Integer> {
         System.out.print(t + " has landed on " + getStatus());
     }
     /**
-     * @return if the token is at the front of the queue and if moving the token would go beyond the bounds of the board.
+     * @return if the token is first in the queue and if the roll times the multiplier is within the bounds of the board.
      */
-    public boolean canMove() {
-        return canMove;
+    public boolean canMove(Token t, int roll, int boardEnd) {
+        if (tokens.firstEntry().getValue().contains(t)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public boolean advanced() {
+        return advanced;
     }
     
     public String getStatus() {
@@ -51,38 +62,38 @@ public class PHold implements Space, Comparator<Integer> {
     /**
      * Take token's turn.
      * 
-     * Print the token. If the token is first in the queue, roll the die. Print the roll. If the roll is within the bounds of the board, advance the token.
+     * Print the roll and the token. If it can move, advance the token.
      */
-    public boolean takeTurn(Token t, Die d, int boardEnd) {
+    public boolean takeTurn(Token t, int roll, int boardEnd) {
+        advanced = false;
         if (tokens.firstEntry().getValue().contains(t)) {
-            /** Normal space behavior.*/
-            Integer roll = d.roll();
             System.out.print(t + " is at the front of the queue and has rolled " + roll + ". ");
-            if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
+        }
+        else {
+            System.out.print(t + " is not at the front of the queue. ");
+        }
+        if (canMove(t, roll, boardEnd)) {
+            roll = die.roll();
+            System.out.print(t + " has rolled " + roll + ". ");
+            if ((roll * multiplier) + t.getIndex() <= boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
                 tokens.get(t.getRoll()).remove(t);
                 if (tokens.get(t.getRoll()).isEmpty()) {
-                    tokens.remove(roll);
-                }
-                canMove = true;
-                t.advance(roll * multiplier);
-                return false;
-            }
-            else if ((roll * multiplier) + t.getIndex() == boardEnd) {
-                tokens.get(t.getRoll()).remove(t);
-                if (tokens.get(t.getRoll()).isEmpty()) {
-                    tokens.remove(roll);
+                    tokens.remove(tokens.firstEntry().getKey());
                 }
                 t.advance(roll * multiplier);
-                return true;
+                advanced = true;
+                if (t.getIndex() == boardEnd) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
             else {
-                canMove = false;
                 return false;
             }
         }
         else {
-            System.out.print(t + " is not at the front of the queue. ");
-            canMove = false;
             return false;
         }
     }

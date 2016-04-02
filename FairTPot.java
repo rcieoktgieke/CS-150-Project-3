@@ -2,7 +2,7 @@
  * When a token lands on a fair treasure pot, it gives that token a number of pieces specified by the game’s configuration. However, each pot can only give pieces to a certain number of tokens (also specified in configuration). If a token lands on the pot after the maximum number of tokens is reached, the pot is treated as a blank space.
  * 
  * @Eric Weber
- * @3/16/16
+ * @4/2/16
  */
 public class FairTPot implements Space  {
     
@@ -12,8 +12,6 @@ public class FairTPot implements Space  {
     private int maxTimes;
     /** The number of times the pot has given pieces */
     private int times = 0;
-    /** The ability of the token last passed to takeTurn to move. */
-    private boolean canMove =  true;
     /**
      * Constructor.
      * 
@@ -38,8 +36,19 @@ public class FairTPot implements Space  {
     /**
      * @return if moving the token would go beyond the bounds of the board.
      */
-    public boolean canMove() {
-        return canMove;
+    public boolean canMove(Token t, int roll, int boardEnd) {
+        if (roll + t.getIndex() <= boardEnd && roll + t.getIndex() > 0) {            
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    /**
+     * @return true
+     */
+    public boolean advanced() {
+       return true;
     }
     
     public String getStatus() {
@@ -49,22 +58,20 @@ public class FairTPot implements Space  {
     /**
      * Take token's turn.
      * 
-     * Roll the die. Print the token and the roll. If the roll is within the bounds of the board, advance the token.
+     * Print the token and the roll. If the roll is within the bounds of the board, advance the token.
      */
-    public boolean takeTurn(Token t, Die d, int boardEnd) {
-        int roll = d.roll();
+    public boolean takeTurn(Token t, int roll, int boardEnd) {
         System.out.print(t + " has rolled " + roll + ". ");
-        if (roll + t.getIndex() < boardEnd) {
-            canMove = true;
+        if (canMove(t, roll, boardEnd)) {
             t.advance(roll);
-            return false;
-        }
-        else if (roll + t.getIndex() == boardEnd) {
-            t.advance(roll);
-            return true;
+            if (t.getIndex() == boardEnd) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
         else {
-            canMove = false;
             return false;
         }
     }

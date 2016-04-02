@@ -31,7 +31,7 @@ public class BlankSpaceTest
     {
         bSpace = new BlankSpace();
         t = new Token();
-        d = new Die(10);
+        d = new Die(15);
         boardEnd = 15;
     }
 
@@ -46,27 +46,32 @@ public class BlankSpaceTest
     }
     
     @Test
-    public void testDefaultCanMove()
-    {
-        assertEquals(true, bSpace.canMove());
-    }
-    @Test
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
             t = new Token();
             int tokenIndex = t.getIndex();
-            bSpace.takeTurn(t, d, boardEnd);
-            if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
-                assertTrue(bSpace.canMove());
-            }
-            else if (tokenIndex + d.prevRoll() == boardEnd) {
-                assertTrue(bSpace.canMove());
+            int roll = d.roll();
+            if (tokenIndex + roll > 0 && tokenIndex + roll <= boardEnd) {
+                assertTrue(bSpace.canMove(t, roll, boardEnd));
             }
             else {
-                assertFalse(bSpace.canMove());
+                assertFalse(bSpace.canMove(t, roll, boardEnd));
             }
         }
+    }
+    @Test
+    public void testCanMoveEnd()
+    {
+        t = new Token();
+        assertTrue(bSpace.canMove(t, boardEnd, boardEnd));
+    }
+    @Test
+    public void testCanMoveTooFar()
+    {
+        t = new Token();
+        assertFalse(bSpace.canMove(t, boardEnd + 1, boardEnd));
+        assertFalse(bSpace.canMove(t, 0, boardEnd));
     }
     
     @Test
@@ -87,7 +92,7 @@ public class BlankSpaceTest
         for (int i = 0; i < 100; i ++) {
             t = new Token();
             int tokenIndex = t.getIndex();
-            boolean takeTurnOutput = bSpace.takeTurn(t, d, boardEnd);
+            boolean takeTurnOutput = bSpace.takeTurn(t, d.roll(), boardEnd);
             if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
                 assertEquals(false, takeTurnOutput);
                 assertEquals(t.getIndex(), (tokenIndex + d.prevRoll()));

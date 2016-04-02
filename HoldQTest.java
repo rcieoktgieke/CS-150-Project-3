@@ -6,11 +6,12 @@ import org.junit.Test;
  * The test class HoldQTest.
  *
  * @Eric Weber
- * @3/16/16
+ * @4/2/16
  */
 public class HoldQTest
 {
     private HoldQ holdQ;
+    private Token t;
     private Token t1;
     private Token t2;
     private Token t3;
@@ -31,11 +32,11 @@ public class HoldQTest
     @Before
     public void setUp()
     {
-        holdQ = new HoldQ(2);
+        d = new Die(10);
+        holdQ = new HoldQ(2, d);
         t1 = new Token();
         t2 = new Token();
         t3 = new Token();
-        d = new Die(10);
         boardEnd = 10;
     }
 
@@ -59,31 +60,45 @@ public class HoldQTest
             holdQ.land(t2, d);
             int roll3 = d.roll();
             holdQ.land(t3, d);
-            holdQ.takeTurn(t2, d, boardEnd);
-            assertFalse(holdQ.canMove());
-            holdQ.takeTurn(t3, d, boardEnd);
-            assertFalse(holdQ.canMove());
+            assertFalse(holdQ.canMove(t2, d.roll(), boardEnd));
+            assertFalse(holdQ.canMove(t3, d.roll(), boardEnd));
         }
         
-        holdQ = new HoldQ(2);
+        holdQ = new HoldQ(2, d);
         for (int i = 0; i < 100; i ++) {
+            holdQ = new HoldQ(2, d);
             Token t = new Token();
             int tokenIndex = t.getIndex();
             int roll = d.prevRoll();
             holdQ.land(t, d);
-            holdQ.takeTurn(t, d, boardEnd);
             while (d.prevRoll() != roll) {
-                assertFalse(holdQ.canMove());
-                holdQ.takeTurn(t, d, boardEnd);
+                assertFalse(holdQ.canMove(t, d.prevRoll(), boardEnd));
+                d.roll();
             }
+            assertTrue(holdQ.canMove(t, d.prevRoll(), boardEnd));
+        }
+    }
+    @Test
+    public void testAdvanced() {
+        boolean reachedEnd = false;
+        boolean passedBounds = false;
+        for (int i = 0; (i < 100) || !reachedEnd || !passedBounds; i ++) {
+            holdQ = new HoldQ(2, d);
+            t = new Token();
+            int tokenIndex = t.getIndex();
+            int roll = d.prevRoll();
+            holdQ.land(t, d);
+            holdQ.takeTurn(t, d.prevRoll(), boardEnd);
             if (tokenIndex + (d.prevRoll() * 2) >= 0 && tokenIndex + (d.prevRoll() * 2) < boardEnd) {
-                assertTrue(holdQ.canMove());
+                assertTrue(holdQ.advanced());
             }
             else if (tokenIndex + (d.prevRoll() * 2) == boardEnd) {
-                assertTrue(holdQ.canMove());
+                assertTrue(holdQ.advanced());
+                reachedEnd = true;
             }
             else {
-                assertFalse(holdQ.canMove());
+                assertFalse(holdQ.advanced());
+                passedBounds = true;
             }
         }
     }
@@ -114,28 +129,25 @@ public class HoldQTest
             holdQ.land(t2, d);
             int roll3 = d.roll();
             holdQ.land(t3, d);
-            holdQ.takeTurn(t2, d, boardEnd);
-            holdQ.takeTurn(t3, d, boardEnd);
+            holdQ.takeTurn(t2, d.roll(), boardEnd);
+            holdQ.takeTurn(t3, d.roll(), boardEnd);
             assertEquals(t2.getIndex(), 0);
             assertEquals(t3.getIndex(), 0);
             
-            holdQ.takeTurn(t1, d, boardEnd);
-            while (d.prevRoll() != roll1) {
-                holdQ.takeTurn(t1, d, boardEnd);
+            holdQ.takeTurn(t1, roll1, boardEnd);
+            if (holdQ.advanced()) {
+                assertEquals(t1.getIndex(), d.prevRoll()*2);
             }
-            assertEquals(t1.getIndex(), roll1*2);
             
-            holdQ.takeTurn(t2, d, boardEnd);
-            while (d.prevRoll() != roll2) {
-                holdQ.takeTurn(t2, d, boardEnd);
+            holdQ.takeTurn(t2, roll2, boardEnd);
+            if (holdQ.advanced()) {
+                assertEquals(t2.getIndex(), d.prevRoll()*2);
             }
-            assertEquals(t2.getIndex(), roll2*2);
             
-            holdQ.takeTurn(t3, d, boardEnd);
-            while (d.prevRoll() != roll3) {
-                holdQ.takeTurn(t3, d, boardEnd);
+            holdQ.takeTurn(t3, roll3, boardEnd);
+            if (holdQ.advanced()) {
+                assertEquals(t3.getIndex(), d.prevRoll()*2);
             }
-            assertEquals(t3.getIndex(), roll3*2);
         }
     }
 }

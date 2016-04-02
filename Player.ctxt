@@ -1,11 +1,17 @@
 #BlueJ class context
 comment0.params=numTokens
 comment0.target=Player(int)
+comment0.text=\n\ Constructor\n\ @param\ numTokens\ number\ of\ tokens\ this\ player\ will\ have.\n
 comment1.params=roll
 comment1.target=Token\ whichToken(int)
+comment1.text=\n\ Choose\ which\ token\ to\ advance\ based\ on\ the\ roll\ given\ and\ the\ strategy\ used\ by\ the\ player.\n\ \n\ @param\ roll\ the\ die\ roll\ which\ will\ move\ the\ token\ returned.\n\ @return\ token\ the\ token\ which\ will\ be\ moved.\n
 comment2.params=
 comment2.target=int\ getPieces()
-comment3.params=
-comment3.target=void\ printTokens()
-comment3.text=\n\ Print\ each\ token,\ their\ index,\ and\ their\ pieces.\n
-numComments=4
+comment2.text=\n\ Find\ the\ number\ of\ pieces\ belonging\ to\ the\ player\ (the\ sum\ of\ the\ number\ of\ pieces\ beloning\ to\ each\ of\ the\ tokens\ belonging\ to\ the\ player).\n\ @return\ the\ number\ of\ pieces\ belonging\ to\ the\ player.\n
+comment3.params=boardEnd\ w\ p
+comment3.target=double\ getPoints(int,\ int,\ double)
+comment3.text=\n\ Find\ the\ number\ of\ points\ the\ player\ has\ based\ on\ the\ status\ of\ its\ tokens\ and\ the\ multipliers\ for\ winning\ and\ pieces.\n\ @return\ how\ many\ points\ the\ player\ has.\n
+comment4.params=
+comment4.target=void\ printTokens()
+comment4.text=\n\ Print\ each\ token,\ their\ index,\ and\ their\ pieces.\n
+numComments=5

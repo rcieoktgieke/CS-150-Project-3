@@ -1,6 +1,6 @@
 PROJECT TITLE: Chutes and Ladders and Pots
 PURPOSE OF PROJECT: To model a game of Chutes and Ladders and Pots using various data structures and algorithms.
-VERSION or DATE: 3/16/16
+VERSION or DATE: 4/2/16
 HOW TO START THIS PROJECT: Run main.main(String[] args) with an array of arguments as specified below.
 AUTHORS: Eric Weber
 USER INSTRUCTIONS: The String array passed to main should consist of the following: [0]: max value of the die. [1]: number of players. [2]: number of tokens per player. [3]: name of config file.

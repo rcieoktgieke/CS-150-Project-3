@@ -6,11 +6,12 @@ import org.junit.Test;
  * The test class PHoldTest.
  *
  * @Eric Weber
- * @3/17/16
+ * @4/2/16
  */
 public class PHoldTest
 {
     private PHold pHold;
+    private Token t;
     private Token t1;
     private Token t2;
     private Token t3;
@@ -31,12 +32,12 @@ public class PHoldTest
     @Before
     public void setUp()
     {
-        pHold = new PHold(3);
+        d = new Die(10);
+        pHold = new PHold(3, d);
         t1 = new Token();
         t2 = new Token();
         t3 = new Token();
-        d = new Die(10);
-        boardEnd = 10;
+        boardEnd = 21;
     }
 
     /**
@@ -48,7 +49,48 @@ public class PHoldTest
     public void tearDown()
     {
     }
-
+    
+    @Test
+    public void testCanMove()
+    {
+        for (int i = 0; i < 100; i ++) {
+            t = new Token();
+            int tokenIndex = t.getIndex();
+            int roll = d.prevRoll();
+            pHold.land(t, d);
+            while (d.prevRoll() != roll) {
+                assertFalse(pHold.canMove(t, d.prevRoll(), boardEnd));
+                d.roll();
+            }
+            assertTrue(pHold.canMove(t, d.prevRoll(), boardEnd));
+        }
+    }
+    @Test
+    public void testAdvanced()
+    {
+        boolean reachedEnd = false;
+        boolean passedBounds = false;
+        for (int i = 0; (i < 100) || !reachedEnd || !passedBounds; i ++) {
+            pHold = new PHold(3, d);
+            t = new Token();
+            int tokenIndex = t.getIndex();
+            int roll = d.prevRoll();
+            pHold.land(t, d);
+            pHold.takeTurn(t, d.roll(), boardEnd);
+            if (tokenIndex + (d.prevRoll() * 3) >= 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
+                assertTrue(pHold.advanced());
+            }
+            else if (tokenIndex + (d.prevRoll() * 3) == boardEnd) {
+                assertTrue(pHold.advanced());
+                reachedEnd = true;
+            }
+            else {
+                assertFalse(pHold.advanced());
+                passedBounds = true;
+            }
+        }
+    }
+    
     @Test
     public void testCompare()
     {
@@ -66,21 +108,22 @@ public class PHoldTest
     @Test
     public void testTakeTurn()
     {
-        for (int i = 0; i < 100; i ++) {
-            Token p = new Token();
-            int tokenIndex = p.getIndex();
-            pHold.land(p, d);
-            boolean takeTurnOutput = pHold.takeTurn(p, d, boardEnd);
+        for (int i = 0; i < 500; i ++) {
+            Token t = new Token();
+            int tokenIndex = t.getIndex();
+            pHold.land(t, d);
+            boolean takeTurnOutput = pHold.takeTurn(t, d.prevRoll(), boardEnd);
+            
             if (tokenIndex + (d.prevRoll() * 3) > 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
                 assertEquals(false, takeTurnOutput);
-                assertEquals(p.getIndex(), (tokenIndex + (d.prevRoll() * 3)));
+                assertEquals(t.getIndex(), (tokenIndex + (d.prevRoll() * 3)));
             }
             else if (tokenIndex + (d.prevRoll() * 3) == boardEnd) {
                 assertEquals(true, takeTurnOutput);
-                assertEquals(p.getIndex(), boardEnd);
+                assertEquals(t.getIndex(), boardEnd);
             }
             else {
-                assertEquals(p.getIndex(), tokenIndex);
+                assertEquals(t.getIndex(), tokenIndex);
             }
         }
     }

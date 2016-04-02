@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class HoldTest.
  *
  * @Eric Weber
- * @3/16/16
+ * @4/2/16
  */
 public class HoldTest
 {
@@ -29,9 +29,9 @@ public class HoldTest
     @Before
     public void setUp()
     {
-        hold = new Hold(3);
-        t = new Token();
         d = new Die(10);
+        hold = new Hold(3, d);
+        t = new Token();
         boardEnd = 15;
     }
     
@@ -51,20 +51,38 @@ public class HoldTest
         for (int i = 0; i < 100; i ++) {
             t = new Token();
             int tokenIndex = t.getIndex();
+            d.roll();
             int roll = d.prevRoll();
             hold.land(t, d);
             while (d.prevRoll() != roll) {
-                assertFalse(hold.canMove());
-                hold.takeTurn(t, d, boardEnd);
+                assertFalse(hold.canMove(t, d.prevRoll(), boardEnd));
+                d.roll();
             }
-            if (tokenIndex + (d.prevRoll() * 3) > 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
-                assertTrue(hold.canMove());
+            assertTrue(hold.canMove(t, d.prevRoll(), boardEnd));
+        }
+    }
+    @Test
+    public void testAdvanced()
+    {
+        boolean reachedEnd = false;
+        boolean passedBounds = false;
+        for (int i = 0; (i < 100) || !reachedEnd || !passedBounds; i ++) {
+            t = new Token();
+            int tokenIndex = t.getIndex();
+            d.roll();
+            int roll = d.prevRoll();
+            hold.land(t, d);
+            hold.takeTurn(t, roll, boardEnd);
+            if (tokenIndex + (d.prevRoll() * 3) >= 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
+                assertTrue(hold.advanced());
             }
             else if (tokenIndex + (d.prevRoll() * 3) == boardEnd) {
-                assertTrue(hold.canMove());
+                assertTrue(hold.advanced());
+                reachedEnd = true;
             }
             else {
-                assertFalse(hold.canMove());
+                assertFalse(hold.advanced());
+                passedBounds = true;
             }
         }
     }
@@ -90,8 +108,8 @@ public class HoldTest
             boolean takeTurnOutput = false;
             hold.land(t, d);
             while (d.prevRoll() != roll) {
-                assertFalse(hold.canMove());
-                takeTurnOutput = hold.takeTurn(t, d, boardEnd);
+                assertFalse(hold.canMove(t, d.prevRoll(), boardEnd));
+                takeTurnOutput = hold.takeTurn(t, d.roll(), boardEnd);
             }
             if (tokenIndex + (d.prevRoll() * 3) > 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
                 assertEquals(false, takeTurnOutput);

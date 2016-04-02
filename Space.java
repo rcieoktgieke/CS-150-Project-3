@@ -2,12 +2,12 @@
  * Spaces are parts of the board at specific indecies.
  * 
  * @Eric Weber
- * @3/16/16
+ * @4/2/16
  */
 public interface Space {
     
     /**
-     * Land toen on space.
+     * Land token on space.
      * 
      * Executes appropriate operations for when a token lands on the space.
      * @param t token that is landing on this space.
@@ -15,11 +15,20 @@ public interface Space {
      */
     public void land(Token t, Die d);
     /**
-     * Check if the token last passed to takeTurn can move.
+     * Check if the given token can move.
      * 
+     * @param t the token that will move.
+     * @param roll roll that will move the token.
+     * @param boardEnd the index of the final space on the board.
      * @return if token can move.
      */
-    public boolean canMove();
+    public boolean canMove(Token t, int roll, int boardEnd);
+    /**
+     * Check if the last turn advanced a token.
+     * 
+     * @return if token advanced.
+     */
+    public boolean advanced();
     /**
      * Return the type and vital information of the space.
      * 
@@ -31,10 +40,10 @@ public interface Space {
      * 
      * Executes appropriate operations for the token to take its turn.
      * @param t token that is taking its turn.
-     * @param d die that is used for the game.
+     * @param r die roll for the turn.
      * @param boardEnd the index of the final space on the board.
      * 
-     * @return if token has reached the final space by exact count.
+     * @return if the game has ended.
      */
-    public boolean takeTurn(Token t, Die d, int boardEnd);
+    public boolean takeTurn(Token t, int r, int boardEnd);
 }

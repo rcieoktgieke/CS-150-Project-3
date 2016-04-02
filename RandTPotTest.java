@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class RandTPotTest.
  *
  * @Eric Weber
- * @3/16/16
+ * @4/2/16
  */
 public class RandTPotTest
 {
@@ -46,27 +46,32 @@ public class RandTPotTest
     }
     
     @Test
-    public void testDefaultCanMove()
-    {
-        assertEquals(true, rPot.canMove());
-    }
-    @Test
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
             t = new Token();
             int tokenIndex = t.getIndex();
-            rPot.takeTurn(t, d, boardEnd);
-            if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
-                assertTrue(rPot.canMove());
-            }
-            else if (tokenIndex + d.prevRoll() == boardEnd) {
-                assertTrue(rPot.canMove());
+            int roll = d.roll();
+            if (tokenIndex + roll > 0 && tokenIndex + roll <= boardEnd) {
+                assertTrue(rPot.canMove(t, roll, boardEnd));
             }
             else {
-                assertFalse(rPot.canMove());
+                assertFalse(rPot.canMove(t, roll, boardEnd));
             }
         }
+    }
+    @Test
+    public void testCanMoveEnd()
+    {
+        t = new Token();
+        assertTrue(rPot.canMove(t, boardEnd, boardEnd));
+    }
+    @Test
+    public void testCanMoveTooFar()
+    {
+        t = new Token();
+        assertFalse(rPot.canMove(t, boardEnd + 1, boardEnd));
+        assertFalse(rPot.canMove(t, 0, boardEnd));
     }
     
     @Test
@@ -105,7 +110,7 @@ public class RandTPotTest
         for (int i = 0; i < 100; i ++) {
             t = new Token();
             int tokenIndex = t.getIndex();
-            boolean takeTurnOutput = rPot.takeTurn(t, d, boardEnd);
+            boolean takeTurnOutput = rPot.takeTurn(t, d.roll(), boardEnd);
             if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
                 assertEquals(false, takeTurnOutput);
                 assertEquals(t.getIndex(), (tokenIndex + d.prevRoll()));
