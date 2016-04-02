@@ -2,9 +2,9 @@
 comment0.params=t\ d
 comment0.target=void\ land(Token,\ Die)
 comment0.text=\n\ Land\ token\ on\ space.\n\ \n\ Executes\ appropriate\ operations\ for\ when\ a\ token\ lands\ on\ the\ space.\n\ @param\ t\ token\ that\ is\ landing\ on\ this\ space.\n\ @param\ d\ die\ that\ is\ used\ for\ the\ game.\n
-comment1.params=
-comment1.target=boolean\ canMove()
-comment1.text=\n\ Check\ if\ the\ token\ last\ passed\ to\ takeTurn\ can\ move.\n\ \n\ @return\ if\ token\ can\ move.\n
+comment1.params=t\ roll\ boardEnd
+comment1.target=boolean\ canMove(Token,\ int,\ int)
+comment1.text=\n\ Check\ if\ the\ given\ token\ can\ move.\n\ \n\ @param\ t\ the\ token\ that\ will\ move.\n\ @param\ roll\ roll\ that\ will\ move\ the\ token.\n\ @param\ boardEnd\ the\ index\ of\ the\ final\ space\ on\ the\ board.\n\ @return\ if\ token\ can\ move.\n
 comment2.params=
 comment2.target=java.lang.String\ getStatus()
 comment2.text=\n\ Return\ the\ type\ and\ vital\ information\ of\ the\ space.\n\ \n\ @return\ the\ type\ and\ vital\ information\ of\ the\ space.\n

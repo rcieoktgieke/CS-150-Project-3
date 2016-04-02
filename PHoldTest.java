@@ -11,6 +11,7 @@ import org.junit.Test;
 public class PHoldTest
 {
     private PHold pHold;
+    private Token t;
     private Token t1;
     private Token t2;
     private Token t3;
@@ -48,7 +49,52 @@ public class PHoldTest
     public void tearDown()
     {
     }
-
+    
+    @Test
+    public void testCanMove()
+    {
+        for (int i = 0; i < 100; i ++) {
+            t = new Token();
+            int tokenIndex = t.getIndex();
+            int roll = d.prevRoll();
+            pHold.land(t, d);
+            while (d.prevRoll() != roll) {
+                assertFalse(pHold.canMove(t, d.prevRoll(), boardEnd));
+                d.roll();
+            }
+            if (tokenIndex + (d.prevRoll() * 3) >= 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
+                assertTrue(pHold.canMove(t, d.prevRoll(), boardEnd));
+            }
+            else if (tokenIndex + (d.prevRoll() * 3) == boardEnd) {
+                assertTrue(pHold.canMove(t, d.prevRoll(), boardEnd));
+            }
+            else {
+                assertFalse(pHold.canMove(t, d.prevRoll(), boardEnd));
+            }
+        }
+    }
+    @Test
+    public void testCanMoveStart()
+    {
+        t = new Token();
+        pHold.land(t, d);
+        assertTrue(pHold.canMove(t, 0, boardEnd));
+    }
+    @Test
+    public void testCanMoveEnd()
+    {
+        t = new Token();
+        pHold.land(t, d);
+        assertTrue(pHold.canMove(t, (boardEnd / 3), boardEnd));
+    }
+    @Test
+    public void testCanMoveTooFar()
+    {
+        t = new Token();
+        pHold.land(t, d);
+        assertFalse(pHold.canMove(t, ((boardEnd / 3) + 1), boardEnd));
+    }
+    
     @Test
     public void testCompare()
     {

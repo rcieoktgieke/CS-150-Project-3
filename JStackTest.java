@@ -47,8 +47,7 @@ public class JStackTest
         for (int i = 0; i < 100; i ++) {
             Token t = new Token();
             jStack.land(t, d);
-            jStack.takeTurn(t, d.roll(), 100);
-            assertEquals(true, jStack.canMove());
+            assertEquals(true, jStack.canMove(t, d.roll(), 100));
         }
     }
     

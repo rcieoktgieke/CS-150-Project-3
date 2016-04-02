@@ -5,7 +5,7 @@ import java.util.*;
  * @Eric Weber
  * @4/2/16
  */
-public class JStack implements Space  {
+public class JStack implements Space {
     
     /** The ability of the token last passed to takeTurn to move. */
     private boolean canMove = true;
@@ -39,8 +39,8 @@ public class JStack implements Space  {
     /**
      * @return true
      */
-    public boolean canMove() {
-        return canMove;
+    public boolean canMove(Token t, int roll, int boardEnd) {
+        return true;
     }
     
     public String getStatus() {

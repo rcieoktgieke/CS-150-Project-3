@@ -8,8 +8,6 @@ import java.util.*;
 public class Hold implements Space  {
     /** The number by which to multiply rolls leaving the hold. */
     private int multiplier;
-    /** The ability of the token last passed to takeTurn to move. */
-    private boolean canMove;
     /** The list of tokens currently in the hold */
     private LinkedList<Token> tokens;
     /**
@@ -30,10 +28,20 @@ public class Hold implements Space  {
         System.out.print(t + " has landed on " + getStatus() + ". ");
     }
     /**
-     * @return if the token has been released from the hold and if moving the token would go beyond the bounds of the board.
+     * @return if the roll is equal to the token's entry roll, and if the roll times the multiplier is within the bounds of the board.
      */
-    public boolean canMove() {
-        return canMove;
+    public boolean canMove(Token t, int roll, int boardEnd) {
+        if (roll == t.getRoll()) {
+            if ((roll * multiplier) + t.getIndex() <= boardEnd && (roll * multiplier) + t.getIndex() >= 0) {            
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
     
     public String getStatus() {
@@ -53,29 +61,20 @@ public class Hold implements Space  {
     /**
      * Take token's turn.
      * 
-     * Print the token and the roll. If the roll is equal to the token's entry roll, and if the roll times the multiplier is within the bounds of the board, advance the token.
+     * Print the token and the roll. If the token can move, advance the token.
      */
     public boolean takeTurn(Token t, int roll, int boardEnd) {
         System.out.print(t + " has rolled " + roll + ". ");
-        if (roll == t.getRoll()) {
-            if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
-                t.advance(roll * multiplier);
-                canMove = true;
-                return false;
-            }
-            else if ((roll * multiplier) + t.getIndex() == boardEnd) {
-                t.advance(roll * multiplier);
+        if (canMove(t, roll, boardEnd)) {
+            t.advance(roll * multiplier);
+            //remove t from tokens?
+            if ((roll * multiplier) + t.getIndex() == boardEnd) {
                 return true;
             }
-            else {
-                canMove = false;
-                System.out.print("Can't escape: movement out of bounds. ");
-                return false;
-            }
+            return false;
         }
         else {
             System.out.print("No change. ");
-            canMove = false;
             return false;
         }
     }

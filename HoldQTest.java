@@ -11,6 +11,7 @@ import org.junit.Test;
 public class HoldQTest
 {
     private HoldQ holdQ;
+    private Token t;
     private Token t1;
     private Token t2;
     private Token t3;
@@ -59,10 +60,8 @@ public class HoldQTest
             holdQ.land(t2, d);
             int roll3 = d.roll();
             holdQ.land(t3, d);
-            holdQ.takeTurn(t2, d.roll(), boardEnd);
-            assertFalse(holdQ.canMove());
-            holdQ.takeTurn(t3, d.roll(), boardEnd);
-            assertFalse(holdQ.canMove());
+            assertFalse(holdQ.canMove(t2, d.roll(), boardEnd));
+            assertFalse(holdQ.canMove(t3, d.roll(), boardEnd));
         }
         
         holdQ = new HoldQ(2);
@@ -71,21 +70,45 @@ public class HoldQTest
             int tokenIndex = t.getIndex();
             int roll = d.prevRoll();
             holdQ.land(t, d);
-            holdQ.takeTurn(t, d.roll(), boardEnd);
             while (d.prevRoll() != roll) {
-                assertFalse(holdQ.canMove());
-                holdQ.takeTurn(t, d.roll(), boardEnd);
+                assertFalse(holdQ.canMove(t, d.prevRoll(), boardEnd));
+                d.roll();
             }
             if (tokenIndex + (d.prevRoll() * 2) >= 0 && tokenIndex + (d.prevRoll() * 2) < boardEnd) {
-                assertTrue(holdQ.canMove());
+                assertTrue(holdQ.canMove(t, d.prevRoll(), boardEnd));
             }
             else if (tokenIndex + (d.prevRoll() * 2) == boardEnd) {
-                assertTrue(holdQ.canMove());
+                assertTrue(holdQ.canMove(t, d.prevRoll(), boardEnd));
             }
             else {
-                assertFalse(holdQ.canMove());
+                assertFalse(holdQ.canMove(t, d.prevRoll(), boardEnd));
             }
+            holdQ.takeTurn(t, d.prevRoll(), boardEnd);
         }
+    }
+    @Test
+    public void testCanMoveStart()
+    {
+        t = new Token();
+        holdQ.land(t, d);
+        t.setRoll(0);
+        assertTrue(holdQ.canMove(t, 0, boardEnd));
+    }
+    @Test
+    public void testCanMoveEnd()
+    {
+        t = new Token();
+        holdQ.land(t, d);
+        t.setRoll(boardEnd / 2);
+        assertTrue(holdQ.canMove(t, (boardEnd / 2), boardEnd));
+    }
+    @Test
+    public void testCanMoveTooFar()
+    {
+        t = new Token();
+        holdQ.land(t, d);
+        t.setRoll((boardEnd / 2) + 1);        
+        assertFalse(holdQ.canMove(t, ((boardEnd / 2) + 1), boardEnd));
     }
     
     @Test

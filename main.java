@@ -4,7 +4,7 @@ import java.io.*;
  * Main runs a game of Chutes and Ladders and Pots
  * 
  * @Eric Weber
- * @3/27/16
+ * @4/2/16
  */
 public class main {
     /**
@@ -101,6 +101,7 @@ public class main {
             int roll = die.roll();
             cToken = turns.next().whichToken(roll);
             int tokenStartIndex = cToken.getIndex();
+            boolean canMove = board.get(cToken.getIndex()).canMove(cToken, roll, boardEnd);
             if (board.get(cToken.getIndex()).takeTurn(cToken, roll, boardEnd)) {
                 /**If a token reaches the final space, print that the game is over and token info.*/
                 System.out.println("GAME OVER");
@@ -109,7 +110,7 @@ public class main {
                 return true;
             }
             else {
-                if (board.get(tokenStartIndex).canMove()) {
+                if (canMove) {
                     /**If the token can move, call land on its new space.*/
                     board.get(cToken.getIndex()).land(cToken, die);
                 }

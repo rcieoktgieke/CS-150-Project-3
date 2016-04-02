@@ -46,27 +46,32 @@ public class FairTPotTest
     }
     
     @Test
-    public void testDefaultCanMove()
-    {
-        assertEquals(true, fPot.canMove());
-    }
-    @Test
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
             t = new Token();
             int tokenIndex = t.getIndex();
-            fPot.takeTurn(t, d.roll(), boardEnd);
-            if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
-                assertTrue(fPot.canMove());
-            }
-            else if (tokenIndex + d.prevRoll() == boardEnd) {
-                assertTrue(fPot.canMove());
+            int roll = d.roll();
+            if (tokenIndex + roll > 0 && tokenIndex + roll <= boardEnd) {
+                assertTrue(fPot.canMove(t, roll, boardEnd));
             }
             else {
-                assertFalse(fPot.canMove());
+                assertFalse(fPot.canMove(t, roll, boardEnd));
             }
         }
+    }
+    @Test
+    public void testCanMoveEnd()
+    {
+        t = new Token();
+        assertTrue(fPot.canMove(t, boardEnd, boardEnd));
+    }
+    @Test
+    public void testCanMoveTooFar()
+    {
+        t = new Token();
+        assertFalse(fPot.canMove(t, boardEnd + 1, boardEnd));
+        assertFalse(fPot.canMove(t, 0, boardEnd));
     }
     
     @Test

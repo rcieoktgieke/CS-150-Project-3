@@ -2,4 +2,7 @@
 comment0.params=numTokens
 comment0.target=FinishFirstPlayer(int)
 comment0.text=\n\ Constructor\n\ @param\ numTokens\ number\ of\ tokens\ this\ player\ will\ have.\n
-numComments=1
+comment1.params=roll
+comment1.target=Token\ whichToken(int)
+comment1.text=\n\ Choose\ which\ token\ to\ advance\ based\ on\ the\ roll\ given\ and\ the\ strategy\ used\ by\ the\ player.\n\ \n\ @param\ roll\ the\ die\ roll\ which\ will\ move\ the\ token\ returned.\n\ @return\ token\ the\ token\ which\ will\ be\ moved.\n
+numComments=2

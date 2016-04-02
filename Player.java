@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Player {
     /** The list of tokens belonging to this player */
-    private ArrayList<Token> tokens = new ArrayList<Token>();
+    protected ArrayList<Token> tokens = new ArrayList<Token>();
     /**
      * Constructor
      * @param numTokens number of tokens this player will have.

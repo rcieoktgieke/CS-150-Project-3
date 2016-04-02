@@ -8,8 +8,6 @@ public class RandTPot implements Space  {
     
     /** The number of pieces left in the pot */
     private int pieces;
-    /** The ability of the token last passed to takeTurn to move. */
-    private boolean canMove = true;
     /**
      * Constructor.
      * 
@@ -31,8 +29,13 @@ public class RandTPot implements Space  {
     /**
      * @return if moving the token would go beyond the bounds of the board.
      */
-    public boolean canMove() {
-        return canMove;
+    public boolean canMove(Token t, int roll, int boardEnd) {
+        if (roll + t.getIndex() <= boardEnd && roll + t.getIndex() > 0) {            
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     
     /**
@@ -63,8 +66,7 @@ public class RandTPot implements Space  {
      */
     public boolean takeTurn(Token t, int roll, int boardEnd) {
         System.out.print(t + " has rolled " + roll + ". ");
-        if (roll + t.getIndex() < boardEnd) {
-            canMove = true;
+        if (canMove(t, roll, boardEnd)) {
             t.advance(roll);
             return false;
         }
@@ -73,7 +75,6 @@ public class RandTPot implements Space  {
             return true;
         }
         else {
-            canMove = false;
             return false;
         }
     }

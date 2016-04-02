@@ -31,10 +31,26 @@ public class HoldQ implements Space {
         System.out.print(t + " has landed on " + getStatus() + ". ");
     }
     /**
-     * @return if the token has been released from the hold and if moving the token would go beyond the bounds of the board.
+     * @return if the token is first in the queue, if the roll is equal to the token's entry roll, and if the roll times the multiplier is within the bounds of the board.
      */
-    public boolean canMove() {
-        return canMove;
+    public boolean canMove(Token t, int roll, int boardEnd) {
+        if (tokens.peek() == t) {
+            /** Hold behavior. */
+            if (roll == t.getRoll()) {
+                if ((roll * multiplier) + t.getIndex() <= boardEnd && (roll * multiplier) + t.getIndex() >= 0) {            
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
     
     public String getStatus() {
@@ -54,13 +70,31 @@ public class HoldQ implements Space {
     /**
      * Take token's turn.
      * 
-     * If the token is first in the queue, roll the die. Print the roll. If the roll is equal to the token's entry roll, and if the roll times the multiplier is within the bounds of the board, advance the token.
+     * Print the token and the roll. If the token can move, advance the token.
      */
     public boolean takeTurn(Token t, int roll, int boardEnd) {
         System.out.print(t);
         if (tokens.peek() == t) {
-            /** Hold behavior. */
             System.out.print(" is at the front of the queue and rolled " + roll + ". ");
+        }
+        else {
+            System.out.print(" is not at the front of the queue. ");
+        }
+        
+        System.out.print(t + " has rolled " + roll + ". ");
+        if (canMove(t, roll, boardEnd)) {
+            tokens.poll();
+            t.advance(roll * multiplier);
+            if ((roll * multiplier) + t.getIndex() == boardEnd) {
+                return true;
+            }
+            return false;
+        }
+        else {
+            System.out.print("No change. ");
+            return false;
+        }
+        /*
             if (roll == t.getRoll()) {
                 if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
                     t.advance(roll * multiplier);
@@ -85,11 +119,6 @@ public class HoldQ implements Space {
                 canMove = false;
                 return false;
             }   
-        }
-        else {
-            System.out.print(" is not at the front of the queue. ");
-            canMove = false;
-            return false;
-        }
+        }*/
     }
 }

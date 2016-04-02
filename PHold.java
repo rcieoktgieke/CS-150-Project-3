@@ -9,8 +9,6 @@ public class PHold implements Space, Comparator<Integer> {
     
     /** The number by which to multiply rolls leaving the hold.*/
     private int multiplier;
-    /** The ability of the token last passed to takeTurn to move. */
-    private boolean canMove;
     /** The queue of tokens currently in the hold */
     private TreeMap<Integer, ArrayList<Token>> tokens;
     /**
@@ -38,10 +36,20 @@ public class PHold implements Space, Comparator<Integer> {
         System.out.print(t + " has landed on " + getStatus());
     }
     /**
-     * @return if the token is at the front of the queue and if moving the token would go beyond the bounds of the board.
+     * @return if the token is first in the queue and if the roll times the multiplier is within the bounds of the board.
      */
-    public boolean canMove() {
-        return canMove;
+    public boolean canMove(Token t, int roll, int boardEnd) {
+        if (tokens.firstEntry().getValue().contains(t)) {
+            if ((roll * multiplier) + t.getIndex() <= boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
     
     public String getStatus() {
@@ -51,38 +59,30 @@ public class PHold implements Space, Comparator<Integer> {
     /**
      * Take token's turn.
      * 
-     * If the token is first in the queue, roll the die. Print the roll. If the roll is within the bounds of the board, advance the token.
+     * Print the roll and the token. If it can move, advance the token.
      */
-    public boolean takeTurn(Token t, int r, int boardEnd) {
+    public boolean takeTurn(Token t, int roll, int boardEnd) {
         if (tokens.firstEntry().getValue().contains(t)) {
-            /** Normal space behavior.*/
-            Integer roll = r;
             System.out.print(t + " is at the front of the queue and has rolled " + roll + ". ");
-            if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
-                tokens.get(t.getRoll()).remove(t);
-                if (tokens.get(t.getRoll()).isEmpty()) {
-                    tokens.remove(tokens.firstEntry().getKey());
-                }
-                canMove = true;
-                t.advance(roll * multiplier);
-                return false;
+        }
+        else {
+            System.out.print(t + " is not at the front of the queue. ");
+        }
+        if (canMove(t, roll, boardEnd)) {
+            tokens.get(t.getRoll()).remove(t);
+            if (tokens.get(t.getRoll()).isEmpty()) {
+                tokens.remove(tokens.firstEntry().getKey());
             }
-            else if ((roll * multiplier) + t.getIndex() == boardEnd) {
-                tokens.get(t.getRoll()).remove(t);
-                if (tokens.get(t.getRoll()).isEmpty()) {
-                    tokens.remove(tokens.firstEntry().getKey());
-                }
-                t.advance(roll * multiplier);
+            int prevIndex = t.getIndex();
+            t.advance(roll * multiplier);
+            if ((roll * multiplier) + prevIndex == boardEnd) {
                 return true;
             }
             else {
-                canMove = false;
                 return false;
             }
         }
         else {
-            System.out.print(t + " is not at the front of the queue. ");
-            canMove = false;
             return false;
         }
     }

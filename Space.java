@@ -15,11 +15,14 @@ public interface Space {
      */
     public void land(Token t, Die d);
     /**
-     * Check if the token last passed to takeTurn can move.
+     * Check if the given token can move.
      * 
+     * @param t the token that will move.
+     * @param roll roll that will move the token.
+     * @param boardEnd the index of the final space on the board.
      * @return if token can move.
      */
-    public boolean canMove();
+    public boolean canMove(Token t, int roll, int boardEnd);
     /**
      * Return the type and vital information of the space.
      * 

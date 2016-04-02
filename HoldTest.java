@@ -54,19 +54,40 @@ public class HoldTest
             int roll = d.prevRoll();
             hold.land(t, d);
             while (d.prevRoll() != roll) {
-                assertFalse(hold.canMove());
-                hold.takeTurn(t, d.roll(), boardEnd);
+                assertFalse(hold.canMove(t, d.prevRoll(), boardEnd));
+                d.roll();
             }
-            if (tokenIndex + (d.prevRoll() * 3) > 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
-                assertTrue(hold.canMove());
+            if (tokenIndex + (d.prevRoll() * 3) >= 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
+                assertTrue(hold.canMove(t, d.prevRoll(), boardEnd));
             }
             else if (tokenIndex + (d.prevRoll() * 3) == boardEnd) {
-                assertTrue(hold.canMove());
+                assertTrue(hold.canMove(t, d.prevRoll(), boardEnd));
             }
             else {
-                assertFalse(hold.canMove());
+                assertFalse(hold.canMove(t, d.prevRoll(), boardEnd));
             }
         }
+    }
+    @Test
+    public void testCanMoveStart()
+    {
+        t = new Token();
+        t.setRoll(0);
+        assertTrue(hold.canMove(t, 0, boardEnd));
+    }
+    @Test
+    public void testCanMoveEnd()
+    {
+        t = new Token();
+        t.setRoll(boardEnd / 3);
+        assertTrue(hold.canMove(t, (boardEnd / 3), boardEnd));
+    }
+    @Test
+    public void testCanMoveTooFar()
+    {
+        t = new Token();
+        t.setRoll((boardEnd / 3) + 1);
+        assertFalse(hold.canMove(t, ((boardEnd / 3) + 1), boardEnd));
     }
     
     @Test
@@ -90,7 +111,7 @@ public class HoldTest
             boolean takeTurnOutput = false;
             hold.land(t, d);
             while (d.prevRoll() != roll) {
-                assertFalse(hold.canMove());
+                assertFalse(hold.canMove(t, d.prevRoll(), boardEnd));
                 takeTurnOutput = hold.takeTurn(t, d.roll(), boardEnd);
             }
             if (tokenIndex + (d.prevRoll() * 3) > 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
