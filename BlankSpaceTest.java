@@ -56,7 +56,7 @@ public class BlankSpaceTest
         for (int i = 0; i < 100; i ++) {
             t = new Token();
             int tokenIndex = t.getIndex();
-            bSpace.takeTurn(t, d, boardEnd);
+            bSpace.takeTurn(t, d.roll(), boardEnd);
             if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
                 assertTrue(bSpace.canMove());
             }
@@ -87,7 +87,7 @@ public class BlankSpaceTest
         for (int i = 0; i < 100; i ++) {
             t = new Token();
             int tokenIndex = t.getIndex();
-            boolean takeTurnOutput = bSpace.takeTurn(t, d, boardEnd);
+            boolean takeTurnOutput = bSpace.takeTurn(t, d.roll(), boardEnd);
             if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
                 assertEquals(false, takeTurnOutput);
                 assertEquals(t.getIndex(), (tokenIndex + d.prevRoll()));

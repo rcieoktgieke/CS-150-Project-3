@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class HoldTest.
  *
  * @Eric Weber
- * @3/16/16
+ * @4/2/16
  */
 public class HoldTest
 {
@@ -55,7 +55,7 @@ public class HoldTest
             hold.land(t, d);
             while (d.prevRoll() != roll) {
                 assertFalse(hold.canMove());
-                hold.takeTurn(t, d, boardEnd);
+                hold.takeTurn(t, d.roll(), boardEnd);
             }
             if (tokenIndex + (d.prevRoll() * 3) > 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
                 assertTrue(hold.canMove());
@@ -91,7 +91,7 @@ public class HoldTest
             hold.land(t, d);
             while (d.prevRoll() != roll) {
                 assertFalse(hold.canMove());
-                takeTurnOutput = hold.takeTurn(t, d, boardEnd);
+                takeTurnOutput = hold.takeTurn(t, d.roll(), boardEnd);
             }
             if (tokenIndex + (d.prevRoll() * 3) > 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
                 assertEquals(false, takeTurnOutput);

@@ -2,7 +2,7 @@
  * When a token lands on a random treasure pot, the token rolls the die and receives a number of pieces equal to that roll. Each pot starts with a number of pieces specified by the configuration, and those pieces are decreased by the number given to each token. When the number of pieces reaches zero, no more pieces are given and the space is treated as blank.
  * 
  * @Eric Weber
- * @3/16/16
+ * @4/2/16
  */
 public class RandTPot implements Space  {
     
@@ -59,10 +59,9 @@ public class RandTPot implements Space  {
     /**
      * Take token's turn.
      * 
-     * Roll the die. Print the token and the roll. If the roll is within the bounds of the board, advance the token.
+     * Print the token and the roll. If the roll is within the bounds of the board, advance the token.
      */
-    public boolean takeTurn(Token t, Die d, int boardEnd) {
-        int roll = d.roll();
+    public boolean takeTurn(Token t, int roll, int boardEnd) {
         System.out.print(t + " has rolled " + roll + ". ");
         if (roll + t.getIndex() < boardEnd) {
             canMove = true;

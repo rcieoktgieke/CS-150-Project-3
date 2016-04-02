@@ -2,7 +2,7 @@
  * When a token lands on a fair treasure pot, it gives that token a number of pieces specified by the game’s configuration. However, each pot can only give pieces to a certain number of tokens (also specified in configuration). If a token lands on the pot after the maximum number of tokens is reached, the pot is treated as a blank space.
  * 
  * @Eric Weber
- * @3/16/16
+ * @4/2/16
  */
 public class FairTPot implements Space  {
     
@@ -49,10 +49,9 @@ public class FairTPot implements Space  {
     /**
      * Take token's turn.
      * 
-     * Roll the die. Print the token and the roll. If the roll is within the bounds of the board, advance the token.
+     * Print the token and the roll. If the roll is within the bounds of the board, advance the token.
      */
-    public boolean takeTurn(Token t, Die d, int boardEnd) {
-        int roll = d.roll();
+    public boolean takeTurn(Token t, int roll, int boardEnd) {
         System.out.print(t + " has rolled " + roll + ". ");
         if (roll + t.getIndex() < boardEnd) {
             canMove = true;

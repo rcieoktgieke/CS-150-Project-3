@@ -1,14 +1,14 @@
 #BlueJ class context
 comment0.params=t\ d
 comment0.target=void\ land(Token,\ Die)
-comment0.text=\n\ Land\ toen\ on\ space.\n\ \n\ Executes\ appropriate\ operations\ for\ when\ a\ token\ lands\ on\ the\ space.\n\ @param\ t\ token\ that\ is\ landing\ on\ this\ space.\n\ @param\ d\ die\ that\ is\ used\ for\ the\ game.\n
+comment0.text=\n\ Land\ token\ on\ space.\n\ \n\ Executes\ appropriate\ operations\ for\ when\ a\ token\ lands\ on\ the\ space.\n\ @param\ t\ token\ that\ is\ landing\ on\ this\ space.\n\ @param\ d\ die\ that\ is\ used\ for\ the\ game.\n
 comment1.params=
 comment1.target=boolean\ canMove()
 comment1.text=\n\ Check\ if\ the\ token\ last\ passed\ to\ takeTurn\ can\ move.\n\ \n\ @return\ if\ token\ can\ move.\n
 comment2.params=
 comment2.target=java.lang.String\ getStatus()
 comment2.text=\n\ Return\ the\ type\ and\ vital\ information\ of\ the\ space.\n\ \n\ @return\ the\ type\ and\ vital\ information\ of\ the\ space.\n
-comment3.params=t\ d\ boardEnd
-comment3.target=boolean\ takeTurn(Token,\ Die,\ int)
-comment3.text=\n\ Take\ the\ turn\ of\ the\ token\ t.\n\ \n\ Executes\ appropriate\ operations\ for\ the\ token\ to\ take\ its\ turn.\n\ @param\ t\ token\ that\ is\ taking\ its\ turn.\n\ @param\ d\ die\ that\ is\ used\ for\ the\ game.\n\ @param\ boardEnd\ the\ index\ of\ the\ final\ space\ on\ the\ board.\n\ \n\ @return\ if\ the\ game\ has\ ended.\n
+comment3.params=t\ r\ boardEnd
+comment3.target=boolean\ takeTurn(Token,\ int,\ int)
+comment3.text=\n\ Take\ the\ turn\ of\ the\ token\ t.\n\ \n\ Executes\ appropriate\ operations\ for\ the\ token\ to\ take\ its\ turn.\n\ @param\ t\ token\ that\ is\ taking\ its\ turn.\n\ @param\ r\ die\ roll\ for\ the\ turn.\n\ @param\ boardEnd\ the\ index\ of\ the\ final\ space\ on\ the\ board.\n\ \n\ @return\ if\ the\ game\ has\ ended.\n
 numComments=4

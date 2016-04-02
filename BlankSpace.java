@@ -2,7 +2,7 @@
  * A blank space lets a token roll on their next turn and move forward.
  *  
  * @Eric Weber
- * @3/3/16
+ * @4/2/16
  */
 public class BlankSpace implements Space  {
     
@@ -29,10 +29,9 @@ public class BlankSpace implements Space  {
     /**
      * Take token's turn.
      * 
-     * Roll the die. Print the token and the roll. If the roll is within the bounds of the board, advance the token.
+     * Print the token and the roll. If the roll is within the bounds of the board, advance the token.
      */
-    public boolean takeTurn(Token t, Die d, int boardEnd) {
-        int roll = d.roll();
+    public boolean takeTurn(Token t, int roll, int boardEnd) {
         System.out.print(t + " has rolled " + roll + ". ");
         if (roll + t.getIndex() < boardEnd) {
             canMove = true;

@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class HoldQTest.
  *
  * @Eric Weber
- * @3/16/16
+ * @4/2/16
  */
 public class HoldQTest
 {
@@ -59,9 +59,9 @@ public class HoldQTest
             holdQ.land(t2, d);
             int roll3 = d.roll();
             holdQ.land(t3, d);
-            holdQ.takeTurn(t2, d, boardEnd);
+            holdQ.takeTurn(t2, d.roll(), boardEnd);
             assertFalse(holdQ.canMove());
-            holdQ.takeTurn(t3, d, boardEnd);
+            holdQ.takeTurn(t3, d.roll(), boardEnd);
             assertFalse(holdQ.canMove());
         }
         
@@ -71,10 +71,10 @@ public class HoldQTest
             int tokenIndex = t.getIndex();
             int roll = d.prevRoll();
             holdQ.land(t, d);
-            holdQ.takeTurn(t, d, boardEnd);
+            holdQ.takeTurn(t, d.roll(), boardEnd);
             while (d.prevRoll() != roll) {
                 assertFalse(holdQ.canMove());
-                holdQ.takeTurn(t, d, boardEnd);
+                holdQ.takeTurn(t, d.roll(), boardEnd);
             }
             if (tokenIndex + (d.prevRoll() * 2) >= 0 && tokenIndex + (d.prevRoll() * 2) < boardEnd) {
                 assertTrue(holdQ.canMove());
@@ -114,26 +114,26 @@ public class HoldQTest
             holdQ.land(t2, d);
             int roll3 = d.roll();
             holdQ.land(t3, d);
-            holdQ.takeTurn(t2, d, boardEnd);
-            holdQ.takeTurn(t3, d, boardEnd);
+            holdQ.takeTurn(t2, d.roll(), boardEnd);
+            holdQ.takeTurn(t3, d.roll(), boardEnd);
             assertEquals(t2.getIndex(), 0);
             assertEquals(t3.getIndex(), 0);
             
-            holdQ.takeTurn(t1, d, boardEnd);
+            holdQ.takeTurn(t1, d.roll(), boardEnd);
             while (d.prevRoll() != roll1) {
-                holdQ.takeTurn(t1, d, boardEnd);
+                holdQ.takeTurn(t1, d.roll(), boardEnd);
             }
             assertEquals(t1.getIndex(), roll1*2);
             
-            holdQ.takeTurn(t2, d, boardEnd);
+            holdQ.takeTurn(t2, d.roll(), boardEnd);
             while (d.prevRoll() != roll2) {
-                holdQ.takeTurn(t2, d, boardEnd);
+                holdQ.takeTurn(t2, d.roll(), boardEnd);
             }
             assertEquals(t2.getIndex(), roll2*2);
             
-            holdQ.takeTurn(t3, d, boardEnd);
+            holdQ.takeTurn(t3, d.roll(), boardEnd);
             while (d.prevRoll() != roll3) {
-                holdQ.takeTurn(t3, d, boardEnd);
+                holdQ.takeTurn(t3, d.roll(), boardEnd);
             }
             assertEquals(t3.getIndex(), roll3*2);
         }

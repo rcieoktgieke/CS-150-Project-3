@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class PHoldTest.
  *
  * @Eric Weber
- * @3/29/16
+ * @4/2/16
  */
 public class PHoldTest
 {
@@ -70,7 +70,7 @@ public class PHoldTest
             Token t = new Token();
             int tokenIndex = t.getIndex();
             pHold.land(t, d);
-            boolean takeTurnOutput = pHold.takeTurn(t, d, boardEnd);
+            boolean takeTurnOutput = pHold.takeTurn(t, d.roll(), boardEnd);
             if (tokenIndex + (d.prevRoll() * 3) > 0 && tokenIndex + (d.prevRoll() * 3) < boardEnd) {
                 assertEquals(false, takeTurnOutput);
                 assertEquals(t.getIndex(), (tokenIndex + (d.prevRoll() * 3)));

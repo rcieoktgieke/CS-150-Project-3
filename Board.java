@@ -68,7 +68,7 @@ public class Board {
         for (int zIndex = 0; zIndex < z; zIndex ++) {
             for (int yIndex = 0; yIndex < y; yIndex ++) {
                 for (int xIndex = 0; xIndex < x; xIndex ++) {
-                    System.out.printf("%-25s", zIndex*(x*y)+yIndex*x+xIndex + ": " + board.get(zIndex*(x*y)+yIndex*x+xIndex).getStatus());
+                    System.out.printf("%-25s", "(" + xIndex + ", " + yIndex + ", " + zIndex + "): " + board.get(zIndex*(x*y)+yIndex*x+xIndex).getStatus());
                 }
                 System.out.println();
             }

@@ -3,7 +3,7 @@ import java.util.*;
  * When a token moves off of a JStack, they move to the same x and y coordinate on the z level that corresponds to their roll modulo the z dimension of the board.
  *  
  * @Eric Weber
- * @3/18/16
+ * @4/2/16
  */
 public class JStack implements Space  {
     
@@ -50,10 +50,9 @@ public class JStack implements Space  {
     /**
      * Take token's turn.
      * 
-     * Roll the die. Print the token and the roll. Advance the player to their current x and y coordinate up (or down) the z level that corresponds to their roll modulo the z dimension of the board.
+     * Print the token and the roll. Advance the player to their current x and y coordinate up (or down) the z level that corresponds to their roll modulo the z dimension of the board.
      */
-    public boolean takeTurn(Token t, Die d, int boardEnd) {
-        int roll = d.roll();
+    public boolean takeTurn(Token t, int roll, int boardEnd) {
         System.out.print(t + " has rolled " + roll + ". ");
         int zIndex = t.getIndex() / (x*y);
         t.advance(((z + ((roll*multiplier + zIndex) % z)) % z - zIndex)*x*y);

@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=numTokens
+comment0.target=FinishFirstPlayer(int)
+comment0.text=\n\ Constructor\n\ @param\ numTokens\ number\ of\ tokens\ this\ player\ will\ have.\n
+numComments=1

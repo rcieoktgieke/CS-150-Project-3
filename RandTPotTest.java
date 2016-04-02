@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class RandTPotTest.
  *
  * @Eric Weber
- * @3/16/16
+ * @4/2/16
  */
 public class RandTPotTest
 {
@@ -56,7 +56,7 @@ public class RandTPotTest
         for (int i = 0; i < 100; i ++) {
             t = new Token();
             int tokenIndex = t.getIndex();
-            rPot.takeTurn(t, d, boardEnd);
+            rPot.takeTurn(t, d.roll(), boardEnd);
             if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
                 assertTrue(rPot.canMove());
             }
@@ -105,7 +105,7 @@ public class RandTPotTest
         for (int i = 0; i < 100; i ++) {
             t = new Token();
             int tokenIndex = t.getIndex();
-            boolean takeTurnOutput = rPot.takeTurn(t, d, boardEnd);
+            boolean takeTurnOutput = rPot.takeTurn(t, d.roll(), boardEnd);
             if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {
                 assertEquals(false, takeTurnOutput);
                 assertEquals(t.getIndex(), (tokenIndex + d.prevRoll()));

@@ -3,7 +3,7 @@ import java.util.*;
  * When a token lands on a priority hold, they are assigned the priority equal to the number rolled to land on it. They may only leave the space when no tokens with a lower number priority are on the priority hold with them. When a token is on a priority hold and does not have the lowest number priority, they end their turn without rolling. When they are on a priority hold and do have the lowest number priority, they roll, and advance the number of spaces rolled times a number specified for that priority hold when the board is created, which will be between two numbers set in configuration.
  * 
  * @Eric Weber
- * @3/25/16
+ * @4/2/16
  */
 public class PHold implements Space, Comparator<Integer> {
     
@@ -51,12 +51,12 @@ public class PHold implements Space, Comparator<Integer> {
     /**
      * Take token's turn.
      * 
-     * Print the token. If the token is first in the queue, roll the die. Print the roll. If the roll is within the bounds of the board, advance the token.
+     * If the token is first in the queue, roll the die. Print the roll. If the roll is within the bounds of the board, advance the token.
      */
-    public boolean takeTurn(Token t, Die d, int boardEnd) {
+    public boolean takeTurn(Token t, int r, int boardEnd) {
         if (tokens.firstEntry().getValue().contains(t)) {
             /** Normal space behavior.*/
-            Integer roll = d.roll();
+            Integer roll = r;
             System.out.print(t + " is at the front of the queue and has rolled " + roll + ". ");
             if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
                 tokens.get(t.getRoll()).remove(t);

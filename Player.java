@@ -18,9 +18,9 @@ public class Player {
         }
     }
     /**
-     * Choose which token to advance based on the roll given.
+     * Choose which token to advance based on the roll given and the strategy used by the player.
      * 
-     * @param roll the die which will move the token returned.
+     * @param roll the die roll which will move the token returned.
      * @return token the token which will be moved.
      */
     public Token whichToken(int roll) {

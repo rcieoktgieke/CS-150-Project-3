@@ -47,7 +47,7 @@ public class JStackTest
         for (int i = 0; i < 100; i ++) {
             Token t = new Token();
             jStack.land(t, d);
-            jStack.takeTurn(t, d, 100);
+            jStack.takeTurn(t, d.roll(), 100);
             assertEquals(true, jStack.canMove());
         }
     }
@@ -59,7 +59,7 @@ public class JStackTest
             Token t = new Token();
             t.advance(d.roll());
             int prevIndex = t.getIndex();
-            boolean gameOver = jStack.takeTurn(t, d, 39);
+            boolean gameOver = jStack.takeTurn(t, d.roll(), 39);
             if (((prevIndex/(4*2) + d.prevRoll() % 5) - prevIndex/(4*2))*2*4 + prevIndex == 39) {
                 assertEquals(true, gameOver);
             }

@@ -98,9 +98,10 @@ public class main {
         Token cToken;
         Iterator<Player> turns = players.iterator();
         while (turns.hasNext()) {
-            cToken = turns.next().whichToken(0); //use die roll (remove rolling from space takeTurn methods)
+            int roll = die.roll();
+            cToken = turns.next().whichToken(roll);
             int tokenStartIndex = cToken.getIndex();
-            if (board.get(cToken.getIndex()).takeTurn(cToken, die, boardEnd)) {
+            if (board.get(cToken.getIndex()).takeTurn(cToken, roll, boardEnd)) {
                 /**If a token reaches the final space, print that the game is over and token info.*/
                 System.out.println("GAME OVER");
                 System.out.println();

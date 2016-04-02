@@ -2,12 +2,12 @@
  * Spaces are parts of the board at specific indecies.
  * 
  * @Eric Weber
- * @4/1/16
+ * @4/2/16
  */
 public interface Space {
     
     /**
-     * Land toen on space.
+     * Land token on space.
      * 
      * Executes appropriate operations for when a token lands on the space.
      * @param t token that is landing on this space.
@@ -31,10 +31,10 @@ public interface Space {
      * 
      * Executes appropriate operations for the token to take its turn.
      * @param t token that is taking its turn.
-     * @param d die that is used for the game.
+     * @param r die roll for the turn.
      * @param boardEnd the index of the final space on the board.
      * 
      * @return if the game has ended.
      */
-    public boolean takeTurn(Token t, Die d, int boardEnd);
+    public boolean takeTurn(Token t, int r, int boardEnd);
 }

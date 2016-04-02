@@ -3,7 +3,7 @@ import java.util.*;
  * When a token lands on a hold, they may not move again until they roll the number they rolled to land on the hold. Any other roll ends the token’s turn without moving their token. When the token rolls the required number, they advance the number of spaces rolled times a number specified for that hold space when the board is created, which will be between two numbers set in configuration.
  *  
  * @Eric Weber
- * @3/16/16
+ * @4/2/16
  */
 public class Hold implements Space  {
     /** The number by which to multiply rolls leaving the hold. */
@@ -53,10 +53,9 @@ public class Hold implements Space  {
     /**
      * Take token's turn.
      * 
-     * Roll the die. Print the token and the roll. If the roll is equal to the token's entry roll, and if the roll times the multiplier is within the bounds of the board, advance the token.
+     * Print the token and the roll. If the roll is equal to the token's entry roll, and if the roll times the multiplier is within the bounds of the board, advance the token.
      */
-    public boolean takeTurn(Token t, Die d, int boardEnd) {
-        int roll = d.roll();
+    public boolean takeTurn(Token t, int roll, int boardEnd) {
         System.out.print(t + " has rolled " + roll + ". ");
         if (roll == t.getRoll()) {
             if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {

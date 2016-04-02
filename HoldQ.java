@@ -3,7 +3,7 @@ import java.util.*;
  * When a tokens lands on a hold queue, they are added to the end of a queue of tokens that landed there previously. They may only leave the space when no tokens are in the queue ahead of them, and when they roll the number they rolled to land on the hold queue. When a token is on a hold queue and are not in the front of the queue, they end their turn without rolling. When they are on a hold queue and are in the front of the queue, they roll, and if their roll is other than the one they entered with, the token’s turn ends without moving. When the token rolls the required number, they advance the number of spaces rolled times a number specified for that hold space when the board is created, which will be between two numbers set in configuration.
  * 
  * @Eric Weber
- * @3/16/16
+ * @4/2/16
  */
 public class HoldQ implements Space {
     
@@ -54,13 +54,12 @@ public class HoldQ implements Space {
     /**
      * Take token's turn.
      * 
-     * Print the token. If the token is first in the queue, roll the die. Print the roll. If the roll is equal to the token's entry roll, and if the roll times the multiplier is within the bounds of the board, advance the token.
+     * If the token is first in the queue, roll the die. Print the roll. If the roll is equal to the token's entry roll, and if the roll times the multiplier is within the bounds of the board, advance the token.
      */
-    public boolean takeTurn(Token t, Die d, int boardEnd) {
+    public boolean takeTurn(Token t, int roll, int boardEnd) {
         System.out.print(t);
         if (tokens.peek() == t) {
             /** Hold behavior. */
-            int roll = d.roll();
             System.out.print(" is at the front of the queue and rolled " + roll + ". ");
             if (roll == t.getRoll()) {
                 if ((roll * multiplier) + t.getIndex() < boardEnd && (roll * multiplier) + t.getIndex() >= 0) {
