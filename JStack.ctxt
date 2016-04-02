@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=factor\ x\ y\ z\ board
-comment0.target=JStack(int,\ int,\ int,\ int,\ Board)
+comment0.params=factor\ x\ y\ z\ board\ die
+comment0.target=JStack(int,\ int,\ int,\ int,\ Board,\ Die)
 comment0.text=\n\ Constructor.\n\ \n\ @param\ x\ the\ value\ of\ the\ x\ dimension\ of\ the\ board.\n\ @param\ y\ the\ value\ of\ the\ y\ dimension\ of\ the\ board.\n\ @param\ z\ the\ value\ of\ the\ z\ dimension\ of\ the\ board.\n\ @param\ board\ the\ board\ used\ for\ the\ game.\n
 comment1.params=t\ d
 comment1.target=void\ land(Token,\ Die)

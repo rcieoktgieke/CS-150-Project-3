@@ -27,7 +27,7 @@ public class JStackTest
     @Before
     public void setUp()
     {
-        jStack = new JStack(1, 4, 2, 5, null);
+        jStack = new JStack(1, 4, 2, 5, null, null);
         d = new Die(10);
     }
 

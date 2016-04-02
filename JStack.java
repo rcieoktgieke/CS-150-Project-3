@@ -19,6 +19,8 @@ public class JStack implements Space {
     private int z;
     /** The board used for the game. */
     private Board board;
+    /** The die used for the game. */
+    private Die die;
     /**
      * Constructor.
      * 
@@ -27,8 +29,9 @@ public class JStack implements Space {
      * @param z the value of the z dimension of the board.
      * @param board the board used for the game.
      */
-    public JStack(int factor, int x, int y, int z, Board board) {
-        this. board = board;
+    public JStack(int factor, int x, int y, int z, Board board, Die die) {
+        this.die = die;
+        this.board = board;
         multiplier = factor;
         this.x = x;
         this.y = y;
@@ -39,6 +42,7 @@ public class JStack implements Space {
      */
     public void land(Token t, Die d) {
         System.out.print(t + " has landed on " + getStatus() + ". ");
+        takeTurn(t, d.roll(), x*y*z - 1);
     }
     /**
      * @return true
@@ -70,6 +74,7 @@ public class JStack implements Space {
             return true;
         }
         else {
+            board.get(t.getIndex()).land(t, die);
             return false;
         }
     }

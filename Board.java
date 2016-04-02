@@ -17,26 +17,25 @@ public class Board {
     private int y;
     /** The value of the z dimension of the board. */
     private int z;
-    /** The number of spaces on the board */
+    /** The number of spaces on the board. */
     private int numberOfSpaces;
+    /** The space generator for the board. */
+    private SpaceGenerator spaceGen;
     /**
      * Constructor.
      * 
      * Initialize the board and set each space based on a Gaussian random number.
-     * @param x the value of the x dimension of the board.
-     * @param y the value of the y dimension of the board.
-     * @param z the value of the z dimension of the board.
      * @param scan the Scanner object reading the file.
      * @param d the die used for the game.
      */
-    public Board(int x, int y, int z, Scanner scan, Die d) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    public Board(Scanner scan, Die d) {
+        spaceGen = new SpaceGenerator(scan, this);
+        x = spaceGen.getX();
+        y = spaceGen.getY();
+        z = spaceGen.getZ();
         numberOfSpaces = x*y*z;
         board = new ArrayList<Space>(numberOfSpaces);
         board.add(new BlankSpace());
-        SpaceGenerator spaceGen = new SpaceGenerator(scan, this);
         /**Iterate through the board, creating a new space of a type defined by a Gaussian random number at each index.*/
         for (int i = 1; i < (numberOfSpaces - x*y); i ++) {
             board.add(spaceGen.randomSpace(x, y, z, d));
@@ -48,6 +47,47 @@ public class Board {
             board.add(new BlankSpace());
         }
     }
+    /**
+     * Return the x dimension of the board.
+     * 
+     * @return the x dimension of the board.
+     */
+    public int getX() {
+        return x;
+    }
+    /**
+     * Return the y dimension of the board.
+     * 
+     * @return the y dimension of the board.
+     */
+    public int getY() {
+        return y;
+    }
+    /**
+     * Return the z dimension of the board.
+     * 
+     * @return the z dimension of the board.
+     */
+    public int getZ() {
+        return z;
+    }
+    /**
+     * Return the points for winning in this game.
+     * 
+     * @return the points for winning in this game.
+     */
+    public int winningPoints() {
+        return spaceGen.winningPoints();
+    }
+    /**
+     * Return the points for pieces in this game.
+     * 
+     * @return the points for pieces in this game.
+     */
+    public double piecesPoints() {
+        return spaceGen.piecesPoints();
+    }
+    
     /**
      * Get the number of spaces on the board.
      * 

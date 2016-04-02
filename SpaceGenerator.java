@@ -39,6 +39,16 @@ public class SpaceGenerator {
     private double jStackFreq;
     /** The board used for the game. */
     private Board board;
+    /** The x dimension of the board. */
+    private int x;
+    /** The y dimension of the board. */
+    private int y;
+    /** The z dimension of the board. */
+    private int z;
+    /** The points for winning in this game. */
+    private int winningPoints;
+    /** The points for pieces in this game. */
+    private double piecesPoints;
     /**
      * Constructor.
      * 
@@ -98,10 +108,10 @@ public class SpaceGenerator {
         }
         else if (spaceRand < fairPotFreq + randomPotFreq + holdFreq + pHoldFreq + holdQFreq + jStackFreq) {
             if (rand.nextInt(2) == 1) {
-                return new JStack(1, x, y, z, board);
+                return new JStack(1, x, y, z, board, d);
             }
             else {
-                return new JStack(-1, x, y, z, board);
+                return new JStack(-1, x, y, z, board, d);
             }
         }
         else {
@@ -128,11 +138,63 @@ public class SpaceGenerator {
         }
     }
     
+    /**
+     * Return the x dimension of the board.
+     * 
+     * @return the x dimension of the board.
+     */
+    public int getX() {
+        return x;
+    }
+    /**
+     * Return the y dimension of the board.
+     * 
+     * @return the y dimension of the board.
+     */
+    public int getY() {
+        return y;
+    }
+    /**
+     * Return the z dimension of the board.
+     * 
+     * @return the z dimension of the board.
+     */
+    public int getZ() {
+        return z;
+    }
+    /**
+     * Return the points for winning in this game.
+     * 
+     * @return the points for winning in this game.
+     */
+    public int winningPoints() {
+        return winningPoints;
+    }
+    /**
+     * Return the points for pieces in this game.
+     * 
+     * @return the points for pieces in this game.
+     */
+    public double piecesPoints() {
+        return piecesPoints;
+    }
+    
     private void readConfig(Scanner scan) {
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             Scanner lineScanner = new Scanner(line);
-            if (line.substring(0, 5).equals("HoldQ")) {
+            if (line.substring(0, 5).equals("board")) {
+                lineScanner.next();
+                x = lineScanner.nextInt();
+                y = lineScanner.nextInt();
+                z = lineScanner.nextInt();
+            }
+            else if (line.substring(0, 6).equals("values")) {
+                lineScanner.next();
+                winningPoints = lineScanner.nextInt();
+                piecesPoints = lineScanner.nextDouble();
+            }
+            else if (line.substring(0, 5).equals("HoldQ")) {
                 lineScanner.next();
                 holdQFreq = lineScanner.nextInt();
                 minHoldQFactor = lineScanner.nextInt();

@@ -20,6 +20,14 @@ public class main {
         File configFile = new File(args[3]);
         try {
             Scanner configScan = new Scanner(configFile);
+            Board board = new Board(configScan, die);
+            int x = board.getX();
+            int y = board.getY();
+            int z = board.getZ();
+            int winningPoints = board.winningPoints();
+            double piecesPoints = board.piecesPoints();
+            System.out.println("X: " + x + " Y: " + y + " Z: " + z + " Winning: " + winningPoints + " Pieces: " + piecesPoints);
+            /*Scanner configScan = new Scanner(configFile);
             configScan.next();
             int x = configScan.nextInt();
             int y = configScan.nextInt();
@@ -28,7 +36,7 @@ public class main {
             int winningPoints = configScan.nextInt();
             double piecesPoints = configScan.nextDouble();
             System.out.println(configScan.nextLine());
-            Board board = new Board(x, y, z, configScan, die);
+            Board board = new Board(x, y, z, configScan, die);*/
             int numberOfSpaces = board.numberOfSpaces();
             for (int p = 0; p < Integer.parseInt(args[1]); p ++) {
                 players.add(new Player(Integer.parseInt(args[2])));
