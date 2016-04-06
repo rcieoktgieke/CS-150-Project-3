@@ -2,9 +2,9 @@
 comment0.params=numTokens
 comment0.target=Player(int)
 comment0.text=\n\ Constructor\n\ @param\ numTokens\ number\ of\ tokens\ this\ player\ will\ have.\n
-comment1.params=roll
-comment1.target=Token\ whichToken(int)
-comment1.text=\n\ Choose\ which\ token\ to\ advance\ based\ on\ the\ roll\ given\ and\ the\ strategy\ used\ by\ the\ player.\n\ \n\ @param\ roll\ the\ die\ roll\ which\ will\ move\ the\ token\ returned.\n\ @return\ token\ the\ token\ which\ will\ be\ moved.\n
+comment1.params=roll\ board\ boardEnd\ dRange
+comment1.target=Token\ whichToken(int,\ Board,\ int,\ int)
+comment1.text=\n\ Choose\ which\ token\ to\ advance\ based\ on\ the\ roll\ given\ and\ the\ strategy\ used\ by\ the\ player.\n\ \n\ @param\ roll\ the\ die\ roll\ which\ will\ move\ the\ token\ returned.\n\ @param\ board\ the\ board\ used\ for\ the\ game.\n\ @param\ boardEnd\ the\ index\ of\ the\ final\ space\ on\ the\ board.\n\ @param\ dRange\ upper\ number\ for\ the\ range\ of\ the\ die.\n\ @return\ token\ the\ token\ which\ will\ be\ moved.\n
 comment2.params=
 comment2.target=int\ getPieces()
 comment2.text=\n\ Find\ the\ number\ of\ pieces\ belonging\ to\ the\ player\ (the\ sum\ of\ the\ number\ of\ pieces\ beloning\ to\ each\ of\ the\ tokens\ belonging\ to\ the\ player).\n\ @return\ the\ number\ of\ pieces\ belonging\ to\ the\ player.\n

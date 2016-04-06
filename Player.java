@@ -3,9 +3,9 @@ import java.util.*;
  * Players have a number of tokens, and given a roll, choose which to move.
  * 
  * @Eric Weber
- * @4/1/16
+ * @4/6/16
  */
-public class Player {
+public abstract class Player {
     /** The list of tokens belonging to this player */
     protected ArrayList<Token> tokens = new ArrayList<Token>();
     /**
@@ -21,11 +21,12 @@ public class Player {
      * Choose which token to advance based on the roll given and the strategy used by the player.
      * 
      * @param roll the die roll which will move the token returned.
+     * @param board the board used for the game.
+     * @param boardEnd the index of the final space on the board.
+     * @param dRange upper number for the range of the die.
      * @return token the token which will be moved.
      */
-    public Token whichToken(int roll) {
-        return tokens.get(0);
-    }
+    public abstract Token whichToken(int roll, Board board, int boardEnd, int dRange);
     /**
      * Find the number of pieces belonging to the player (the sum of the number of pieces beloning to each of the tokens belonging to the player).
      * @return the number of pieces belonging to the player.
