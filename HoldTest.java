@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class HoldTest.
  *
  * @Eric Weber
- * @4/2/16
+ * @4/6/16
  */
 public class HoldTest
 {
@@ -31,7 +31,7 @@ public class HoldTest
     {
         d = new Die(10);
         hold = new Hold(3, d);
-        t = new Token();
+        t = new Token(1, 1);
         boardEnd = 15;
     }
     
@@ -49,7 +49,7 @@ public class HoldTest
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
-            t = new Token();
+            t = new Token(1, i);
             int tokenIndex = t.getIndex();
             d.roll();
             int roll = d.prevRoll();
@@ -67,7 +67,7 @@ public class HoldTest
         boolean reachedEnd = false;
         boolean passedBounds = false;
         for (int i = 0; (i < 100) || !reachedEnd || !passedBounds; i ++) {
-            t = new Token();
+            t = new Token(1, i);
             int tokenIndex = t.getIndex();
             d.roll();
             int roll = d.prevRoll();
@@ -102,7 +102,7 @@ public class HoldTest
     public void testTakeTurn()
     {
         for (int i = 0; i < 100; i ++) {
-            t = new Token();
+            t = new Token(1, i);
             int tokenIndex = t.getIndex();
             int roll = d.prevRoll();
             boolean takeTurnOutput = false;

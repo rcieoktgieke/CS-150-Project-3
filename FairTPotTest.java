@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class FairTPotTest.
  *
  * @Eric Weber
- * @3/16/16
+ * @4/6/16
  */
 public class FairTPotTest
 {
@@ -30,7 +30,7 @@ public class FairTPotTest
     public void setUp()
     {
         fPot = new FairTPot(10, 300);
-        t = new Token();
+        t = new Token(1, 1);
         d = new Die(10);
         boardEnd = 15;
     }
@@ -49,7 +49,7 @@ public class FairTPotTest
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
-            t = new Token();
+            t = new Token(1, i);
             int tokenIndex = t.getIndex();
             int roll = d.roll();
             if (tokenIndex + roll > 0 && tokenIndex + roll <= boardEnd) {
@@ -63,13 +63,13 @@ public class FairTPotTest
     @Test
     public void testCanMoveEnd()
     {
-        t = new Token();
+        t = new Token(1, 1);
         assertTrue(fPot.canMove(t, boardEnd, boardEnd));
     }
     @Test
     public void testCanMoveTooFar()
     {
-        t = new Token();
+        t = new Token(1, 1);
         assertFalse(fPot.canMove(t, boardEnd + 1, boardEnd));
         assertFalse(fPot.canMove(t, 0, boardEnd));
     }
@@ -101,7 +101,7 @@ public class FairTPotTest
     public void testTakeTurn()
     {
         for (int i = 0; i < 100; i ++) {
-            t = new Token();
+            t = new Token(1, i);
             int tokenIndex = t.getIndex();
             boolean takeTurnOutput = fPot.takeTurn(t, d.roll(), boardEnd);
             if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {

@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.params=numTokens
-comment0.target=Player(int)
-comment0.text=\n\ Constructor\n\ @param\ numTokens\ number\ of\ tokens\ this\ player\ will\ have.\n
+comment0.params=number\ numTokens
+comment0.target=Player(int,\ int)
+comment0.text=\n\ Constructor\n\ @param\ number\ this\ player's\ number.\n\ @param\ numTokens\ number\ of\ tokens\ this\ player\ will\ have.\n
 comment1.params=roll\ board\ boardEnd\ dRange
 comment1.target=Token\ whichToken(int,\ Board,\ int,\ int)
 comment1.text=\n\ Choose\ which\ token\ to\ advance\ based\ on\ the\ roll\ given\ and\ the\ strategy\ used\ by\ the\ player.\n\ \n\ @param\ roll\ the\ die\ roll\ which\ will\ move\ the\ token\ returned.\n\ @param\ board\ the\ board\ used\ for\ the\ game.\n\ @param\ boardEnd\ the\ index\ of\ the\ final\ space\ on\ the\ board.\n\ @param\ dRange\ upper\ number\ for\ the\ range\ of\ the\ die.\n\ @return\ token\ the\ token\ which\ will\ be\ moved.\n
@@ -14,4 +14,6 @@ comment3.text=\n\ Find\ the\ number\ of\ points\ the\ player\ has\ based\ on\ th
 comment4.params=
 comment4.target=void\ printTokens()
 comment4.text=\n\ Print\ each\ token,\ their\ index,\ and\ their\ pieces.\n
-numComments=5
+comment5.params=
+comment5.target=java.lang.String\ toString()
+numComments=6

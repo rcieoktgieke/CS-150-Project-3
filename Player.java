@@ -8,13 +8,17 @@ import java.util.*;
 public abstract class Player {
     /** The list of tokens belonging to this player */
     protected ArrayList<Token> tokens = new ArrayList<Token>();
+    /** This player's number */
+    protected int number;
     /**
      * Constructor
+     * @param number this player's number.
      * @param numTokens number of tokens this player will have.
      */
-    public Player(int numTokens) {
+    public Player(int number, int numTokens) {
+        this.number = number;
         for (int i = 0; i < numTokens; i ++) {
-            tokens.add(new Token());
+            tokens.add(new Token(number, i));
         }
     }
     /**
@@ -52,8 +56,8 @@ public abstract class Player {
             if (cToken.getIndex() == boardEnd) {
                 points += w;
             }
-            points += cToken.getPieces() * p;
         }
+        points += this.getPieces() * p;
         return points;
     }
     /**
@@ -66,5 +70,8 @@ public abstract class Player {
             cToken = tokenIter.next();
             System.out.println("    " + cToken + ": " + cToken.getIndex() + " Pieces: " + cToken.getPieces());
         }
+    }
+    public String toString() {
+        return "Player"+number;
     }
 }

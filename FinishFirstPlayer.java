@@ -7,12 +7,8 @@ import java.util.*;
  */
 public class FinishFirstPlayer extends Player {
     
-    /**
-     * Constructor
-     * @param numTokens number of tokens this player will have.
-     */
-    public FinishFirstPlayer(int numTokens) {
-        super(numTokens);
+    public FinishFirstPlayer(int number, int numTokens) {
+        super(number, numTokens);
     }
     public Token whichToken(int roll, Board board, int boardEnd, int dRange) {
         Token tokenToMove = tokens.get(0);

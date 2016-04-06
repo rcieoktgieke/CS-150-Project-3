@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class HoldQTest.
  *
  * @Eric Weber
- * @4/2/16
+ * @4/6/16
  */
 public class HoldQTest
 {
@@ -34,9 +34,9 @@ public class HoldQTest
     {
         d = new Die(10);
         holdQ = new HoldQ(2, d);
-        t1 = new Token();
-        t2 = new Token();
-        t3 = new Token();
+        t1 = new Token(1, 1);
+        t2 = new Token(1, 2);
+        t3 = new Token(1, 3);
         boardEnd = 10;
     }
 
@@ -67,7 +67,7 @@ public class HoldQTest
         holdQ = new HoldQ(2, d);
         for (int i = 0; i < 100; i ++) {
             holdQ = new HoldQ(2, d);
-            Token t = new Token();
+            Token t = new Token(1, i);
             int tokenIndex = t.getIndex();
             int roll = d.prevRoll();
             holdQ.land(t, d);
@@ -84,7 +84,7 @@ public class HoldQTest
         boolean passedBounds = false;
         for (int i = 0; (i < 100) || !reachedEnd || !passedBounds; i ++) {
             holdQ = new HoldQ(2, d);
-            t = new Token();
+            t = new Token(1, i);
             int tokenIndex = t.getIndex();
             int roll = d.prevRoll();
             holdQ.land(t, d);
@@ -120,9 +120,9 @@ public class HoldQTest
     {
         boardEnd = 20;
         for (int i = 0; i < 300; i ++) {
-            t1 = new Token();
-            t2 = new Token();
-            t3 = new Token();
+            t1 = new Token(i, 1);
+            t2 = new Token(i, 2);
+            t3 = new Token(i, 3);
             int roll1 = d.roll();
             holdQ.land(t1, d);
             int roll2 = d.roll();
