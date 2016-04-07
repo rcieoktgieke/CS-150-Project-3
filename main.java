@@ -4,7 +4,7 @@ import java.io.*;
  * Main runs a game of Chutes and Ladders and Pots
  * 
  * @Eric Weber
- * @4/6/16
+ * @4/7/16
  */
 public class main {
     /**
