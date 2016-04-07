@@ -90,6 +90,8 @@ public class main {
      * @param d die that is used for the game.
      * @param dRange upper number for the range of the die.
      * @param boardEnd the index of the final space on the board.
+     * @param w the points for winning in this game.
+     * @param p the points for pieces in this game.
      * @return if the game has ended.
      */
     public static boolean takeTurn(LinkedList<Player> players, Board board, Die die, int dRange, int boardEnd, int w, double p) {
@@ -97,7 +99,7 @@ public class main {
         Iterator<Player> turns = players.iterator();
         while (turns.hasNext()) {
             int roll = die.roll();
-            cToken = turns.next().whichToken(roll, board, boardEnd, dRange);
+            cToken = turns.next().whichToken(roll, board, boardEnd, dRange, players, w, p);
             int tokenStartIndex = cToken.getIndex();
             boolean canMove = board.get(cToken.getIndex()).canMove(cToken, roll, boardEnd);
             if (board.get(cToken.getIndex()).takeTurn(cToken, roll, boardEnd)) {

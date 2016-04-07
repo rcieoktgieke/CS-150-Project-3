@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.params=number\ numTokens
 comment0.target=FinishFirstPlayer(int,\ int)
-comment1.params=roll\ board\ boardEnd\ dRange
-comment1.target=Token\ whichToken(int,\ Board,\ int,\ int)
+comment1.params=roll\ board\ boardEnd\ dRange\ players\ w\ p
+comment1.target=Token\ whichToken(int,\ Board,\ int,\ int,\ java.util.LinkedList,\ int,\ double)
 numComments=2

@@ -28,9 +28,13 @@ public abstract class Player {
      * @param board the board used for the game.
      * @param boardEnd the index of the final space on the board.
      * @param dRange upper number for the range of the die.
+     * @param players list of players in the game in turn order.
+     * @param w the points for winning in this game.
+     * @param p the points for pieces in this game.
+     * 
      * @return token the token which will be moved.
      */
-    public abstract Token whichToken(int roll, Board board, int boardEnd, int dRange);
+    public abstract Token whichToken(int roll, Board board, int boardEnd, int dRange, LinkedList<Player> players, int w, double p);
     /**
      * Find the number of pieces belonging to the player (the sum of the number of pieces beloning to each of the tokens belonging to the player).
      * @return the number of pieces belonging to the player.
@@ -46,6 +50,9 @@ public abstract class Player {
     }
     /**
      * Find the number of points the player has based on the status of its tokens and the multipliers for winning and pieces.
+     * @param boardEnd boardEnd the index of the final space on the board.
+     * @param w the points for winning in this game.
+     * @param p the points for pieces in this game.
      * @return how many points the player has.
      */
     public double getPoints(int boardEnd, int w, double p) {
