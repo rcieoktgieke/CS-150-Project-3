@@ -44,4 +44,7 @@ public class TotalJerkPlayer extends Player {
         }
         return tokenToMove;
     }
+    public String toString() {
+        return "TotalJerkPlayer"+number;
+    }
 }

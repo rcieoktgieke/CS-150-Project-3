@@ -3,7 +3,7 @@ import java.util.*;
  * JustPointsPlayers choose to move tokens (which are free to move) only if they will land (or have a chance to land) on a treasure pot.
  * 
  * @Eric Weber
- * @4/6/16
+ * @4/7/16
  */
 public class JustPointsPlayer extends Player {
     
@@ -40,5 +40,8 @@ public class JustPointsPlayer extends Player {
             }
         }
         return tokenToMove;
+    }
+    public String toString() {
+        return "JustPointsPlayer"+number;
     }
 }

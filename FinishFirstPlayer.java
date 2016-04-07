@@ -3,7 +3,7 @@ import java.util.*;
  * A FinishFirstPlayer advances its furthest token (when it may advance) until it comes within a single die roll of the finish, at which point it moves its other tokens in a similar fashion until it rolls a number required to end the game and would have the highest score if it ended the game.
  * 
  * @Eric Weber
- * @4/6/16
+ * @4/7/16
  */
 public class FinishFirstPlayer extends Player {
     
@@ -36,5 +36,8 @@ public class FinishFirstPlayer extends Player {
             }
         }
         return tokenToMove;
+    }
+    public String toString() {
+        return "FinishFirstPlayer"+number;
     }
 }
