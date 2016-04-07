@@ -2,7 +2,7 @@
  * When a token lands on a fair treasure pot, it gives that token a number of pieces specified by the game’s configuration. However, each pot can only give pieces to a certain number of tokens (also specified in configuration). If a token lands on the pot after the maximum number of tokens is reached, the pot is treated as a blank space.
  * 
  * @Eric Weber
- * @4/2/16
+ * @4/6/16
  */
 public class FairTPot implements Space  {
     
@@ -49,6 +49,20 @@ public class FairTPot implements Space  {
      */
     public boolean advanced() {
        return true;
+    }
+    
+    /**
+     * Determine if the pot has more pieces.
+     * 
+     * @return whether the pot has pieces left to give.
+     */
+    public boolean hasPieces() {
+        if (times < maxTimes) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     
     public String getStatus() {

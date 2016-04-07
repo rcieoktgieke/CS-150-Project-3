@@ -2,7 +2,7 @@
  * When a token lands on a random treasure pot, the token rolls the die and receives a number of pieces equal to that roll. Each pot starts with a number of pieces specified by the configuration, and those pieces are decreased by the number given to each token. When the number of pieces reaches zero, no more pieces are given and the space is treated as blank.
  * 
  * @Eric Weber
- * @4/2/16
+ * @4/6/16
  */
 public class RandTPot implements Space  {
     
@@ -42,6 +42,20 @@ public class RandTPot implements Space  {
      */
     public boolean advanced() {
        return true;
+    }
+    
+    /**
+     * Determine if the pot has more pieces.
+     * 
+     * @return whether the pot has pieces left to give.
+     */
+    public boolean hasPieces() {
+        if (pieces > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     
     /**
