@@ -3,7 +3,7 @@ import java.util.*;
  * Players have a number of tokens, and given a roll, choose which to move.
  * 
  * @Eric Weber
- * @4/6/16
+ * @4/8/16
  */
 public abstract class Player {
     /** The list of tokens belonging to this player */
@@ -35,6 +35,22 @@ public abstract class Player {
      * @return token the token which will be moved.
      */
     public abstract Token whichToken(int roll, Board board, int boardEnd, int dRange, LinkedList<Player> players, int w, double p);
+    /**
+     * Find the highest index of the tokens belonging to this player.
+     * @return highest index of a token belonging to this player.
+     */
+    public int getHighestIndex() {
+        int index = 0;
+        Iterator<Token> tokenIter = tokens.iterator();
+        while (tokenIter.hasNext()) {
+            Token cToken = tokenIter.next();
+            if (cToken.getIndex() > index) {
+                index = cToken.getIndex();
+            }
+        }
+        return index;
+    }
+    
     /**
      * Find the number of pieces belonging to the player (the sum of the number of pieces beloning to each of the tokens belonging to the player).
      * @return the number of pieces belonging to the player.

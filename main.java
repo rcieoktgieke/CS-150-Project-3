@@ -4,7 +4,7 @@ import java.io.*;
  * Main runs a game of Chutes and Ladders and Pots
  * 
  * @Eric Weber
- * @4/7/16
+ * @4/8/16
  */
 public class main {
     /**
@@ -28,7 +28,7 @@ public class main {
             double piecesPoints = board.piecesPoints();
             int numberOfSpaces = board.numberOfSpaces();
             for (int p = 0; p < Integer.parseInt(args[1]); p ++) {
-                players.add(new FinishFirstPlayer(p, Integer.parseInt(args[2])));
+                players.add(new JustInFrontPlayer(p, Integer.parseInt(args[2])));
             }
             /**Initialize user interface.*/
             boolean repeat = true;
