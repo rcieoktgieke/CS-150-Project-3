@@ -4,7 +4,7 @@ import java.io.*;
  * Main runs a game of Chutes and Ladders and Pots
  * 
  * @Eric Weber
- * @4/2/16
+ * @4/8/16
  */
 public class main {
     /**
@@ -26,20 +26,9 @@ public class main {
             int z = board.getZ();
             int winningPoints = board.winningPoints();
             double piecesPoints = board.piecesPoints();
-            System.out.println("X: " + x + " Y: " + y + " Z: " + z + " Winning: " + winningPoints + " Pieces: " + piecesPoints);
-            /*Scanner configScan = new Scanner(configFile);
-            configScan.next();
-            int x = configScan.nextInt();
-            int y = configScan.nextInt();
-            int z = configScan.nextInt();
-            configScan.next();
-            int winningPoints = configScan.nextInt();
-            double piecesPoints = configScan.nextDouble();
-            System.out.println(configScan.nextLine());
-            Board board = new Board(x, y, z, configScan, die);*/
             int numberOfSpaces = board.numberOfSpaces();
             for (int p = 0; p < Integer.parseInt(args[1]); p ++) {
-                players.add(new Player(Integer.parseInt(args[2])));
+                players.add(new JustInFrontPlayer(p, Integer.parseInt(args[2])));
             }
             /**Initialize user interface.*/
             boolean repeat = true;
@@ -59,14 +48,14 @@ public class main {
                         /**Take one turn*/
                         repeat = true;
                         System.out.println();
-                        if (takeTurn(players, board, die, numberOfSpaces - 1, winningPoints, piecesPoints)) {
+                        if (takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints)) {
                             repeat = false;
                         }
                     }
                     else if (line.equals("i")) {
                         /**Take turns until the game ends*/
                         System.out.println();
-                        while (!(takeTurn(players, board, die, numberOfSpaces - 1, winningPoints, piecesPoints))) {
+                        while (!(takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints))) {
                             System.out.println();
                         }
                         repeat = false;
@@ -99,15 +88,18 @@ public class main {
      * @param players list of players in the game in turn order.
      * @param board the board used for the game.
      * @param d die that is used for the game.
+     * @param dRange upper number for the range of the die.
      * @param boardEnd the index of the final space on the board.
+     * @param w the points for winning in this game.
+     * @param p the points for pieces in this game.
      * @return if the game has ended.
      */
-    public static boolean takeTurn(LinkedList<Player> players, Board board, Die die, int boardEnd, int w, double p) {
+    public static boolean takeTurn(LinkedList<Player> players, Board board, Die die, int dRange, int boardEnd, int w, double p) {
         Token cToken;
         Iterator<Player> turns = players.iterator();
         while (turns.hasNext()) {
             int roll = die.roll();
-            cToken = turns.next().whichToken(roll);
+            cToken = turns.next().whichToken(roll, board, boardEnd, dRange, players, w, p);
             int tokenStartIndex = cToken.getIndex();
             boolean canMove = board.get(cToken.getIndex()).canMove(cToken, roll, boardEnd);
             if (board.get(cToken.getIndex()).takeTurn(cToken, roll, boardEnd)) {

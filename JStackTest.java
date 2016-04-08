@@ -1,3 +1,5 @@
+import java.util.*;
+import java.io.*;
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
@@ -6,7 +8,7 @@ import org.junit.Test;
  * The test class JStackTest.
  *
  * @Eric Weber
- * @3/17/16
+ * @4/6/16
  */
 public class JStackTest
 {
@@ -25,9 +27,9 @@ public class JStackTest
      * Called before every test case method.
      */
     @Before
-    public void setUp()
+    public void setUp() throws FileNotFoundException
     {
-        jStack = new JStack(1, 4, 2, 5, null, null);
+        jStack = new JStack(1, 4, 2, 5, new Board(new Scanner(new File("jStackTestConfig.txt")), new Die(10)), new Die(10));
         d = new Die(10);
     }
 
@@ -45,7 +47,7 @@ public class JStackTest
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
-            Token t = new Token();
+            Token t = new Token(1, i);
             jStack.land(t, d);
             assertEquals(true, jStack.canMove(t, d.roll(), 100));
         }
@@ -55,7 +57,7 @@ public class JStackTest
     public void testTakeTurn()
     {
         for (int i = 0; i < 500; i ++) {
-            Token t = new Token();
+            Token t = new Token(1, i);
             t.advance(d.roll());
             int prevIndex = t.getIndex();
             boolean gameOver = jStack.takeTurn(t, d.roll(), 39);

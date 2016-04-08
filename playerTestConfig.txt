@@ -1,0 +1,8 @@
+board 10 10 5
+values 33 1.5
+HoldQ 0 0 0
+Hold 0 0 0
+treasurePotA 0 0 0
+PriorityHold 0 0 0
+treasurePotB 0 0
+JStack 0

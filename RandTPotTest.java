@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class RandTPotTest.
  *
  * @Eric Weber
- * @4/2/16
+ * @4/6/16
  */
 public class RandTPotTest
 {
@@ -30,7 +30,7 @@ public class RandTPotTest
     public void setUp()
     {
         rPot = new RandTPot(30);
-        t = new Token();
+        t = new Token(1, 1);
         d = new Die(10);
         boardEnd = 15;
     }
@@ -49,7 +49,7 @@ public class RandTPotTest
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
-            t = new Token();
+            t = new Token(1, i);
             int tokenIndex = t.getIndex();
             int roll = d.roll();
             if (tokenIndex + roll > 0 && tokenIndex + roll <= boardEnd) {
@@ -63,13 +63,13 @@ public class RandTPotTest
     @Test
     public void testCanMoveEnd()
     {
-        t = new Token();
+        t = new Token(1, 1);
         assertTrue(rPot.canMove(t, boardEnd, boardEnd));
     }
     @Test
     public void testCanMoveTooFar()
     {
-        t = new Token();
+        t = new Token(1, 1);
         assertFalse(rPot.canMove(t, boardEnd + 1, boardEnd));
         assertFalse(rPot.canMove(t, 0, boardEnd));
     }
@@ -108,7 +108,7 @@ public class RandTPotTest
     public void testTakeTurn()
     {
         for (int i = 0; i < 100; i ++) {
-            t = new Token();
+            t = new Token(1, i);
             int tokenIndex = t.getIndex();
             boolean takeTurnOutput = rPot.takeTurn(t, d.roll(), boardEnd);
             if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {

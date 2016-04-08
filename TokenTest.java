@@ -7,7 +7,7 @@ import org.junit.Test;
  * The test class TokenTest.
  *
  * @Eric Weber
- * @4/1/16
+ * @4/6/16
  */
 public class TokenTest
 {
@@ -43,7 +43,7 @@ public class TokenTest
     {
         Random rand = new Random();
         for (int i = 0; i < 100; i ++) {
-            Token token1 = new Token();
+            Token token1 = new Token(1, i);
             int index = 0;
             for (int j = 0; j < 100; j ++) {
                 int number = rand.nextInt(20);
@@ -60,7 +60,7 @@ public class TokenTest
     {
         Random rand = new Random();
         for (int i = 0; i < 100; i ++) {
-            Token token1 = new Token();
+            Token token1 = new Token(1, i);
             int pieces = 0;
             for (int j = 0; j < 100; j ++) {
                 int number = rand.nextInt(20);

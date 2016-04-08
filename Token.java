@@ -2,7 +2,7 @@
  * A Token has a space on the board and a number of pieces.
  * 
  * @Eric Weber
- * @3/16/16
+ * @4/6/16
  */
 public class Token {
     /** The index of the space which the token currently is on. */
@@ -11,10 +11,16 @@ public class Token {
     private int pieces;
     /** The number of the latest roll needed for future reference. */
     private int storedRoll;
+    /** This token's player's number */
+    private int pNumber;
+    /** This token's number */
+    private int tNumber;
     /**
      * Constructor.
      */
-    public Token() {
+    public Token(int pNumber, int tNumber) {
+        this.pNumber = pNumber;
+        this.tNumber = tNumber;
         int index = 0;
         int pieces = 0;
     }
@@ -68,5 +74,9 @@ public class Token {
      */
     public void setRoll(int roll) {
         storedRoll = roll;
+    }
+    
+    public String toString() {
+        return "Token" + pNumber + "-" + tNumber;
     }
 }

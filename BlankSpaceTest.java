@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class BlankSpaceTest.
  *
  * @Eric Weber
- * @3/16/16
+ * @4/6/16
  */
 public class BlankSpaceTest
 {
@@ -30,7 +30,7 @@ public class BlankSpaceTest
     public void setUp()
     {
         bSpace = new BlankSpace();
-        t = new Token();
+        t = new Token(1, 1);
         d = new Die(15);
         boardEnd = 15;
     }
@@ -49,7 +49,7 @@ public class BlankSpaceTest
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
-            t = new Token();
+            t = new Token(1, i);
             int tokenIndex = t.getIndex();
             int roll = d.roll();
             if (tokenIndex + roll > 0 && tokenIndex + roll <= boardEnd) {
@@ -63,13 +63,13 @@ public class BlankSpaceTest
     @Test
     public void testCanMoveEnd()
     {
-        t = new Token();
+        t = new Token(1, 1);
         assertTrue(bSpace.canMove(t, boardEnd, boardEnd));
     }
     @Test
     public void testCanMoveTooFar()
     {
-        t = new Token();
+        t = new Token(1, 1);
         assertFalse(bSpace.canMove(t, boardEnd + 1, boardEnd));
         assertFalse(bSpace.canMove(t, 0, boardEnd));
     }
@@ -90,7 +90,7 @@ public class BlankSpaceTest
     public void testTakeTurn()
     {
         for (int i = 0; i < 100; i ++) {
-            t = new Token();
+            t = new Token(1, i);
             int tokenIndex = t.getIndex();
             boolean takeTurnOutput = bSpace.takeTurn(t, d.roll(), boardEnd);
             if (tokenIndex + d.prevRoll() > 0 && tokenIndex + d.prevRoll() < boardEnd) {

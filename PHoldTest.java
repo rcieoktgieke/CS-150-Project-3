@@ -6,7 +6,7 @@ import org.junit.Test;
  * The test class PHoldTest.
  *
  * @Eric Weber
- * @4/2/16
+ * @4/6/16
  */
 public class PHoldTest
 {
@@ -34,9 +34,9 @@ public class PHoldTest
     {
         d = new Die(10);
         pHold = new PHold(3, d);
-        t1 = new Token();
-        t2 = new Token();
-        t3 = new Token();
+        t1 = new Token(1, 1);
+        t2 = new Token(1, 2);
+        t3 = new Token(1, 3);
         boardEnd = 21;
     }
 
@@ -54,7 +54,7 @@ public class PHoldTest
     public void testCanMove()
     {
         for (int i = 0; i < 100; i ++) {
-            t = new Token();
+            t = new Token(1, i);
             int tokenIndex = t.getIndex();
             int roll = d.prevRoll();
             pHold.land(t, d);
@@ -72,7 +72,7 @@ public class PHoldTest
         boolean passedBounds = false;
         for (int i = 0; (i < 100) || !reachedEnd || !passedBounds; i ++) {
             pHold = new PHold(3, d);
-            t = new Token();
+            t = new Token(1, i);
             int tokenIndex = t.getIndex();
             int roll = d.prevRoll();
             pHold.land(t, d);
@@ -109,7 +109,7 @@ public class PHoldTest
     public void testTakeTurn()
     {
         for (int i = 0; i < 500; i ++) {
-            Token t = new Token();
+            Token t = new Token(1, i);
             int tokenIndex = t.getIndex();
             pHold.land(t, d);
             boolean takeTurnOutput = pHold.takeTurn(t, d.prevRoll(), boardEnd);

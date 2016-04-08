@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=
-comment0.target=Token()
+comment0.params=pNumber\ tNumber
+comment0.target=Token(int,\ int)
 comment0.text=\n\ Constructor.\n
 comment1.params=spaces
 comment1.target=void\ advance(int)
@@ -20,4 +20,6 @@ comment5.text=\n\ Get\ the\ roll\ stored\ by\ this\ token\ for\ future\ referenc
 comment6.params=roll
 comment6.target=void\ setRoll(int)
 comment6.text=\n\ Set\ the\ roll\ stored\ by\ this\ token\ for\ future\ reference.\n\ \n\ @param\ the\ roll\ to\ be\ stored\ by\ this\ token\ for\ future\ reference.\n
-numComments=7
+comment7.params=
+comment7.target=java.lang.String\ toString()
+numComments=8
