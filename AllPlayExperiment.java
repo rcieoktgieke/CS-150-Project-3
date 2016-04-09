@@ -1,12 +1,12 @@
 import java.util.*;
 import java.io.*;
 /**
- * JerkVsFinishExperiment tests how often TotalJerkPlayers win against FinishFirstPlayers as the board has increasing numbers of PHolds and HoldQs.
+ * AllPlayExperiment tests which of the four players has the highest percent of wins given a normal initial configuration.
  * 
  * @Eric Weber
  * @4/9/16
  */
-public class JerkVsFinishExperiment {
+public class AllPlayExperiment {
     
     /**
      * Run and analyze games of Chutes and Ladders and Pots.
@@ -16,11 +16,12 @@ public class JerkVsFinishExperiment {
             final int j = i;
             new Thread() {
                 public void run() {
-                    File file = new File("Experiment1/output" + j + ".csv");
+                    File file = new File("Experiment2/output" + j + ".csv");
                     try {
                         file.createNewFile();
                         FileWriter printer = new FileWriter(file);
-                        printer.write(j + ", " + runExperiment(j));
+                        ArrayList<Integer> output = runExperiment();
+                        printer.write(j + ", " + output.get(1) + ", " + output.get(2) + ", " + output.get(3) + ", " + output.get(4));
                         printer.close();
                     }
                     catch (Exception e) {
@@ -35,16 +36,19 @@ public class JerkVsFinishExperiment {
     /**
      * Run a game and analyze results.
      * 
-     * @param eNumber this experiment's number.
      * @return percent of games run by TotalJerkPlayers.
      */
-    public static double runExperiment(int eNumber) {
-        double percentWonByJerks = 0.0;
+    public static ArrayList<Integer> runExperiment() {
+        ArrayList<Integer> winTimes = new ArrayList<Integer>(4);
+        winTimes.set(0, 0);
+        winTimes.set(1, 0);
+        winTimes.set(2, 0);
+        winTimes.set(3, 0);
         for (int i = 0; i < 1000; i ++) {
             /** Initialize all components of the game.*/
             Die die = new Die(10);
             LinkedList<Player> players = new LinkedList<Player>();
-            File configFile = new File("Configs1/config" + eNumber + ".txt");
+            File configFile = new File("Experiment2Config.txt");
             try {
                 Scanner configScan = new Scanner(configFile);
                 Board board = new Board(configScan, die);
@@ -54,9 +58,11 @@ public class JerkVsFinishExperiment {
                 int winningPoints = board.winningPoints();
                 double piecesPoints = board.piecesPoints();
                 int numberOfSpaces = board.numberOfSpaces();
-                for (int p = 0; p < 20; p += 2) {
+                for (int p = 0; p < 40; p += 4) {
                     players.add(new FinishFirstPlayer(p, 10));
-                    players.add(new TotalJerkPlayer(p + 1, 10));
+                    players.add(new JustPointsPlayer(p + 1, 10));
+                    players.add(new TotalJerkPlayer(p + 2, 10));
+                    players.add(new JustInFrontPlayer(p + 3, 10));
                 }
                 /**Initialize user interface.*/
                 boolean repeat = true;
@@ -75,8 +81,17 @@ public class JerkVsFinishExperiment {
                         wonPoints = cPlayer.getPoints(numberOfSpaces - 1, winningPoints, piecesPoints);
                     }
                 }
-                if (wonPlayer instanceof TotalJerkPlayer) {
-                    percentWonByJerks += 1;
+                if (wonPlayer instanceof FinishFirstPlayer) {
+                    winTimes.set(0, winTimes.get(0) + 1);
+                }
+                else if (wonPlayer instanceof JustPointsPlayer) {
+                    winTimes.set(1, winTimes.get(1) + 1);
+                }
+                else if (wonPlayer instanceof TotalJerkPlayer) {
+                    winTimes.set(2, winTimes.get(2) + 1);
+                }
+                else if (wonPlayer instanceof JustInFrontPlayer) {
+                    winTimes.set(3, winTimes.get(3) + 1);
                 }
             }
             catch (Exception e) {
@@ -84,7 +99,7 @@ public class JerkVsFinishExperiment {
                 System.out.println(e.getLocalizedMessage());
             }
         }
-        return percentWonByJerks / 10.0;
+        return winTimes;
     }
     
     /**
