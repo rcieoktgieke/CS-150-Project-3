@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 /**
- * AllPlayExperiment tests which of the four players has the highest percent of wins given a normal initial configuration.
+ * AllPlayExperiment tests which of the four players has the highest percent of wins as points for pieces increase relative to points for winning.
  * 
  * @Eric Weber
  * @4/9/16
@@ -20,7 +20,7 @@ public class AllPlayExperiment {
                     try {
                         file.createNewFile();
                         FileWriter printer = new FileWriter(file);
-                        ArrayList<Integer> output = runExperiment();
+                        ArrayList<Integer> output = runExperiment(j);
                         printer.write(j + ", " + output.get(0) + ", " + output.get(1) + ", " + output.get(2) + ", " + output.get(3));
                         printer.close();
                     }
@@ -36,19 +36,20 @@ public class AllPlayExperiment {
     /**
      * Run a game and analyze results.
      * 
-     * @return percent of games run by TotalJerkPlayers.
+     * @param eNumber this experiment's number.
+     * @return game winners
      */
-    public static ArrayList<Integer> runExperiment() {
+    public static ArrayList<Integer> runExperiment(int eNumber) {
         ArrayList<Integer> winTimes = new ArrayList<Integer>(4);
         winTimes.add(0);
         winTimes.add(0);
         winTimes.add(0);
         winTimes.add(0);
-        for (int i = 0; i < 1000; i ++) {
+        for (int i = 0; i < 10000; i ++) {
             /** Initialize all components of the game.*/
             Die die = new Die(10);
             LinkedList<Player> players = new LinkedList<Player>();
-            File configFile = new File("Experiment2Config.txt");
+            File configFile = new File("Configs2/config" + eNumber + ".txt");
             try {
                 Scanner configScan = new Scanner(configFile);
                 Board board = new Board(configScan, die);

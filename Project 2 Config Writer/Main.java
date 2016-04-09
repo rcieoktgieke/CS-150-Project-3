@@ -6,17 +6,17 @@ import java.io.FileWriter;
  * Main writes a bunch of config files for Project 2.
  * 
  * @Eric Weber
- * @4/8/16
+ * @4/9/16
  */
 public class Main
 {
     public static void main(String[] args) {
-        for (int i = 0; i < 90; i ++) {
-            File file1 = new File("Configs1/config" + i + ".txt");
+        for (int i = 0; i < 100; i ++) {
+            File file1 = new File("Configs2/config" + i + ".txt");
             try {
                 file1.createNewFile();
                 FileWriter printer = new FileWriter(file1);
-                printer.write("board 10 10 3\nvalues 33 1.5\nHoldQ " + (90 - i) + " 2 5\nHold 5 1 3\ntreasurePotA 0 5 50\nPriorityHold " + i + " 2 4\ntreasurePotB 0 60\nJStack 5");
+                printer.write("board 10 10 10\nvalues 33 " + i/10.0 + "\nHoldQ 5 2 5\nHold 10 -3 -1\ntreasurePotA 15 5 50\nPriorityHold 5 -2 2\ntreasurePotB 5 60\nJStack 10");
                 printer.close();
             }
             catch (Exception e) {
