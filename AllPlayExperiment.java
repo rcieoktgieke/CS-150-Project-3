@@ -12,7 +12,7 @@ public class AllPlayExperiment {
      * Run and analyze games of Chutes and Ladders and Pots.
      */
     public static void main(String[] args) {
-        for (int i = 0; i < 90; i ++) {
+        for (int i = 0; i < 1; i ++) {
             final int j = i;
             new Thread() {
                 public void run() {
@@ -21,7 +21,7 @@ public class AllPlayExperiment {
                         file.createNewFile();
                         FileWriter printer = new FileWriter(file);
                         ArrayList<Integer> output = runExperiment();
-                        printer.write(j + ", " + output.get(1) + ", " + output.get(2) + ", " + output.get(3) + ", " + output.get(4));
+                        printer.write(j + ", " + output.get(0) + ", " + output.get(1) + ", " + output.get(2) + ", " + output.get(3));
                         printer.close();
                     }
                     catch (Exception e) {
@@ -40,10 +40,10 @@ public class AllPlayExperiment {
      */
     public static ArrayList<Integer> runExperiment() {
         ArrayList<Integer> winTimes = new ArrayList<Integer>(4);
-        winTimes.set(0, 0);
-        winTimes.set(1, 0);
-        winTimes.set(2, 0);
-        winTimes.set(3, 0);
+        winTimes.add(0);
+        winTimes.add(0);
+        winTimes.add(0);
+        winTimes.add(0);
         for (int i = 0; i < 1000; i ++) {
             /** Initialize all components of the game.*/
             Die die = new Die(10);
