@@ -40,12 +40,19 @@ public class AllPlayExperiment {
      * @return game winners
      */
     public static ArrayList<Integer> runExperiment(int eNumber) {
+        PrintStream dummyStream = new PrintStream(new OutputStream() {
+            public void write(int b) {
+                //NO-OP
+            }
+        });
+        System.setOut(dummyStream);
+        
         ArrayList<Integer> winTimes = new ArrayList<Integer>(4);
         winTimes.add(0);
         winTimes.add(0);
         winTimes.add(0);
         winTimes.add(0);
-        for (int i = 0; i < 10000; i ++) {
+        for (int i = 0; i < 1000; i ++) {
             /** Initialize all components of the game.*/
             Die die = new Die(10);
             LinkedList<Player> players = new LinkedList<Player>();

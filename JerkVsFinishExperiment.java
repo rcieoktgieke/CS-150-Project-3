@@ -39,6 +39,13 @@ public class JerkVsFinishExperiment {
      * @return percent of games run by TotalJerkPlayers.
      */
     public static double runExperiment(int eNumber) {
+        PrintStream dummyStream = new PrintStream(new OutputStream() {
+            public void write(int b) {
+                //NO-OP
+            }
+        });
+        System.setOut(dummyStream);
+        
         double percentWonByJerks = 0.0;
         for (int i = 0; i < 1000; i ++) {
             /** Initialize all components of the game.*/
