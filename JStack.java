@@ -3,7 +3,7 @@ import java.util.*;
  * When a token moves off of a JStack, they move to the same x and y coordinate on the z level that corresponds to their roll modulo the z dimension of the board.
  *  
  * @Eric Weber
- * @4/2/16
+ * @4/16/16
  */
 public class JStack implements Space {
     
@@ -45,6 +45,30 @@ public class JStack implements Space {
         takeTurn(t, d.roll(), x*y*z - 1);
     }
     /**
+     * Print the token and the status of the JStack.
+     */
+    public boolean land(Token t, Die d, JStack initialSpace, int boardEnd) {
+        System.out.print(t + " has landed on " + getStatus() + ". ");
+        if (this == initialSpace) {
+            int roll = d.roll();
+            if (roll + t.getIndex() <= boardEnd && roll + t.getIndex() > 0) {            
+                t.advance(roll);
+                if (t.getIndex() == boardEnd) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return takeTurn(t, d.roll(), x*y*z - 1, initialSpace);
+        }
+    }
+    /**
      * @return true
      */
     public boolean canMove(Token t, int roll, int boardEnd) {
@@ -75,6 +99,30 @@ public class JStack implements Space {
         }
         else {
             board.get(t.getIndex()).land(t, die);
+            return false;
+        }
+    }
+    /**
+     * Take token's turn.
+     * 
+     * Print the token and the roll. Advance the player to their current x and y coordinate up (or down) the z level that corresponds to their roll modulo the z dimension of the board.
+     * @param initalSpace the JStack that initiated this chain of landing.
+     */
+    public boolean takeTurn(Token t, int roll, int boardEnd, JStack initialSpace) {
+        System.out.print(t + " has rolled " + roll + ". ");
+        int zIndex = t.getIndex() / (x*y);
+        t.advance(((z + ((roll*multiplier + zIndex) % z)) % z - zIndex)*x*y);
+        if (t.getIndex() == boardEnd) {
+            return true;
+        }
+        else {
+            Space landingSpace = board.get(t.getIndex());
+            if (landingSpace instanceof JStack) {
+                return land(t, die, initialSpace, boardEnd);
+            }
+            else {
+                land(t, die);
+            }
             return false;
         }
     }
