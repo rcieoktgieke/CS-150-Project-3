@@ -5,7 +5,7 @@ import java.io.File;
  * The board stores spaces and provides access to them to main.
  * 
  * @Eric Weber
- * @4/2/16
+ * @4/16/16
  */
 public class Board {
     
@@ -36,12 +36,9 @@ public class Board {
         numberOfSpaces = x*y*z;
         board = new ArrayList<Space>(numberOfSpaces);
         board.add(new BlankSpace());
-        /**Iterate through the board, creating a new space of a type defined by a Gaussian random number at each index.*/
-        for (int i = 1; i < (numberOfSpaces - x*y); i ++) {
+        /**Iterate through the board, creating a new space of a type defined by a random number at each index.*/
+        for (int i = 1; i < (numberOfSpaces - x); i ++) {
             board.add(spaceGen.randomSpace(x, y, z, d));
-        }
-        for (int i = (numberOfSpaces - x*y); i < (numberOfSpaces - x); i ++) {
-            board.add(spaceGen.noStackSpace(x, y, z, d));
         }
         for (int i = 0; i < x; i ++) {
             board.add(new BlankSpace());
