@@ -46,6 +46,7 @@ public class JStack implements Space {
     }
     /**
      * Print the token and the status of the JStack.
+     * @return if the token has reached the end of the board.
      */
     public boolean land(Token t, Die d, JStack initialSpace, int boardEnd) {
         System.out.print(t + " has landed on " + getStatus() + ". ");

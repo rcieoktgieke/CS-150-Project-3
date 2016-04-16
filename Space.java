@@ -2,7 +2,7 @@
  * Spaces are parts of the board at specific indecies.
  * 
  * @Eric Weber
- * @4/2/16
+ * @4/16/16
  */
 public interface Space {
     
@@ -43,7 +43,7 @@ public interface Space {
      * @param r die roll for the turn.
      * @param boardEnd the index of the final space on the board.
      * 
-     * @return if the game has ended.
+     * @return if the token has reached the end of the board.
      */
     public boolean takeTurn(Token t, int r, int boardEnd);
 }

@@ -13,5 +13,5 @@ comment3.target=java.lang.String\ getStatus()
 comment3.text=\n\ Return\ the\ type\ and\ vital\ information\ of\ the\ space.\n\ \n\ @return\ the\ type\ and\ vital\ information\ of\ the\ space.\n
 comment4.params=t\ r\ boardEnd
 comment4.target=boolean\ takeTurn(Token,\ int,\ int)
-comment4.text=\n\ Take\ the\ turn\ of\ the\ token\ t.\n\ \n\ Executes\ appropriate\ operations\ for\ the\ token\ to\ take\ its\ turn.\n\ @param\ t\ token\ that\ is\ taking\ its\ turn.\n\ @param\ r\ die\ roll\ for\ the\ turn.\n\ @param\ boardEnd\ the\ index\ of\ the\ final\ space\ on\ the\ board.\n\ \n\ @return\ if\ the\ game\ has\ ended.\n
+comment4.text=\n\ Take\ the\ turn\ of\ the\ token\ t.\n\ \n\ Executes\ appropriate\ operations\ for\ the\ token\ to\ take\ its\ turn.\n\ @param\ t\ token\ that\ is\ taking\ its\ turn.\n\ @param\ r\ die\ roll\ for\ the\ turn.\n\ @param\ boardEnd\ the\ index\ of\ the\ final\ space\ on\ the\ board.\n\ \n\ @return\ if\ the\ token\ has\ reached\ the\ end\ of\ the\ board.\n
 numComments=5
