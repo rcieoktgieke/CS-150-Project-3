@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=key
+comment0.target=MazeNode(java.lang.Integer)
+comment1.params=key\ exit
+comment1.target=MazeNode(java.lang.Integer,\ MazeExit)
+comment2.params=
+comment2.target=java.lang.Integer\ getKey()
+comment3.params=node\ weight
+comment3.target=void\ addEdge(MazeNode,\ java.lang.Integer)
+comment4.params=
+comment4.target=java.lang.String\ toString()
+numComments=5

@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=maze
+comment0.target=MazeExit(Maze)
+comment0.text=\n\ Constructor.\n
+comment1.params=t\ d
+comment1.target=void\ land(Token,\ Die)
+comment2.params=t\ roll\ boardEnd
+comment2.target=boolean\ canMove(Token,\ int,\ int)
+comment2.text=\n\ @return\ if\ moving\ the\ token\ would\ go\ beyond\ the\ bounds\ of\ the\ board.\n
+comment3.params=
+comment3.target=boolean\ advanced()
+comment3.text=\n\ @return\ true\n
+comment4.params=
+comment4.target=java.lang.String\ getStatus()
+comment5.params=t\ roll\ boardEnd
+comment5.target=boolean\ takeTurn(Token,\ int,\ int)
+comment5.text=\n\ Take\ token's\ turn.\n\ \n\ Print\ the\ token\ and\ the\ roll.\ If\ the\ roll\ is\ within\ the\ bounds\ of\ the\ board,\ advance\ the\ token.\n
+numComments=6
