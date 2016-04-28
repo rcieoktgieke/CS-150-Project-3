@@ -26,10 +26,11 @@ public class Board {
      * 
      * Initialize the board and set each space based on a Gaussian random number.
      * @param scan the Scanner object reading the file.
+     * @param graphScanners the Scanner objects for the graph config files.
      * @param d the die used for the game.
      */
-    public Board(Scanner scan, Die d) {
-        spaceGen = new SpaceGenerator(scan, this);
+    public Board(Scanner configScan, ArrayList<Scanner> graphScans, Die d) {
+        spaceGen = new SpaceGenerator(configScan, graphScans, this);
         x = spaceGen.getX();
         y = spaceGen.getY();
         z = spaceGen.getZ();

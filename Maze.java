@@ -9,15 +9,15 @@ public class Maze {
     
     private HashMap<Token, Integer> pieces;
     private HashMap<Token, MazeNode> locations;
-    //private ArrayList<MazeNode> entrances;
-    public Maze() {//ArrayList<MazeNode> entrances) {
-        //this.entrances = entrances;
+    public Maze() {
         pieces = new HashMap<Token, Integer>();
     }
-    /*public ArrayList<MazeNode> getEntrances() {
-        return entrances;
+    public void enterMaze(Token t, MazeNode entrance) {
+        locations.put(t, entrance);
     }
-    public ArrayList<MazeExit> getExits() {
-        return null;
-    }*/
+    public boolean canMove(Token t, int roll) {
+        return false;
+    }
+    public void takeTurn(Token t, int roll, int boardEnd) {
+    }
 }

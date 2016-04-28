@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.params=scan\ d
-comment0.target=Board(java.util.Scanner,\ Die)
-comment0.text=\n\ Constructor.\n\ \n\ Initialize\ the\ board\ and\ set\ each\ space\ based\ on\ a\ Gaussian\ random\ number.\n\ @param\ scan\ the\ Scanner\ object\ reading\ the\ file.\n\ @param\ d\ the\ die\ used\ for\ the\ game.\n
+comment0.params=configScan\ graphScans\ d
+comment0.target=Board(java.util.Scanner,\ java.util.ArrayList,\ Die)
+comment0.text=\n\ Constructor.\n\ \n\ Initialize\ the\ board\ and\ set\ each\ space\ based\ on\ a\ Gaussian\ random\ number.\n\ @param\ scan\ the\ Scanner\ object\ reading\ the\ file.\n\ @param\ graphScanners\ the\ Scanner\ objects\ for\ the\ graph\ config\ files.\n\ @param\ d\ the\ die\ used\ for\ the\ game.\n
 comment1.params=
 comment1.target=int\ getX()
 comment1.text=\n\ Return\ the\ x\ dimension\ of\ the\ board.\n\ \n\ @return\ the\ x\ dimension\ of\ the\ board.\n

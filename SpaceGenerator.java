@@ -3,7 +3,7 @@ import java.util.*;
  * SpaceGenerator uses a Gaussian random number to choose one of the six types of spaces.
  * 
  * @Eric Weber
- * @4/2/16
+ * @4/28/16
  */
 public class SpaceGenerator {
     private Random rand;
@@ -53,13 +53,15 @@ public class SpaceGenerator {
      * Constructor.
      * 
      * Initialize random without seed.
-     * @param scan the Scanner object for the board's config file.
+     * @param configScan the Scanner object for the board's config file.
+     * @param graphScanners the Scanner objects for the graph config files.
      * @param board the board used for the game.
      */
-    public SpaceGenerator(Scanner scan, Board board) {
+    public SpaceGenerator(Scanner configScan, ArrayList<Scanner> graphScans, Board board) {
         this.board = board;
         rand = new Random();
-        readConfig(scan);
+        readConfig(configScan);
+        //GRAPH SCANNERS
     }
     /**
      * Generates a space (of type BlankSpace, RandTPot, FairTPot, Hold, PHold, HoldQ, or JStack) based on a random number.

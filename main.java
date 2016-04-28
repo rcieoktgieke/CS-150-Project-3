@@ -4,7 +4,7 @@ import java.io.*;
  * Main runs a game of Chutes and Ladders and Pots
  * 
  * @Eric Weber
- * @4/8/16
+ * @4/28/16
  */
 public class main {
     /**
@@ -20,7 +20,12 @@ public class main {
         File configFile = new File(args[3]);
         try {
             Scanner configScan = new Scanner(configFile);
-            Board board = new Board(configScan, die);
+            //Graph scans
+            ArrayList<Scanner> graphScans = new ArrayList<Scanner>();
+            for (int i = 4; i < args.length; i ++) {
+                graphScans.add(new Scanner(new File(args[i])));
+            }
+            Board board = new Board(configScan, graphScans, die);
             int x = board.getX();
             int y = board.getY();
             int z = board.getZ();

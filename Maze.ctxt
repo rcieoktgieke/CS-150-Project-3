@@ -1,4 +1,10 @@
 #BlueJ class context
 comment0.params=
 comment0.target=Maze()
-numComments=1
+comment1.params=t\ entrance
+comment1.target=void\ enterMaze(Token,\ MazeNode)
+comment2.params=t\ roll
+comment2.target=boolean\ canMove(Token,\ int)
+comment3.params=t\ roll\ boardEnd
+comment3.target=void\ takeTurn(Token,\ int,\ int)
+numComments=4
