@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=maze
-comment0.target=MazeExit(Maze)
+comment0.params=maze\ index
+comment0.target=MazeExit(Maze,\ int)
 comment0.text=\n\ Constructor.\n
 comment1.params=t\ d
 comment1.target=void\ land(Token,\ Die)

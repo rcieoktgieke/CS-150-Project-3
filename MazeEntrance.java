@@ -42,6 +42,7 @@ public class MazeEntrance implements Space {
      * Print the token and the roll. If the roll is within the bounds of the board, advance the token.
      */
     public boolean takeTurn(Token t, int roll, int boardEnd) {
+        System.out.println(t + " is in a maze and rolled " + roll + ". ");
         maze.takeTurn(t, roll, boardEnd);
         return false;
     }

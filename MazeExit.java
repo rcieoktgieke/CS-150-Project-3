@@ -2,7 +2,7 @@
  * A 
  *  
  * @Eric Weber
- * @4/28/16
+ * @4/30/16
  */
 public class MazeExit implements Space {
     
@@ -11,9 +11,11 @@ public class MazeExit implements Space {
     /**
      * Constructor.
      */
-    public MazeExit(Maze maze) {
+    public MazeExit(Maze maze, int index) {
+        this.index = index;
     }
     public void land(Token t, Die d) {
+        t.advance(index - t.getIndex());
     }
     /**
      * @return if moving the token would go beyond the bounds of the board.

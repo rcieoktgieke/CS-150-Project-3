@@ -3,11 +3,11 @@ import java.util.*;
  * 
  * 
  * @Eric Weber
- * @4/28/16
+ * @4/30/16
  */
 public class MazeNode {
     private LinkedList<MazeEdge> edges;
-    private MazeExit exit;
+    private MazeExit exit = null;
     private Integer key;
     public MazeNode(Integer key) {
         edges = new LinkedList<MazeEdge>();
@@ -23,6 +23,12 @@ public class MazeNode {
     }
     public void addEdge(MazeNode node, Integer weight) {
         edges.add(new MazeEdge(node, weight));
+    }
+    public LinkedList<MazeEdge> getEdges() {
+        return edges;
+    }
+    public MazeExit getExit() {
+        return exit;
     }
     public String toString() {
         String output = "";
