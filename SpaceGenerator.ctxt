@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.params=configScan\ graphScans\ board
-comment0.target=SpaceGenerator(java.util.Scanner,\ java.util.ArrayList,\ Board)
-comment0.text=\n\ Constructor.\n\ \n\ Initialize\ random\ without\ seed.\n\ @param\ configScan\ the\ Scanner\ object\ for\ the\ board's\ config\ file.\n\ @param\ graphScanners\ the\ Scanner\ objects\ for\ the\ graph\ config\ files.\n\ @param\ board\ the\ board\ used\ for\ the\ game.\n
+comment0.params=configScan\ board
+comment0.target=SpaceGenerator(java.util.Scanner,\ Board)
+comment0.text=\n\ Constructor.\n\ \n\ Initialize\ random\ without\ seed.\n\ @param\ configScan\ the\ Scanner\ object\ for\ the\ board's\ config\ file.\n\ @param\ board\ the\ board\ used\ for\ the\ game.\n
 comment1.params=x\ y\ z\ d
 comment1.target=Space\ randomSpace(int,\ int,\ int,\ Die)
 comment1.text=\n\ Generates\ a\ space\ (of\ type\ BlankSpace,\ RandTPot,\ FairTPot,\ Hold,\ PHold,\ HoldQ,\ or\ JStack)\ based\ on\ a\ random\ number.\n\ \n\ @param\ x\ the\ value\ of\ the\ x\ dimension\ of\ the\ board.\n\ @param\ y\ the\ value\ of\ the\ y\ dimension\ of\ the\ board.\n\ @param\ z\ the\ value\ of\ the\ z\ dimension\ of\ the\ board.\n\ @param\ d\ the\ die\ used\ for\ the\ game.\n\ @return\ a\ space\ of\ type\ BlankSpace,\ RandTPot,\ FairTPot,\ Hold,\ PHold,\ HoldQ,\ or\ JStack.\n

@@ -34,7 +34,7 @@ public class MazeExit implements Space {
     }
     
     public String getStatus() {
-        return "MazeEntrance";
+        return "MazeExit";
     }
     
     /**

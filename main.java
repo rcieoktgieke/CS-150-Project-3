@@ -20,7 +20,6 @@ public class main {
         File configFile = new File(args[3]);
         try {
             Scanner configScan = new Scanner(configFile);
-            //Graph scans
             ArrayList<Scanner> graphScans = new ArrayList<Scanner>();
             for (int i = 4; i < args.length; i ++) {
                 graphScans.add(new Scanner(new File(args[i])));

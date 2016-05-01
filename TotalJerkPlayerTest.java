@@ -35,7 +35,7 @@ public class TotalJerkPlayerTest
     {
         scan = new Scanner(new File("playerTestConfig.txt"));
         die = new Die(5);
-        board = new Board(scan, die);
+        board = new Board(scan, null, die);
         totalJerk1 = new TotalJerkPlayer(1, 5);
         players = new LinkedList<Player>();
         players.add(new TotalJerkPlayer(1, 5));

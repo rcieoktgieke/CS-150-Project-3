@@ -35,7 +35,7 @@ public class JustInFrontPlayerTest
     {
         scan = new Scanner(new File("playerTestConfig.txt"));
         die = new Die(5);
-        board = new Board(scan, die);
+        board = new Board(scan, null, die);
         inFront1 = new JustInFrontPlayer(1, 5);
         players = new LinkedList<Player>();
         players.add(new JustInFrontPlayer(1, 5));

@@ -2,7 +2,7 @@
  * 
  *  
  * @Eric Weber
- * @4/28/16
+ * @4/30/16
  */
 public class MazeEntrance implements Space {
     
@@ -16,6 +16,7 @@ public class MazeEntrance implements Space {
         this.node = node;
     }
     public void land(Token t, Die d) {
+        System.out.print(t + " has landed on " + getStatus() + ". ");
         maze.enterMaze(t, node);
     }
     /**

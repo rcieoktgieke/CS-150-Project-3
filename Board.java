@@ -5,7 +5,7 @@ import java.io.File;
  * The board stores spaces and provides access to them to main.
  * 
  * @Eric Weber
- * @4/16/16
+ * @4/30/16
  */
 public class Board {
     
@@ -30,7 +30,7 @@ public class Board {
      * @param d the die used for the game.
      */
     public Board(Scanner configScan, ArrayList<Scanner> graphScans, Die d) {
-        spaceGen = new SpaceGenerator(configScan, graphScans, this);
+        spaceGen = new SpaceGenerator(configScan, this);
         x = spaceGen.getX();
         y = spaceGen.getY();
         z = spaceGen.getZ();
@@ -43,6 +43,63 @@ public class Board {
         }
         for (int i = 0; i < x; i ++) {
             board.add(new BlankSpace());
+        }
+        ArrayList<Integer> mazeIndices = new ArrayList<Integer>();
+        for (Scanner graphScan : graphScans) {
+            insertGraph(graphScan, mazeIndices);
+        }
+    }
+    private void insertGraph(Scanner graphScan, ArrayList<Integer> mazeIndices) {
+        Maze maze = new Maze();
+        Random rand = new Random();
+        
+        HashMap<Integer, MazeNode> nodes = new HashMap<Integer, MazeNode>();
+        ArrayList<MazeNode> entrances = new ArrayList<MazeNode>();
+        ArrayList<MazeNode> exits = new ArrayList<MazeNode>();
+        while (graphScan.hasNextLine()) {
+            Scanner lineScanner = new Scanner(graphScan.nextLine());
+            Integer key1 = lineScanner.nextInt();
+            lineScanner.next();
+            Integer key2 = lineScanner.nextInt();
+            Integer weight = lineScanner.nextInt();
+            
+            exits.remove(nodes.get(key1));
+            entrances.remove(nodes.get(key2));
+            if (!nodes.containsKey(key1)) {
+                nodes.put(key1, new MazeNode(key1));
+                entrances.add(nodes.get(key1));
+            }
+            if (nodes.containsKey(key2)) {
+                nodes.get(key1).addEdge(nodes.get(key2), weight);
+            }
+            else {
+                nodes.put(key2, new MazeNode(key2));
+                nodes.get(key1).addEdge(nodes.get(key2), weight);
+                exits.add(nodes.get(key2));
+            }
+        }
+        
+        for (MazeNode entrance : entrances) {
+            boolean inserted = false;
+            while (!inserted) {
+                int index = rand.nextInt(numberOfSpaces - x - 1) + 1;
+                if (!mazeIndices.contains(index)) {
+                    mazeIndices.add(index);
+                    board.set(index, new MazeEntrance(maze, entrance));
+                    inserted = true;
+                }
+            }
+        }
+        for (MazeNode exit : exits) {
+            boolean inserted = false;
+            while (!inserted) {
+                int index = rand.nextInt(numberOfSpaces - x - 1) + 1;
+                if (!mazeIndices.contains(index)) {
+                    mazeIndices.add(index);
+                    board.set(index, new MazeExit(maze));
+                    inserted = true;
+                }
+            }
         }
     }
     /**

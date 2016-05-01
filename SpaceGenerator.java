@@ -54,14 +54,12 @@ public class SpaceGenerator {
      * 
      * Initialize random without seed.
      * @param configScan the Scanner object for the board's config file.
-     * @param graphScanners the Scanner objects for the graph config files.
      * @param board the board used for the game.
      */
-    public SpaceGenerator(Scanner configScan, ArrayList<Scanner> graphScans, Board board) {
+    public SpaceGenerator(Scanner configScan, Board board) {
         this.board = board;
         rand = new Random();
         readConfig(configScan);
-        //GRAPH SCANNERS
     }
     /**
      * Generates a space (of type BlankSpace, RandTPot, FairTPot, Hold, PHold, HoldQ, or JStack) based on a random number.
