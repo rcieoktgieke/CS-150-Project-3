@@ -18,7 +18,15 @@ public class Maze {
         locations.put(t, entrance);
     }
     public boolean canMove(Token t, int roll) {
-        return false;
+        for (MazeEdge edge : locations.get(t).getEdges()) {
+            if (edge.getWeight() == roll) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
     }
     public void takeTurn(Token t, int roll, int boardEnd) {
         for (MazeEdge edge : locations.get(t).getEdges()) {
@@ -28,6 +36,7 @@ public class Maze {
                     locations.replace(t, edge.getDest());
                 }
                 else {
+                    System.out.print("Exiting maze. ");
                     t.addPieces(pieces.get(t));
                     pieces.remove(t);
                     edge.getDest().getExit().land(t, null);

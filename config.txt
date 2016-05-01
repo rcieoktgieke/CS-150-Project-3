@@ -1,4 +1,4 @@
-board 10 5 5
+board 5 5 3
 values 33 1.5
 HoldQ 5 2 5
 Hold 10 -3 -1
