@@ -42,6 +42,7 @@ public class Maze {
                     edge.getDest().getExit().land(t, null);
                     locations.remove(t);
                 }
+                break;
             }
         }
     }

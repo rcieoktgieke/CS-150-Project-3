@@ -7,7 +7,7 @@ import java.util.*;
  * The test class MazeTest.
  *
  * @Eric Weber
- * @4/28/16
+ * @5/3/16
  */
 public class MazeTest
 {
@@ -39,7 +39,7 @@ public class MazeTest
     }
 
     @Test
-    public void testMaze()
+    public void testInitMaze()
     {
         HashMap<Integer, MazeNode> nodes = new HashMap<Integer, MazeNode>();
         ArrayList<MazeNode> entrances = new ArrayList<MazeNode>();
@@ -91,5 +91,12 @@ public class MazeTest
         }
         System.out.println(output);
         assertEquals(output, "=======Exits========\n-1\n");
+    }
+    
+    @Test
+    public void testMaze()
+    {
+        //entrance is 3.
+        
     }
 }

@@ -4,14 +4,14 @@ import java.io.*;
  * Main runs a game of Chutes and Ladders and Pots
  * 
  * @Eric Weber
- * @4/28/16
+ * @5/5/16
  */
 public class main {
     /**
      * Run a game of Chutes and Ladders and Pots.
      * 
      * Create a die, a list of players, and a board, and prompt the user for instructions. An input of p should print a map of the board, i.e. location of every token, aid, obstacle and treasure pot and its status. An input of c should move the game forward one turn. An input of i should continue the game until it ends. An input of r should print status of each player/token; the position on the board and the number of treasure pieces in their possession. Any other input should end the game.
-     * @param args [0]: max value of the die. [1]: number of players. [2]: number of tokens per player. [3]: name of config file.
+     * @param args [0]: max value of the die. [1]: number of players. [2]: number of tokens per player. [3]: name of config file.  [4+]: names of graph files to be added to the board.
      */
     public static void main(String[] args) {
         /** Initialize all components of the game.*/
@@ -38,6 +38,7 @@ public class main {
             boolean repeat = true;
             BufferedReader terminalReader = new BufferedReader(new InputStreamReader(System.in));
             board.printBoard();
+            ArrayList<Token> finishedTokens = new ArrayList<Token>();
             while (repeat) {
                 System.out.println("Enter what you want to do: ");
                 /**Interpret and execute user commands.*/
@@ -52,14 +53,16 @@ public class main {
                         /**Take one turn*/
                         repeat = true;
                         System.out.println();
-                        if (takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints)) {
+                        /*if (takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, finishedTokens)) {
                             repeat = false;
-                        }
+                        }*/
                     }
                     else if (line.equals("i")) {
                         /**Take turns until the game ends*/
                         System.out.println();
-                        while (!(takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints))) {
+                        boolean allFinished = false;
+                        while (!allFinished) {
+                            takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, finishedTokens);
                             System.out.println();
                         }
                         repeat = false;
@@ -96,33 +99,40 @@ public class main {
      * @param boardEnd the index of the final space on the board.
      * @param w the points for winning in this game.
      * @param p the points for pieces in this game.
-     * @return if the game has ended.
+     * @param finishedTokens the tokens that have finished the game.
+     * @return a token if it has reached the end of the board.
      */
-    public static boolean takeTurn(LinkedList<Player> players, Board board, Die die, int dRange, int boardEnd, int w, double p) {
+    public static Token takeTurn(LinkedList<Player> players, Board board, Die die, int dRange, int boardEnd, int w, double p, ArrayList<Token> finishedTokens) {
         Token cToken;
         Iterator<Player> turns = players.iterator();
         while (turns.hasNext()) {
             int roll = die.roll();
             cToken = turns.next().whichToken(roll, board, boardEnd, dRange, players, w, p);
             int tokenStartIndex = cToken.getIndex();
-            boolean canMove = board.get(cToken.getIndex()).canMove(cToken, roll, boardEnd);
-            if (board.get(cToken.getIndex()).takeTurn(cToken, roll, boardEnd)) {
-                /**If a token reaches the final space, print that the game is over and token info.*/
-                System.out.println("GAME OVER");
-                System.out.println();
-                printPlayers(players, boardEnd, w, p);
-                return true;
-            }
-            else {
-                if (canMove && board.get(tokenStartIndex).advanced()) {
-                    /**If the token can move, call land on its new space.*/
-                    board.get(cToken.getIndex()).land(cToken, die);
+            boolean tokenFinished = false;
+            for (Token t : finishedTokens) {
+                if (t == cToken) {
+                    tokenFinished = true;
                 }
             }
-            System.out.println();
+            if (!tokenFinished) {
+                boolean canMove = board.get(cToken.getIndex()).canMove(cToken, roll, boardEnd);
+                if (board.get(cToken.getIndex()).takeTurn(cToken, roll, boardEnd)) {
+                    /**If a token reaches the final space, print that it finised and its info.*/
+                    System.out.println("Token finished: " + cToken.toString());
+                    return cToken;
+                }
+                else {
+                    if (canMove && board.get(tokenStartIndex).advanced()) {
+                        /**If the token can move, call land on its new space.*/
+                        board.get(cToken.getIndex()).land(cToken, die);
+                    }
+                }
+                System.out.println();
+            }
         }
         System.out.println();
-        return false;
+        return null;
     }
     /**
      * Print a map of the board.

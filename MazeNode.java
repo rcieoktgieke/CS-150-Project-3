@@ -30,6 +30,9 @@ public class MazeNode {
     public MazeExit getExit() {
         return exit;
     }
+    public void setExit(MazeExit exit) {
+        this.exit = exit;
+    }
     public String toString() {
         String output = "";
         Iterator<MazeEdge> edgeIter = edges.iterator();

@@ -5,7 +5,7 @@ import java.io.File;
  * The board stores spaces and provides access to them to main.
  * 
  * @Eric Weber
- * @4/30/16
+ * @5/5/16
  */
 public class Board {
     
@@ -96,7 +96,9 @@ public class Board {
                 int index = rand.nextInt(numberOfSpaces - x - 1) + 1;
                 if (!mazeIndices.contains(index)) {
                     mazeIndices.add(index);
-                    board.set(index, new MazeExit(maze, index));
+                    MazeExit exitSpace = new MazeExit(maze, index);
+                    exit.setExit(exitSpace);
+                    board.set(index, exitSpace);
                     inserted = true;
                 }
             }
