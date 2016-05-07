@@ -28,6 +28,10 @@ public class main {
             int x = board.getX();
             int y = board.getY();
             int z = board.getZ();
+            ArrayList<Integer> unvisitedLevels = new ArrayList<Integer>();
+            for (int l = 0; l < z; l ++) {
+                unvisitedLevels.add(l);
+            }
             int winningPoints = board.winningPoints();
             double piecesPoints = board.piecesPoints();
             int numberOfSpaces = board.numberOfSpaces();
@@ -62,7 +66,7 @@ public class main {
                         }
                     }
                     if (!allFinished) {
-                        takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, finishedTokens);
+                        takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, x, y, unvisitedLevels, finishedTokens);
                     }
                     else {
                         repeat = false;
@@ -73,7 +77,7 @@ public class main {
                     System.out.println();
                     boolean finished = false;
                     while (!finished) {
-                        finished = takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, finishedTokens);
+                        finished = takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, x, y, unvisitedLevels, finishedTokens);
                     }
                     repeat = false;
                 }
@@ -105,10 +109,13 @@ public class main {
      * @param boardEnd the index of the final space on the board.
      * @param w the points for winning in this game.
      * @param p the points for pieces in this game.
+     * @param x the x-dimension of the board.
+     * @param y the y-dimension of the board.
+     * @param unvisitedLevels the levels that tokens have not already visited.
      * @param finishedTokens the tokens that have finished the game.
      * @return a token if all of a player's tokens have reached the end of the board.
      */
-    public static boolean takeTurn(LinkedList<Player> players, Board board, Die die, int dRange, int boardEnd, int w, double p, ArrayList<Token> finishedTokens) {
+    public static boolean takeTurn(LinkedList<Player> players, Board board, Die die, int dRange, int boardEnd, int w, double p, int x, int y, ArrayList<Integer> unvisitedLevels, ArrayList<Token> finishedTokens) {
         Token cToken;
         Iterator<Player> turns = players.iterator();
         while (turns.hasNext()) {
@@ -143,6 +150,11 @@ public class main {
                 else {
                     if (canMove && board.get(tokenStartIndex).advanced()) {
                         /**If the token can move, call land on its new space.*/
+                        if (unvisitedLevels.contains(cToken.getIndex() / (x*y))) {
+                            unvisitedLevels.remove(new Integer(cToken.getIndex() / (x*y)));
+                            System.out.println(cToken.toString() + " has reached level " + cToken.getIndex() / (x*y) + " first and recieves " + (int) ((w/2.0 * 10) + 5) / 10 + " pieces.");
+                            cToken.addPieces((int) ((w/2.0 * 10) + 5) / 10);
+                        }
                         board.get(cToken.getIndex()).land(cToken, die);
                     }
                 }
