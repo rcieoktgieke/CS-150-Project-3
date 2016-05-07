@@ -1,8 +1,8 @@
 /**
- * A 
+ * A MazeExit corresponds to a MazeNode that has no outgoing edges. When a Token moves onto that node, it lands on the associated MazeExit.
  *  
  * @Eric Weber
- * @4/30/16
+ * @5/7/16
  */
 public class MazeExit implements Space {
     

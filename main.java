@@ -55,7 +55,7 @@ public class main {
             piecesPoints = board.piecesPoints();
             numberOfSpaces = board.numberOfSpaces();
             for (int p = 0; p < Integer.parseInt(args[1]); p ++) {
-                players.add(new JustInFrontPlayer(p, Integer.parseInt(args[2])));
+                players.add(new FinishFirstPlayer(p, Integer.parseInt(args[2])));
             }
             /**Initialize user interface.*/
             boolean repeat = true;

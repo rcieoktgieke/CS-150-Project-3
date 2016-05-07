@@ -1,8 +1,8 @@
 /**
+ * A MazeEntrance stores a MazeNode that has no incoming edges. When a Token lands on the MazeEntrance, it is added to the MazeNode and the Maze to which the MazeNode belongs.
  * 
- *  
  * @Eric Weber
- * @4/30/16
+ * @5/7/16
  */
 public class MazeEntrance implements Space {
     

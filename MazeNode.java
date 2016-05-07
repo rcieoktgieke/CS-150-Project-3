@@ -1,9 +1,9 @@
 import java.util.*;
 /**
- * 
+ * A MazeNode stores a key to identify it and a list of outgoing edges or, if that list is empty, a MazeExit space to link it to a location on the board.
  * 
  * @Eric Weber
- * @4/30/16
+ * @5/7/16
  */
 public class MazeNode {
     private LinkedList<MazeEdge> edges;

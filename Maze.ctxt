@@ -1,10 +1,14 @@
 #BlueJ class context
 comment0.params=
 comment0.target=Maze()
+comment0.text=\n\ Constructor.\n
 comment1.params=t\ entrance
 comment1.target=void\ enterMaze(Token,\ MazeNode)
+comment1.text=\n\ Enter\ a\ Token\ into\ the\ Maze\ with\ 0\ pieces\ and\ with\ the\ MazeNode\ at\ which\ it\ is\ starting.\n\ \n\ @param\ t\ the\ Token\ to\ be\ added.\n\ @param\ entrance\ the\ MazeNode\ at\ which\ the\ Token\ is\ starting.\n
 comment2.params=t\ roll
 comment2.target=boolean\ canMove(Token,\ int)
+comment2.text=\n\ Determine\ if\ the\ given\ Token\ can\ move\ using\ the\ given\ roll.\n\ \n\ @param\ t\ the\ Token\ to\ move.\n\ @param\ roll\ the\ roll\ with\ which\ the\ Token\ will\ move.\n\ @return\ if\ the\ given\ Token\ can\ move\ using\ the\ given\ roll.\n
 comment3.params=t\ roll\ boardEnd
 comment3.target=void\ takeTurn(Token,\ int,\ int)
+comment3.text=\n\ Take\ the\ Token's\ turn.\ If\ the\ Token's\ current\ node\ has\ an\ edge\ with\ weight\ equal\ to\ the\ Token's\ roll,\ the\ Token's\ node\ is\ replaced\ by\ the\ one\ at\ the\ destination\ of\ that\ edge.\ If\ that\ node\ has\ no\ outgoing\ edges,\ the\ Token\ lands\ on\ the\ MazeExit\ associated\ with\ that\ MazeNode.\n\ \n\ @param\ t\ the\ Token\ being\ moved.\n\ @param\ roll\ the\ roll\ with\ which\ the\ Token\ is\ moving.\n\ @param\ boardEnd\ the\ index\ of\ the\ final\ space\ of\ the\ board.\n
 numComments=4

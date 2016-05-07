@@ -29,7 +29,7 @@ public class JStackTest
     @Before
     public void setUp() throws FileNotFoundException
     {
-        jStack = new JStack(1, 4, 2, 5, new Board(new Scanner(new File("jStackTestConfig.txt")), null, new Die(10)), new Die(10));
+        jStack = new JStack(1, 4, 2, 5, new Board(new Scanner(new File("jStackTestConfig.txt")), new ArrayList<Scanner>(), new Die(10)), new Die(10));
         d = new Die(10);
     }
 

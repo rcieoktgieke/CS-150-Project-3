@@ -1,13 +1,15 @@
-
 /**
- * 
+ * A MazeEdge stores a weight and a destination of type MazeNode.
  * 
  * @Eric Weber
- * @4/28/16
+ * @5/7/16
  */
 public class MazeEdge {
     private Integer weight;
     private MazeNode dest;
+    /**
+     * Constructor.
+     */
     public MazeEdge(MazeNode dest, Integer weight) {
         this.weight = weight;
         this.dest = dest;
