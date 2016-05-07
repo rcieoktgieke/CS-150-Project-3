@@ -9,7 +9,7 @@ import org.junit.Test;
  * The test class JustInFrontPlayerTest.
  *
  * @Eric Weber
- * @4/8/16
+ * @5/7/16
  */
 public class JustInFrontPlayerTest
 {
@@ -35,7 +35,8 @@ public class JustInFrontPlayerTest
     {
         scan = new Scanner(new File("playerTestConfig.txt"));
         die = new Die(5);
-        board = new Board(scan, null, die);
+        ArrayList<Scanner> scanners = new ArrayList<Scanner>();
+        board = new Board(scan, scanners, die);
         inFront1 = new JustInFrontPlayer(1, 5);
         players = new LinkedList<Player>();
         players.add(new JustInFrontPlayer(1, 5));

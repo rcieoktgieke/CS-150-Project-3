@@ -3,7 +3,7 @@ import java.util.*;
  * A JustInFrontPlayer checks if any player has a token in front of its frontmost token. If one does, it acts like a finish first player. Otherwise, it acts like a JustPointsPlayer.
  * 
  * @Eric Weber
- * @4/8/16
+ * @5/7/16
  */
 public class JustInFrontPlayer extends Player{
     
@@ -27,10 +27,17 @@ public class JustInFrontPlayer extends Player{
         }
         
         Token tokenToMove = tokens.get(0);
+        Iterator<Token> tokenIter = tokens.iterator();
+        while (tokenIter.hasNext()) {
+            Token cToken = tokenIter.next();
+            if (cToken.getIndex() != boardEnd) {
+                tokenToMove = cToken;
+            }
+        }
         
         if (inFront) {
             boolean foundPieces = false;
-            Iterator<Token> tokenIter = tokens.iterator();
+            tokenIter = tokens.iterator();
             while (tokenIter.hasNext()) {
                 Token cToken = tokenIter.next();
                 if (board.get(cToken.getIndex()).canMove(cToken, roll, boardEnd)) {
@@ -58,7 +65,7 @@ public class JustInFrontPlayer extends Player{
         }
         else {
             int tokenIndex = 0;
-            Iterator<Token> tokenIter = tokens.iterator();
+            tokenIter = tokens.iterator();
             while (tokenIter.hasNext()) {
                 Token cToken = tokenIter.next();
                 if (board.get(cToken.getIndex()).canMove(cToken, roll, boardEnd)) {

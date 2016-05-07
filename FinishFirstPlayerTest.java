@@ -9,7 +9,7 @@ import org.junit.Test;
  * The test class FinishFirstPlayerTest.
  *
  * @Eric Weber
- * @4/6/16
+ * @5/7/16
  */
 public class FinishFirstPlayerTest
 {
@@ -35,7 +35,8 @@ public class FinishFirstPlayerTest
     {
         scan = new Scanner(new File("playerTestConfig.txt"));
         die = new Die(5);
-        board = new Board(scan, die);
+        ArrayList<Scanner> scanners = new ArrayList<Scanner>();
+        board = new Board(scan, scanners, die);
         finishFi1 = new FinishFirstPlayer(1, 5);
         players = new LinkedList<Player>();
         players.add(new FinishFirstPlayer(1, 5));

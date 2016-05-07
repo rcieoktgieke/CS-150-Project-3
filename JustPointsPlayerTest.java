@@ -9,7 +9,7 @@ import org.junit.Test;
  * The test class JustPointsPlayerTest.
  *
  * @Eric Weber
- * @4/6/16
+ * @5/7/16
  */
 public class JustPointsPlayerTest
 {
@@ -35,7 +35,8 @@ public class JustPointsPlayerTest
     {
         scan = new Scanner(new File("playerTestConfig.txt"));
         die = new Die(5);
-        board = new Board(scan, die);
+        ArrayList<Scanner> scanners = new ArrayList<Scanner>();
+        board = new Board(scan, scanners , die);
         justPoints1 = new JustPointsPlayer(1, 5);
         players = new LinkedList<Player>();
         players.add(new JustPointsPlayer(1, 5));

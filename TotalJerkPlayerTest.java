@@ -9,7 +9,7 @@ import org.junit.Test;
  * The test class TotalJerkPlayerTest.
  *
  * @Eric Weber
- * @4/7/16
+ * @5/7/16
  */
 public class TotalJerkPlayerTest
 {
@@ -35,7 +35,8 @@ public class TotalJerkPlayerTest
     {
         scan = new Scanner(new File("playerTestConfig.txt"));
         die = new Die(5);
-        board = new Board(scan, null, die);
+        ArrayList<Scanner> scanners = new ArrayList<Scanner>();
+        board = new Board(scan, scanners, die);
         totalJerk1 = new TotalJerkPlayer(1, 5);
         players = new LinkedList<Player>();
         players.add(new TotalJerkPlayer(1, 5));

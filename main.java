@@ -55,7 +55,7 @@ public class main {
             piecesPoints = board.piecesPoints();
             numberOfSpaces = board.numberOfSpaces();
             for (int p = 0; p < Integer.parseInt(args[1]); p ++) {
-                players.add(new FinishFirstPlayer(p, Integer.parseInt(args[2])));
+                players.add(new JustInFrontPlayer(p, Integer.parseInt(args[2])));
             }
             /**Initialize user interface.*/
             boolean repeat = true;
@@ -85,7 +85,7 @@ public class main {
                         }
                     }
                     if (!allFinished) {
-                        takeTurn(Integer.parseInt(args[1]));//players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, x, y, unvisitedLevels, finalSpaceVisited, finishedTokens);
+                        takeTurn(Integer.parseInt(args[1]));
                     }
                     else {
                         repeat = false;
@@ -96,7 +96,7 @@ public class main {
                     System.out.println();
                     boolean finished = false;
                     while (!finished) {
-                        finished = takeTurn(Integer.parseInt(args[1]));//players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, x, y, unvisitedLevels, finalSpaceVisited, finishedTokens);
+                        finished = takeTurn(Integer.parseInt(args[1]));
                     }
                     repeat = false;
                 }
@@ -121,21 +121,10 @@ public class main {
      * Take a turn.
      * 
      * Iterate through the list of players in turn order. Take the turn of each token each player chooses on its current space, and, if allowed, land them on their next space.
-     * @param players list of players in the game in turn order.
-     * @param board the board used for the game.
-     * @param d die that is used for the game.
      * @param dRange upper number for the range of the die.
-     * @param boardEnd the index of the final space on the board.
-     * @param w the points for winning in this game.
-     * @param p the points for pieces in this game.
-     * @param x the x-dimension of the board.
-     * @param y the y-dimension of the board.
-     * @param unvisitedLevels the levels that tokens have not already visited.
-     * @param finalSpaceVisited whether a token has reached the end of the board.
-     * @param finishedTokens the tokens that have finished the game.
      * @return a token if all of a player's tokens have reached the end of the board.
      */
-    public boolean takeTurn(int dRange) {//LinkedList<Player> players, Board board, Die die, int dRange, int boardEnd, int w, double p, int x, int y, ArrayList<Integer> unvisitedLevels, boolean finalSpaceVisited, ArrayList<Token> finishedTokens) {
+    public boolean takeTurn(int dRange) {
         int boardEnd = numberOfSpaces - 1;
         int w = winningPoints;
         double p = piecesPoints;

@@ -3,7 +3,7 @@ import java.util.*;
  * A TotalJerkPlayer reserves half of its tokens to stay put on any Space that could prevent other player's tokens from moving (i.e. PHold and HoldQ), unless none of its other tokens can move. If at least one of its moving tokens can move, it moves the token with the highest index.
  * 
  * @Eric Weber
- * @4/7/16
+ * @5/7/16
  */
 public class TotalJerkPlayer extends Player {
 
@@ -24,10 +24,12 @@ public class TotalJerkPlayer extends Player {
         while (tokenIter.hasNext() && i < numTokens / 2) {
             i ++;
             Token cToken = tokenIter.next();
-            if (board.get(cToken.getIndex()).canMove(cToken, roll, boardEnd)) {
-                if (cToken.getIndex() >= tokenIndex) {
-                    tokenToMove = cToken;
-                    tokenIndex = cToken.getIndex();
+            if (cToken.getIndex() != boardEnd) {
+                if (board.get(cToken.getIndex()).canMove(cToken, roll, boardEnd)) {
+                    if (cToken.getIndex() >= tokenIndex) {
+                        tokenToMove = cToken;
+                        tokenIndex = cToken.getIndex();
+                    }
                 }
             }
         }
