@@ -3,7 +3,7 @@ import java.util.*;
  * A FinishFirstPlayer advances its furthest token (when it may advance) until it comes within a single die roll of the finish, at which point it moves its other tokens in a similar fashion until it rolls a number required to end the game and would have the highest score if it ended the game.
  * 
  * @Eric Weber
- * @4/7/16
+ * @5/6/16
  */
 public class FinishFirstPlayer extends Player {
     
@@ -26,11 +26,13 @@ public class FinishFirstPlayer extends Player {
         Iterator<Token> tokenIter = tokens.iterator();
         while (tokenIter.hasNext()) {
             Token cToken = tokenIter.next();
-            if (board.get(cToken.getIndex()).canMove(cToken, roll, boardEnd)) {
-                if (winning || cToken.getIndex() + dRange < boardEnd) {
-                    if (cToken.getIndex() >= tokenIndex) {
-                        tokenToMove = cToken;
-                        tokenIndex = cToken.getIndex();
+            if (cToken.getIndex() != boardEnd) {
+                if (board.get(cToken.getIndex()).canMove(cToken, roll, boardEnd)) {
+                    if (winning || cToken.getIndex() + dRange < boardEnd) {
+                        if (cToken.getIndex() >= tokenIndex) {
+                            tokenToMove = cToken;
+                            tokenIndex = cToken.getIndex();
+                        }
                     }
                 }
             }

@@ -3,7 +3,7 @@ import java.util.*;
  * Players have a number of tokens, and given a roll, choose which to move.
  * 
  * @Eric Weber
- * @4/8/16
+ * @5/5/16
  */
 public abstract class Player {
     /** The list of tokens belonging to this player */
@@ -20,6 +20,9 @@ public abstract class Player {
         for (int i = 0; i < numTokens; i ++) {
             tokens.add(new Token(number, i));
         }
+    }
+    public ArrayList<Token> getTokens() {
+        return tokens;
     }
     /**
      * Choose which token to advance based on the roll given and the strategy used by the player.

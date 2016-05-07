@@ -8,7 +8,7 @@ import org.junit.Test;
  * The test class JStackTest.
  *
  * @Eric Weber
- * @4/6/16
+ * @5/7/16
  */
 public class JStackTest
 {
@@ -29,7 +29,7 @@ public class JStackTest
     @Before
     public void setUp() throws FileNotFoundException
     {
-        jStack = new JStack(1, 4, 2, 5, new Board(new Scanner(new File("jStackTestConfig.txt")), new Die(10)), new Die(10));
+        jStack = new JStack(1, 4, 2, 5, new Board(new Scanner(new File("jStackTestConfig.txt")), null, new Die(10)), new Die(10));
         d = new Die(10);
     }
 

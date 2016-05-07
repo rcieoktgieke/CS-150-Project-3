@@ -4,7 +4,7 @@ import java.io.*;
  * Main runs a game of Chutes and Ladders and Pots
  * 
  * @Eric Weber
- * @5/5/16
+ * @5/7/16
  */
 public class main {
     /**
@@ -32,7 +32,7 @@ public class main {
             double piecesPoints = board.piecesPoints();
             int numberOfSpaces = board.numberOfSpaces();
             for (int p = 0; p < Integer.parseInt(args[1]); p ++) {
-                players.add(new JustInFrontPlayer(p, Integer.parseInt(args[2])));
+                players.add(new FinishFirstPlayer(p, Integer.parseInt(args[2])));
             }
             /**Initialize user interface.*/
             boolean repeat = true;
@@ -42,48 +42,54 @@ public class main {
             while (repeat) {
                 System.out.println("Enter what you want to do: ");
                 /**Interpret and execute user commands.*/
-                try {
-                    String line = terminalReader.readLine();
-                    if (line.equals("p")) {
-                        /**Print a map of the board.*/
-                        repeat = true;
-                        printMap(board);
-                    }
-                    else if (line.equals("c")) {
-                        /**Take one turn*/
-                        repeat = true;
-                        System.out.println();
-                        /*if (takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, finishedTokens)) {
-                            repeat = false;
-                        }*/
-                    }
-                    else if (line.equals("i")) {
-                        /**Take turns until the game ends*/
-                        System.out.println();
-                        boolean allFinished = false;
-                        while (!allFinished) {
-                            takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, finishedTokens);
-                            System.out.println();
+                String line = terminalReader.readLine();
+                if (line.equals("p")) {
+                    /**Print a map of the board.*/
+                    repeat = true;
+                    printMap(board);
+                }
+                else if (line.equals("c")) {
+                    /**Take one turn*/
+                    repeat = true;
+                    System.out.println();
+                    
+                    boolean allFinished = true;
+                    for (Player p : players) {
+                        for (Token t : p.getTokens()) {
+                            if (!finishedTokens.contains(t)) {
+                                allFinished = false;
+                            }
                         }
-                        repeat = false;
                     }
-                    else if (line.equals("r")) {
-                        /**Print player status*/
-                        repeat = true;
-                        System.out.println();
-                        printPlayers(players, numberOfSpaces - 1, winningPoints, piecesPoints);
+                    if (!allFinished) {
+                        takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, finishedTokens);
                     }
                     else {
-                        /**End game*/
                         repeat = false;
                     }
                 }
-                catch (Exception e) {
-                    System.out.println(e.getMessage());
+                else if (line.equals("i")) {
+                    /**Take turns until the game ends*/
+                    System.out.println();
+                    boolean finished = false;
+                    while (!finished) {
+                        finished = takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, finishedTokens);
+                    }
+                    repeat = false;
+                }
+                else if (line.equals("r")) {
+                    /**Print player status*/
+                    repeat = true;
+                    System.out.println();
+                    printPlayers(players, numberOfSpaces - 1, winningPoints, piecesPoints);
+                }
+                else {
+                    /**End game*/
+                    repeat = false;
                 }
             }
         }
-        catch (Exception e) {
+        catch (java.io.IOException e) {
             System.out.println("Config file scan has failed.");
             System.out.println(e.getLocalizedMessage());
         }
@@ -100,9 +106,9 @@ public class main {
      * @param w the points for winning in this game.
      * @param p the points for pieces in this game.
      * @param finishedTokens the tokens that have finished the game.
-     * @return a token if it has reached the end of the board.
+     * @return a token if all of a player's tokens have reached the end of the board.
      */
-    public static Token takeTurn(LinkedList<Player> players, Board board, Die die, int dRange, int boardEnd, int w, double p, ArrayList<Token> finishedTokens) {
+    public static boolean takeTurn(LinkedList<Player> players, Board board, Die die, int dRange, int boardEnd, int w, double p, ArrayList<Token> finishedTokens) {
         Token cToken;
         Iterator<Player> turns = players.iterator();
         while (turns.hasNext()) {
@@ -118,9 +124,21 @@ public class main {
             if (!tokenFinished) {
                 boolean canMove = board.get(cToken.getIndex()).canMove(cToken, roll, boardEnd);
                 if (board.get(cToken.getIndex()).takeTurn(cToken, roll, boardEnd)) {
-                    /**If a token reaches the final space, print that it finised and its info.*/
+                    /**If a token reaches the final space, print that it finished and its info.*/
                     System.out.println("Token finished: " + cToken.toString());
-                    return cToken;
+                    finishedTokens.add(cToken);
+                    for (Player player : players) {
+                        boolean playerFinished = true;
+                        for (Token t : player.getTokens()) {
+                            if (!finishedTokens.contains(t)) {
+                                playerFinished = false;
+                            }
+                        }
+                        if (playerFinished) {
+                            System.out.println("Player has ended the game: " + player.toString());
+                            return true;
+                        }
+                    }
                 }
                 else {
                     if (canMove && board.get(tokenStartIndex).advanced()) {
@@ -132,7 +150,7 @@ public class main {
             }
         }
         System.out.println();
-        return null;
+        return false;
     }
     /**
      * Print a map of the board.
