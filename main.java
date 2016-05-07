@@ -7,6 +7,18 @@ import java.io.*;
  * @5/7/16
  */
 public class main {
+    private Die die;
+    private LinkedList<Player> players;
+    private Board board;
+    private int x;
+    private int y;
+    private int z;
+    private boolean finalSpaceVisited;
+    private ArrayList<Integer> unvisitedLevels;
+    private int winningPoints;
+    private double piecesPoints;
+    private int numberOfSpaces;
+    private ArrayList<Token> finishedTokens;
     /**
      * Run a game of Chutes and Ladders and Pots.
      * 
@@ -14,9 +26,15 @@ public class main {
      * @param args [0]: max value of the die. [1]: number of players. [2]: number of tokens per player. [3]: name of config file.  [4+]: names of graph files to be added to the board.
      */
     public static void main(String[] args) {
+        main m = new main();
+        m.run(args);
+    }
+    public main() {
+    }
+    public void run(String[] args) {
         /** Initialize all components of the game.*/
-        Die die = new Die(Integer.parseInt(args[1]));
-        LinkedList<Player> players = new LinkedList<Player>();
+        die = new Die(Integer.parseInt(args[1]));
+        players = new LinkedList<Player>();
         File configFile = new File(args[3]);
         try {
             Scanner configScan = new Scanner(configFile);
@@ -24,17 +42,18 @@ public class main {
             for (int i = 4; i < args.length; i ++) {
                 graphScans.add(new Scanner(new File(args[i])));
             }
-            Board board = new Board(configScan, graphScans, die);
-            int x = board.getX();
-            int y = board.getY();
-            int z = board.getZ();
-            ArrayList<Integer> unvisitedLevels = new ArrayList<Integer>();
+            board = new Board(configScan, graphScans, die);
+            x = board.getX();
+            y = board.getY();
+            z = board.getZ();
+            finalSpaceVisited = false;
+            unvisitedLevels = new ArrayList<Integer>();
             for (int l = 0; l < z; l ++) {
                 unvisitedLevels.add(l);
             }
-            int winningPoints = board.winningPoints();
-            double piecesPoints = board.piecesPoints();
-            int numberOfSpaces = board.numberOfSpaces();
+            winningPoints = board.winningPoints();
+            piecesPoints = board.piecesPoints();
+            numberOfSpaces = board.numberOfSpaces();
             for (int p = 0; p < Integer.parseInt(args[1]); p ++) {
                 players.add(new FinishFirstPlayer(p, Integer.parseInt(args[2])));
             }
@@ -42,7 +61,7 @@ public class main {
             boolean repeat = true;
             BufferedReader terminalReader = new BufferedReader(new InputStreamReader(System.in));
             board.printBoard();
-            ArrayList<Token> finishedTokens = new ArrayList<Token>();
+            finishedTokens = new ArrayList<Token>();
             while (repeat) {
                 System.out.println("Enter what you want to do: ");
                 /**Interpret and execute user commands.*/
@@ -66,7 +85,7 @@ public class main {
                         }
                     }
                     if (!allFinished) {
-                        takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, x, y, unvisitedLevels, finishedTokens);
+                        takeTurn(Integer.parseInt(args[1]));//players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, x, y, unvisitedLevels, finalSpaceVisited, finishedTokens);
                     }
                     else {
                         repeat = false;
@@ -77,7 +96,7 @@ public class main {
                     System.out.println();
                     boolean finished = false;
                     while (!finished) {
-                        finished = takeTurn(players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, x, y, unvisitedLevels, finishedTokens);
+                        finished = takeTurn(Integer.parseInt(args[1]));//players, board, die, Integer.parseInt(args[1]), numberOfSpaces - 1, winningPoints, piecesPoints, x, y, unvisitedLevels, finalSpaceVisited, finishedTokens);
                     }
                     repeat = false;
                 }
@@ -112,10 +131,14 @@ public class main {
      * @param x the x-dimension of the board.
      * @param y the y-dimension of the board.
      * @param unvisitedLevels the levels that tokens have not already visited.
+     * @param finalSpaceVisited whether a token has reached the end of the board.
      * @param finishedTokens the tokens that have finished the game.
      * @return a token if all of a player's tokens have reached the end of the board.
      */
-    public static boolean takeTurn(LinkedList<Player> players, Board board, Die die, int dRange, int boardEnd, int w, double p, int x, int y, ArrayList<Integer> unvisitedLevels, ArrayList<Token> finishedTokens) {
+    public boolean takeTurn(int dRange) {//LinkedList<Player> players, Board board, Die die, int dRange, int boardEnd, int w, double p, int x, int y, ArrayList<Integer> unvisitedLevels, boolean finalSpaceVisited, ArrayList<Token> finishedTokens) {
+        int boardEnd = numberOfSpaces - 1;
+        int w = winningPoints;
+        double p = piecesPoints;
         Token cToken;
         Iterator<Player> turns = players.iterator();
         while (turns.hasNext()) {
@@ -146,6 +169,11 @@ public class main {
                             return true;
                         }
                     }
+                    if (!finalSpaceVisited) {
+                        finalSpaceVisited = true;
+                        System.out.println(cToken.toString() + " has reached the end of the board first and recieves " + w + " pieces.");
+                        cToken.addPieces(w);
+                    }
                 }
                 else {
                     if (canMove && board.get(tokenStartIndex).advanced()) {
@@ -169,7 +197,7 @@ public class main {
      * 
      * @param board the board used for the game.
      */
-    public static void printMap(Board board) {
+    public void printMap(Board board) {
         board.printBoard();
     }
     /**
@@ -177,7 +205,7 @@ public class main {
      * 
      * @param players list of players in turn order.
      */
-    public static void printPlayers(LinkedList<Player> players, int boardEnd, int w, double p) {
+    public void printPlayers(LinkedList<Player> players, int boardEnd, int w, double p) {
         Player cPlayer;
         Iterator<Player> playerIter = players.iterator();
         while (playerIter.hasNext()) {
