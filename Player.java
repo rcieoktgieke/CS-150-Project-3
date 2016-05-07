@@ -3,13 +3,14 @@ import java.util.*;
  * Players have a number of tokens, and given a roll, choose which to move.
  * 
  * @Eric Weber
- * @5/5/16
+ * @5/7/16
  */
 public abstract class Player {
     /** The list of tokens belonging to this player */
     protected ArrayList<Token> tokens = new ArrayList<Token>();
     /** This player's number */
     protected int number;
+    protected double points;
     /**
      * Constructor
      * @param number this player's number.
@@ -23,6 +24,9 @@ public abstract class Player {
     }
     public ArrayList<Token> getTokens() {
         return tokens;
+    }
+    public void addPoints(double pointsToAdd) {
+        this.points += pointsToAdd;
     }
     /**
      * Choose which token to advance based on the roll given and the strategy used by the player.
@@ -84,7 +88,7 @@ public abstract class Player {
             }
         }
         points += this.getPieces() * p;
-        return points;
+        return points + this.points;
     }
     /**
      * Print each token, their index, and their pieces.

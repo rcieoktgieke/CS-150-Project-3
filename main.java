@@ -143,7 +143,8 @@ public class main {
         Iterator<Player> turns = players.iterator();
         while (turns.hasNext()) {
             int roll = die.roll();
-            cToken = turns.next().whichToken(roll, board, boardEnd, dRange, players, w, p);
+            Player cPlayer = turns.next();
+            cToken = cPlayer.whichToken(roll, board, boardEnd, dRange, players, w, p);
             int tokenStartIndex = cToken.getIndex();
             boolean tokenFinished = false;
             for (Token t : finishedTokens) {
@@ -171,8 +172,8 @@ public class main {
                     }
                     if (!finalSpaceVisited) {
                         finalSpaceVisited = true;
-                        System.out.println(cToken.toString() + " has reached the end of the board first and recieves " + w + " pieces.");
-                        cToken.addPieces(w);
+                        System.out.println(cPlayer.toString() + " has reached the end of the board first and recieves " + w + " points.");
+                        cPlayer.addPoints(w);
                     }
                 }
                 else {
@@ -180,8 +181,8 @@ public class main {
                         /**If the token can move, call land on its new space.*/
                         if (unvisitedLevels.contains(cToken.getIndex() / (x*y))) {
                             unvisitedLevels.remove(new Integer(cToken.getIndex() / (x*y)));
-                            System.out.println(cToken.toString() + " has reached level " + cToken.getIndex() / (x*y) + " first and recieves " + (int) ((w/2.0 * 10) + 5) / 10 + " pieces.");
-                            cToken.addPieces((int) ((w/2.0 * 10) + 5) / 10);
+                            System.out.println(cPlayer.toString() + " has reached level " + cToken.getIndex() / (x*y) + " first and recieves " + (int) ((w/2.0 * 10) + 5) / 10 + " points.");
+                            cPlayer.addPoints((int) ((w/2.0 * 10) + 5) / 10);
                         }
                         board.get(cToken.getIndex()).land(cToken, die);
                     }
