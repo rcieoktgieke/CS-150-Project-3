@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=args
+comment0.target=void\ main(java.lang.String[])
+comment0.text=\n\ Run\ a\ game\ of\ Chutes\ and\ Ladders\ and\ Pots.\n\ \n\ Create\ a\ die,\ a\ list\ of\ players,\ and\ a\ board,\ and\ prompt\ the\ user\ for\ instructions.\ An\ input\ of\ p\ should\ print\ a\ map\ of\ the\ board,\ i.e.\ location\ of\ every\ token,\ aid,\ obstacle\ and\ treasure\ pot\ and\ its\ status.\ An\ input\ of\ c\ should\ move\ the\ game\ forward\ one\ turn.\ An\ input\ of\ i\ should\ continue\ the\ game\ until\ it\ ends.\ An\ input\ of\ r\ should\ print\ status\ of\ each\ player/token;\ the\ position\ on\ the\ board\ and\ the\ number\ of\ treasure\ pieces\ in\ their\ possession.\ Any\ other\ input\ should\ end\ the\ game.\n\ @param\ args\ [0]\:\ max\ value\ of\ the\ die.\ [1]\:\ number\ of\ players.\ [2]\:\ number\ of\ tokens\ per\ player.\ [3]\:\ name\ of\ config\ file.\ \ [4+]\:\ names\ of\ graph\ files\ to\ be\ added\ to\ the\ board.\n
+comment1.params=
+comment1.target=void\ run()
+comment2.params=
+comment2.target=AllPlayExperiment()
+comment3.params=args
+comment3.target=Player\ run(java.lang.String[])
+comment4.params=b
+comment4.target=void\ write(int)
+comment5.params=dRange
+comment5.target=boolean\ takeTurn(int)
+comment5.text=\n\ Take\ a\ turn.\n\ \n\ Iterate\ through\ the\ list\ of\ players\ in\ turn\ order.\ Take\ the\ turn\ of\ each\ token\ each\ player\ chooses\ on\ its\ current\ space,\ and,\ if\ allowed,\ land\ them\ on\ their\ next\ space.\n\ @param\ dRange\ upper\ number\ for\ the\ range\ of\ the\ die.\n\ @return\ a\ token\ if\ all\ of\ a\ player's\ tokens\ have\ reached\ the\ end\ of\ the\ board.\n
+comment6.params=board
+comment6.target=void\ printMap(Board)
+comment6.text=\n\ Print\ a\ map\ of\ the\ board.\n\ \n\ @param\ board\ the\ board\ used\ for\ the\ game.\n
+comment7.params=players\ boardEnd\ w\ p
+comment7.target=void\ printPlayers(java.util.LinkedList,\ int,\ int,\ double)
+comment7.text=\n\ Print\ each\ player,\ their\ tokens,\ and\ their\ pieces.\n\ \n\ @param\ players\ list\ of\ players\ in\ turn\ order.\n
+numComments=8
